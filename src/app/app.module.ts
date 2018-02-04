@@ -9,6 +9,7 @@ import { HeaderLinksComponent } from './shared/header/header-links/header-links.
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProductBoxComponent } from './shared/product-box/product-box.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ContainerComponent } from './grid/container/container.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     HeaderLinksComponent,
     FooterComponent,
     ProductBoxComponent,
-    HomepageComponent
+    HomepageComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
