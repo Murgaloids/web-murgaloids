@@ -9,7 +9,11 @@ import { HeaderLinksComponent } from './shared/header/header-links/header-links.
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProductBoxComponent } from './shared/product-box/product-box.component';
 import { HomepageComponent } from './homepage/homepage.component';
+<<<<<<< HEAD
 import { ContainerComponent } from './shared/grid/container/container.component';
+=======
+import { ContainerComponent } from './grid/container/container.component';
+>>>>>>> 49042dbacd9815c95b0ada1011c00c87ca73c1ed
 
 @NgModule({
   declarations: [
