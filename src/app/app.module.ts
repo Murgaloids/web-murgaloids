@@ -11,6 +11,8 @@ import { ProductBoxComponent } from './shared/product-box/product-box.component'
 import { HomepageComponent } from './homepage/homepage.component';
 import { ContainerComponent } from './shared/grid/container/container.component';
 
+import { AccountService } from './shared/services/account.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { ContainerComponent } from './shared/grid/container/container.component'
     HttpModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AccountService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
