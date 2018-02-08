@@ -6,9 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HeaderLinksComponent } from './shared/header/header-links/header-links.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { ProductBoxComponent } from './shared/product-box/product-box.component';
-import { HomepageComponent } from './homepage/homepage.component';
 import { ContainerComponent } from './shared/grid/container/container.component';
 
 import { AccountService } from './shared/services/account.service';
@@ -18,9 +15,6 @@ import { AccountService } from './shared/services/account.service';
     AppComponent,
     HeaderComponent,
     HeaderLinksComponent,
-    FooterComponent,
-    ProductBoxComponent,
-    HomepageComponent,
     ContainerComponent
   ],
   imports: [

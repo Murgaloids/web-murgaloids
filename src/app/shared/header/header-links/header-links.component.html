@@ -1,4 +1,4 @@
-<ul>
+<ul class="navigation-links" role="navigation">
   <li *ngIf="accountService.isUserLoggedIn()"><a>{{links[0]}}</a></li>
   <li *ngIf="accountService.isUserLoggedIn()"><a>{{links[1]}}</a></li>
   <li><a (click)="onSignInToggle()">{{links[2]}}</a></li>

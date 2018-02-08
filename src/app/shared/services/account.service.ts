@@ -31,7 +31,7 @@ export class AccountService {
   toggleSignIn() {
     let signOutIndex, signInIndex, signOutConst, signInConst;
 
-    if (this.activeLinks.indexOf(SIGN_IN_CONST) !== -1) {
+    if (this.activeLinks.indexOf(SIGN_IN_CONST) == -1) {
       signOutIndex = this.inactiveLinks.indexOf(SIGN_OUT_CONST);
       signInIndex  = this.activeLinks.indexOf(SIGN_IN_CONST);
       this.inactiveLinks.splice(signOutIndex, 1);
