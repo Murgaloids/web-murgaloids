@@ -1,1 +1,11 @@
-<app-header-links></app-header-links>
+<mat-toolbar id="navbar" color="primary">
+  <span id="navbar-title">Murgaloids</span>
+  <span class="spacer"></span>
+  <ul>
+    <span *ngIf="accountService.isUserLoggedIn()">
+      <li id="account-icon"><a><mat-icon class="material-icons">account_circle</mat-icon></a></li>
+      <li id="sell-icon"><a><mat-icon class="material-icons">attach_money</mat-icon></a></li>
+    </span>
+    <li id="login-option"><a (click)="onSignInToggle()">{{loginOption}}</a></li>
+  </ul>
+</mat-toolbar>

@@ -2,51 +2,28 @@ import { EventEmitter } from '@angular/core';
 
 const SIGN_IN_CONST = 'Sign In';
 const SIGN_OUT_CONST = 'Sign Out';
-const ACCOUNT_CONST = 'Account';
-const SELL_CONST = 'Sell';
 
 export class AccountService {
-  private isLoggedIn = false;
-  private activeLinks = [ACCOUNT_CONST, SELL_CONST, SIGN_IN_CONST];
-  private inactiveLinks = [SIGN_OUT_CONST];
+  private activeOption = SIGN_IN_CONST;
+  private inactiveOption = SIGN_OUT_CONST;
 
   linksChanged = new EventEmitter<void>();
 
-  toggleLogin() {
-    this.isLoggedIn = !this.isLoggedIn;
-  }
-
   isUserLoggedIn() {
-    return this.isLoggedIn;
+    return this.activeOption === SIGN_OUT_CONST;
   }
 
-  getActiveLinks() {
-    return this.activeLinks.slice();
+  getActiveOption() {
+    return this.activeOption;
   }
 
   getInactiveLinks() {
-    return this.inactiveLinks.slice();
+    return this.inactiveOption;
   }
 
-  toggleSignIn() {
-    let signOutIndex, signInIndex, signOutConst, signInConst;
-
-    if (this.activeLinks.indexOf(SIGN_IN_CONST) == -1) {
-      signOutIndex = this.inactiveLinks.indexOf(SIGN_OUT_CONST);
-      signInIndex  = this.activeLinks.indexOf(SIGN_IN_CONST);
-      this.inactiveLinks.splice(signOutIndex, 1);
-      this.activeLinks.splice(signInIndex, 1);
-      this.inactiveLinks.push(SIGN_IN_CONST);
-      this.activeLinks.push(SIGN_OUT_CONST);
-    } else {
-      signOutIndex = this.activeLinks.indexOf(SIGN_OUT_CONST);
-      signInIndex  = this.inactiveLinks.indexOf(SIGN_IN_CONST);
-      this.activeLinks.splice(signOutIndex, 1);
-      this.inactiveLinks.splice(signInIndex, 1);
-      this.activeLinks.push(SIGN_IN_CONST);
-      this.inactiveLinks.push(SIGN_OUT_CONST);
-    }
-      
-    this.toggleLogin();
+  toggleLogin() {
+    const temp = this.activeOption;
+    this.activeOption = this.inactiveOption;
+    this.inactiveOption = temp;
   }
 }

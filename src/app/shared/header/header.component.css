@@ -1,0 +1,33 @@
+.spacer { flex: 1 1 auto; }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+ul {
+  font-size: 14px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  text-align: right;
+  margin: 0;
+  padding-left: 10px;
+}
+
+li:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+#navbar-title { font-size: 24px; }
+
+#account-icon,
+#sell-icon {
+  position: relative;
+  top: 6px;
+}
