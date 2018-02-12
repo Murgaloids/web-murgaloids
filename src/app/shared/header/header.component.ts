@@ -13,16 +13,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.loginOption = this.accountService.getActiveOption();
-    this.accountService.linksChanged.subscribe(this.toggleSignIn.bind(this));
-  }
-
-  toggleSignIn() {
-    this.accountService.toggleLogin();
-    this.loginOption = this.accountService.getActiveOption();
+    this.accountService.linksChanged.subscribe(() => this.loginOption = this.accountService.getActiveOption());
   }
 
   onSignInToggle() {
-    this.accountService.linksChanged.emit();
+    this.accountService.toggleLogin();
   }
 
   getLoginOption() {

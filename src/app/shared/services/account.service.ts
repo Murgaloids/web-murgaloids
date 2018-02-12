@@ -25,5 +25,6 @@ export class AccountService {
     const temp = this.activeOption;
     this.activeOption = this.inactiveOption;
     this.inactiveOption = temp;
+    this.linksChanged.emit();
   }
 }
