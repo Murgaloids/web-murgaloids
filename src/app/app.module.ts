@@ -13,11 +13,19 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 import { AccountService } from './shared/services/account.service';
+import { ProfileComponent } from './profile/profile.component';
+
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'profile', component: ProfileComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +35,11 @@ import { AccountService } from './shared/services/account.service';
     AngularFontAwesomeModule,
     MatToolbarModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // debuggin purposes only
+    )
   ],
   providers: [
     AccountService

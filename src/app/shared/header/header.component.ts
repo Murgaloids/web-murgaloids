@@ -28,4 +28,9 @@ export class HeaderComponent implements OnInit {
   getLoginOption() {
     return this.loginOption;
   }
+
+  routeToProfile() {
+    console.log("routing to profile");
+
+  }
 }
