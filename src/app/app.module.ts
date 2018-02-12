@@ -10,13 +10,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
+import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './shared/header/header.component';
-
 import { AccountService } from './shared/services/account.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
     HeaderComponent
   ],
   imports: [
