@@ -1,7 +1,7 @@
 <mat-toolbar
   id="navbar"
   color="accent"
-  *ngIf="windowService.width > 768; else mobileView">
+  *ngIf="windowService.width > mobileWidth; else mobileView">
   <span id="navbar-title">Murgaloids</span>
   <mat-form-field>
     <input matInput placeholder="Search for anything...">
@@ -19,16 +19,45 @@
         </li>
       <li id="sell-icon"><a><mat-icon class="material-icons">attach_money</mat-icon></a></li>
     </span>
-    <li id="login-option"><a (click)="onSignInToggle()">{{loginOption}}</a></li>
+    <li
+      id="signup-option"
+      *ngIf="!accountService.isUserLoggedIn()"><a>Sign Up</a></li>
+    <li id="login-option"><a (click)="onSignInToggle()">{{accountService.active}}</a></li>
   </ul>
 </mat-toolbar>
 
 <ng-template #mobileView>
-  <mat-toolbar
-    id="navbar"
-    color="accent">
-    <mat-icon class="material-icons">search</mat-icon>
+  <mat-toolbar id="navbar" color="accent">
+    <mat-icon
+      class="material-icons"
+      (click)="onSearchIconToggle()"
+      *ngIf="!isInputVisible; else mobileInputForm">search</mat-icon>
     <span class="spacer"></span>
-    <mat-icon class="material-icons">menu</mat-icon>
+    <mat-icon
+      class="material-icons"
+      [matMenuTriggerFor]="menu">menu</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <a
+          routerLink="/profile"
+          routerLinkActive="active">Profile</a>
+      </button>
+      <button mat-menu-item>
+        <a>Sell</a>
+      </button>
+      <button mat-menu-item>
+        <a (click)="onSignInToggle()">{{accountService.active}}</a>
+      </button>
+    </mat-menu>
   </mat-toolbar>
+</ng-template>
+
+<ng-template #mobileInputForm>
+  <mat-form-field id="mobile-input-form">
+    <input
+      autofocus
+      matInput
+      placeholder="Search for anything..."
+      (blur)="onSearchIconToggle()">
+  </mat-form-field>
 </ng-template>

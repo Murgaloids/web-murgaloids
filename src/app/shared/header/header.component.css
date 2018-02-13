@@ -7,6 +7,11 @@
 
 mat-toolbar { height: 115px; }
 
+mat-form-field {
+  margin-left: 25px;
+  width: 25%;
+}
+
 ul {
   font-size: 14px;
   list-style-type: none;
@@ -34,7 +39,6 @@ li:hover {
   top: 6px;
 }
 
-mat-form-field {
-  margin-left: 25px;
-  width: 25%;
+#mobile-input-form {
+  width: 80%;
 }
