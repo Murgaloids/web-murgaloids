@@ -1,5 +1,11 @@
-<mat-toolbar id="navbar" color="primary">
+<mat-toolbar
+  id="navbar"
+  color="accent"
+  *ngIf="windowService.width > 768; else mobileView">
   <span id="navbar-title">Murgaloids</span>
+  <mat-form-field>
+    <input matInput placeholder="Search for anything...">
+  </mat-form-field>
   <span class="spacer"></span>
   <ul>
     <span *ngIf="accountService.isUserLoggedIn()">
@@ -16,3 +22,13 @@
     <li id="login-option"><a (click)="onSignInToggle()">{{loginOption}}</a></li>
   </ul>
 </mat-toolbar>
+
+<ng-template #mobileView>
+  <mat-toolbar
+    id="navbar"
+    color="accent">
+    <mat-icon class="material-icons">search</mat-icon>
+    <span class="spacer"></span>
+    <mat-icon class="material-icons">menu</mat-icon>
+  </mat-toolbar>
+</ng-template>

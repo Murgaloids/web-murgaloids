@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
+import { WindowService } from '../services/window.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { AccountService } from '../services/account.service';
 export class HeaderComponent implements OnInit {
   private loginOption: String;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private windowService: WindowService) {}
 
   ngOnInit() {
     this.loginOption = this.accountService.getActiveOption();
