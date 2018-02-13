@@ -10,15 +10,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AccountService } from './shared/services/account.service';
+import { ProfileComponent } from './profile/profile.component';
+
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'profile', component: ProfileComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,8 @@ import { AccountService } from './shared/services/account.service';
     AngularFontAwesomeModule,
     MatToolbarModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AccountService

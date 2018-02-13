@@ -3,7 +3,14 @@
   <span class="spacer"></span>
   <ul>
     <span *ngIf="accountService.isUserLoggedIn()">
-      <li id="account-icon"><a><mat-icon class="material-icons">account_circle</mat-icon></a></li>
+      <li id="account-icon">
+        <a>
+          <mat-icon
+            class="material-icons"
+            routerLink="/profile"
+            routerLinkActive="active">account_circle</mat-icon>
+          </a>
+        </li>
       <li id="sell-icon"><a><mat-icon class="material-icons">attach_money</mat-icon></a></li>
     </span>
     <li id="login-option"><a (click)="onSignInToggle()">{{loginOption}}</a></li>
