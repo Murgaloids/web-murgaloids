@@ -9,12 +9,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { AccountService } from './shared/services/account.service';
+import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { RouterModule, Routes } from '@angular/router';
+import { AccountService } from './shared/services/account.service';
+import { WindowService } from './shared/services/window.service';
+
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent }
@@ -38,7 +43,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AccountService
+    AccountService,
+    WindowService
   ],
   bootstrap: [AppComponent]
 })

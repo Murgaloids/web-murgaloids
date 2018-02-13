@@ -5,9 +5,7 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-mat-toolbar {
-  height: 115px;
-}
+mat-toolbar { height: 115px; }
 
 ul {
   font-size: 14px;
@@ -17,15 +15,15 @@ ul {
 }
 
 li {
-  display: inline;
-  text-align: right;
   margin: 0;
   padding-left: 10px;
+  display: inline;
+  text-align: right;
 }
 
 li:hover {
-  cursor: pointer;
   opacity: 0.6;
+  cursor: pointer;
 }
 
 #navbar-title { font-size: 24px; }
@@ -38,5 +36,5 @@ li:hover {
 
 mat-form-field {
   margin-left: 25px;
-  width: 35%;
+  width: 25%;
 }
