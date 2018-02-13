@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
+import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './shared/header/header.component';
-
 import { AccountService } from './shared/services/account.service';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -24,8 +24,13 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     HeaderComponent,
     ProfileComponent
+=======
+    ProfileComponent,
+    HeaderComponent
+>>>>>>> f254d7538f5a3bdc6995aa906cbe20a5e4c251a1
   ],
   imports: [
     BrowserModule,

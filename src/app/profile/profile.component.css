@@ -1,0 +1,26 @@
+div.appcontainer {
+  padding-left: 3cm;
+  padding-right: 3cm;
+}
+
+h1 {
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+  font-size: 40px;
+}
+
+h2 {
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+  font-size: 30px;
+}
+
+img.profile {
+  border-radius: 25px;
+  height: 300px;
+}
+
+img {
+  border-radius: 25px;
+  height: 200px;
+}
