@@ -1,5 +1,8 @@
-<mat-toolbar id="navbar" color="primary">
+<mat-toolbar id="navbar" color="accent">
   <span id="navbar-title">Murgaloids</span>
+  <mat-form-field>
+    <input matInput placeholder="Search for anything...">
+  </mat-form-field>
   <span class="spacer"></span>
   <ul>
     <span *ngIf="accountService.isUserLoggedIn()">
