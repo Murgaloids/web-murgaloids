@@ -9,7 +9,8 @@ import { WindowService } from './shared/services/window.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [WindowService]
 })
 export class AppComponent {
   constructor(private windowService: WindowService) {}
