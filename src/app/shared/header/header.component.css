@@ -7,10 +7,7 @@
 
 mat-toolbar { height: 115px; }
 
-mat-form-field {
-  margin-left: 25px;
-  width: 25%;
-}
+mat-form-field { width: 25%; }
 
 ul {
   font-size: 14px;
@@ -31,7 +28,10 @@ li:hover {
   cursor: pointer;
 }
 
-#navbar-title { font-size: 24px; }
+#navbar-title {
+  font-size: 24px;
+  margin-right: 25px;
+}
 
 #account-icon,
 #sell-icon {

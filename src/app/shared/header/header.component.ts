@@ -13,7 +13,6 @@ import { WindowService } from '../services/window.service';
 export class HeaderComponent implements OnInit {
   private mobileWidth: number;
   private isInputVisible: boolean;
-  private isMenuVisible: boolean;
 
   constructor(
      private accountService: AccountService,
@@ -23,7 +22,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
     this.isInputVisible = false;
-    this.isMenuVisible = false;
   }
 
   onSignInToggle() {
@@ -32,9 +30,5 @@ export class HeaderComponent implements OnInit {
 
   onSearchIconToggle() {
     this.isInputVisible = !this.isInputVisible;
-  }
-
-  onMenuIconToggle() {
-    this.isMenuVisible = !this.isMenuVisible;
   }
 }
