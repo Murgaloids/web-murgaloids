@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';
+import { DummyDataService } from './shared/services/dummy-data.service';
 
 const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent }
@@ -41,7 +42,10 @@ const appRoutes: Routes = [
     MatMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AccountService],
+  providers: [
+    AccountService,
+    DummyDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
