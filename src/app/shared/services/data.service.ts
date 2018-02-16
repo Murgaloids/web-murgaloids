@@ -6,7 +6,7 @@ import { DummyDataService } from './dummy-data.service';
 @Injectable()
 export class DataService {
 
-  constructor(public dummyDataService: DummyDataService) { }
+  constructor(private dummyDataService: DummyDataService) { }
 
   getUser(userId: number): User {
     return this.dummyDataService.getDummyUser(userId);

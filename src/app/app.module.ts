@@ -18,7 +18,6 @@ import { ProfileComponent } from './profile/profile.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';
-import { DataService } from './shared/services/data.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
 
 const appRoutes: Routes = [
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
   ],
   providers: [
     AccountService,
-    DataService,
     DummyDataService
   ],
   bootstrap: [AppComponent]

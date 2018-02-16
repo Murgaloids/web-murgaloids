@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
-import { User } from '../shared/models/user.model';
 import { Item } from '../shared/models/item.model';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [DataService]
 })
 export class ProfileComponent implements OnInit {
   id: number;
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   userItemsViewed: Item[];
   userImageSrc: string;
 
-  constructor(public dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.id = 12345678;
