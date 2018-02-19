@@ -1,10 +1,10 @@
 <!-- For Desktop -->
 <mat-toolbar
   id="navbar"
-  color="accent"
+  color="primary"
   *ngIf="windowService.width > mobileWidth; else mobileView">
   <span id="navbar-title">Murgaloids</span>
-  <mat-form-field>
+  <mat-form-field color="accent">
     <input matInput placeholder="Search for anything...">
   </mat-form-field>
   <span class="spacer"></span>
@@ -30,7 +30,7 @@
 
 <!-- For Mobile -->
 <ng-template #mobileView>
-  <mat-toolbar id="navbar" color="accent">
+  <mat-toolbar id="navbar" color="primary">
     <mat-icon
       class="material-icons"
       (click)="onSearchIconToggle()"
@@ -59,7 +59,7 @@
 
 <!-- For Mobile Input Toggle -->
 <ng-template #mobileInputForm>
-  <mat-form-field id="mobile-input-form">
+  <mat-form-field id="mobile-input-form" color="accent">
     <input
       autofocus
       matInput
