@@ -8,12 +8,32 @@
     </div>
     <div class="col-xs-12 col-md-9">
       <h2>Selling Items</h2>
-      <div>
-        <img *ngFor="let item of userItemsForSale" class="img-reponsive" src="{{ item.itemImageSrc }}">
+      <div fxLayout="row" fxLayout.xs="column">
+        <app-item-card
+          fxFlex="25%;"
+          fxFlex.xs="100%;"
+          class="item-card"
+          *ngFor="let item of userItemsForSale"
+          [itemName]="item.itemName"
+          [itemAbout]="item.itemAbout"
+          [itemRating]="item.itemRating"
+          [itemPrice]="item.itemPrice"
+          [itemImageSrc]="item.itemImageSrc">
+        </app-item-card>
       </div>
       <h2>Recently Viewed Items</h2>
-      <div>
-        <img *ngFor="let item of userItemsViewed" class="img-reponsive" src="{{ item.itemImageSrc }}">
+      <div fxLayout="row" fxLayout.xs="column">
+        <app-item-card
+          fxFlex="25%;"
+          fxFlex.xs="100%;"
+          class="item-card"
+          *ngFor="let item of userItemsViewed"
+          [itemName]="item.itemName"
+          [itemAbout]="item.itemAbout"
+          [itemRating]="item.itemRating"
+          [itemPrice]="item.itemPrice"
+          [itemImageSrc]="item.itemImageSrc">
+        </app-item-card>
       </div>
     </div>
   </div>
