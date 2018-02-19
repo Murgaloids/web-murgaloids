@@ -1,3 +1,8 @@
+@import '~@angular/material/theming';
+@include mat-core();
+@import '../../../beach-shop-theme.scss';
+
+
 .spacer { flex: 1 1 auto; }
 
 .material-icons.md-18 { font-size: 18px; }
@@ -26,6 +31,10 @@ li {
 li:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+
+/deep/ label.mat-input-placeholder {
+  color: mat-color($beach-shop-accent);
 }
 
 #navbar-title {
