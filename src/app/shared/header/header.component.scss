@@ -1,7 +1,6 @@
 @import '~@angular/material/theming';
-@include mat-core();
 @import '../../../beach-shop-theme.scss';
-
+@include mat-core();
 
 .spacer { flex: 1 1 auto; }
 
