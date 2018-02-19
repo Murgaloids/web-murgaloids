@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
 import { Item } from '../shared/models/item.model';
+import { ItemCardComponent } from '../item-card/item-card.component';
 
 @Component({
   selector: 'app-profile',
