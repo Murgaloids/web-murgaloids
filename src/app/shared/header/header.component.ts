@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import { MOBILE_WIDTH } from '../global';
+
 import { AccountService } from '../services/account.service';
+import { WindowService } from '../services/window.service';
 
 @Component({
   selector: 'app-header',
@@ -7,20 +11,24 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  private loginOption: String;
+  private mobileWidth: number;
+  private isInputVisible: boolean;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+     private accountService: AccountService,
+     private windowService: WindowService
+  ) {}
 
   ngOnInit() {
-    this.loginOption = this.accountService.getActiveOption();
-    this.accountService.linksChanged.subscribe(() => this.loginOption = this.accountService.getActiveOption());
+    this.mobileWidth = MOBILE_WIDTH;
+    this.isInputVisible = false;
   }
 
   onSignInToggle() {
     this.accountService.toggleLogin();
   }
 
-  getLoginOption() {
-    return this.loginOption;
+  onSearchIconToggle() {
+    this.isInputVisible = !this.isInputVisible;
   }
 }
