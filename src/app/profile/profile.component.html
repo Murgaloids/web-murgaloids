@@ -8,8 +8,12 @@
     </div>
     <div class="col-xs-12 col-md-9">
       <h2>Selling Items</h2>
-      <div fxLayout="row">
-        <app-item-card class="item-card" *ngFor="let item of userItemsForSale"
+      <div fxLayout="row" fxLayout.xs="column">
+        <app-item-card
+          fxFlex="25%;"
+          fxFlex.xs="100%;"
+          class="item-card"
+          *ngFor="let item of userItemsForSale"
           [itemName]="item.itemName"
           [itemAbout]="item.itemAbout"
           [itemRating]="item.itemRating"
@@ -18,8 +22,12 @@
         </app-item-card>
       </div>
       <h2>Recently Viewed Items</h2>
-      <div fxLayout="row">
-        <app-item-card class="item-card" *ngFor="let item of userItemsViewed"
+      <div fxLayout="row" fxLayout.xs="column">
+        <app-item-card
+          fxFlex="25%;"
+          fxFlex.xs="100%;"
+          class="item-card"
+          *ngFor="let item of userItemsViewed"
           [itemName]="item.itemName"
           [itemAbout]="item.itemAbout"
           [itemRating]="item.itemRating"
