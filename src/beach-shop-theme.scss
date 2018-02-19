@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$beach-shop-primary: mat-palette($mat-grey, 900);
+$beach-shop-accent:  mat-palette($mat-yellow, 800);
+$beach-shop-warn:    mat-palette($mat-deep-orange);
+
+$beach-shop-theme: mat-light-theme($beach-shop-primary, $beach-shop-accent, $beach-shop-warn);
+
+@include angular-material-theme($beach-shop-theme);

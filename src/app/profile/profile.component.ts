@@ -5,7 +5,7 @@ import { Item } from '../shared/models/item.model';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
   providers: [DataService]
 })
 export class ProfileComponent implements OnInit {
