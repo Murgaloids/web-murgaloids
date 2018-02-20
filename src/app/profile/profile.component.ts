@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
 import { Item } from '../shared/models/item.model';
+import { ItemCardComponent } from '../item-card/item-card.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
   providers: [DataService]
 })
 export class ProfileComponent implements OnInit {

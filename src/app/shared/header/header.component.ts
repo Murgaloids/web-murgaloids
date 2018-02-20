@@ -8,7 +8,7 @@ import { WindowService } from '../services/window.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   private mobileWidth: number;
