@@ -6,9 +6,11 @@ import { Item } from '../models/item.model';
 export class DummyDataService {
 
   dummyUser: User;
+  dummyItems: Item[];
 
   constructor() {
     let dummyItem1 = new Item();
+    dummyItem1.itemId = 1;
     dummyItem1.itemName = 'Laptop';
     dummyItem1.itemAbout = 'About the laptop.';
     dummyItem1.itemRating = 5.0;
@@ -16,6 +18,7 @@ export class DummyDataService {
     dummyItem1.itemImageSrc = 'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/T/V9/TV901/TV901_AV1?wid=1000&hei=1000&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1465509119024';
 
     let dummyItem2 = new Item();
+    dummyItem2.itemId = 2;
     dummyItem2.itemName = 'Watch';
     dummyItem2.itemAbout = 'About the watch.';
     dummyItem2.itemRating = 4.0;
@@ -23,6 +26,7 @@ export class DummyDataService {
     dummyItem2.itemImageSrc = 'https://www.obaku.com/content/collection/V213GUCURZ.jpg';
 
     let dummyItem3 = new Item();
+    dummyItem3.itemId = 3;
     dummyItem3.itemName = 'Textbook';
     dummyItem3.itemAbout = 'About the textbook.';
     dummyItem3.itemRating = 3.0;
@@ -30,6 +34,7 @@ export class DummyDataService {
     dummyItem3.itemImageSrc = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNKRtgGPWEqw9T5cETltCf8IVKcrtoCNPlJiW12-3EjNIXmo';
 
     let dummyItem4 = new Item();
+    dummyItem4.itemId = 4;
     dummyItem4.itemName = 'iClicker';
     dummyItem4.itemAbout = 'About the iClicker.';
     dummyItem4.itemRating = 2.0;
@@ -37,6 +42,7 @@ export class DummyDataService {
     dummyItem4.itemImageSrc = 'https://www.umsl.edu/technology/frc/images/student-iclicker.png';
 
     let dummyItem5 = new Item();
+    dummyItem5.itemId = 5;
     dummyItem5.itemName = 'Calculator';
     dummyItem5.itemAbout = 'About the calculator.';
     dummyItem5.itemRating = 5.0;
@@ -44,6 +50,7 @@ export class DummyDataService {
     dummyItem5.itemImageSrc = 'https://www.goodsamaritan.ms/uploads/1/2/7/7/12777965/s736176615899143325_p466_i1_w1200.jpeg';
 
     let dummyItem6 = new Item();
+    dummyItem6.itemId = 6;
     dummyItem6.itemName = 'Pencils';
     dummyItem6.itemAbout = 'About the pencils.';
     dummyItem6.itemRating = 4.0;
@@ -51,6 +58,7 @@ export class DummyDataService {
     dummyItem6.itemImageSrc = 'http://www.hobbycraft.co.uk/supplyimages/597152_1000_1_800.jpg';
 
     let dummyItem7 = new Item();
+    dummyItem7.itemId = 7;
     dummyItem7.itemName = 'Backpack';
     dummyItem7.itemAbout = 'About the backpack description.';
     dummyItem7.itemRating = 2.0;
@@ -58,6 +66,7 @@ export class DummyDataService {
     dummyItem7.itemImageSrc = 'https://i5.walmartimages.com/asr/1afc32ce-b86e-4545-aae8-fe0fb6d1dd6c_1.1123d86c3a7f30ef2dcebb1582a1dc4f.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF';
 
     let dummyItem8 = new Item();
+    dummyItem8.itemId = 8;
     dummyItem8.itemName = 'Skateboard';
     dummyItem8.itemAbout = 'About the skateboard.';
     dummyItem8.itemRating = 5.0;
@@ -75,6 +84,16 @@ export class DummyDataService {
     dummyUserItemsViewed.push(dummyItem6);
     dummyUserItemsViewed.push(dummyItem7);
     dummyUserItemsViewed.push(dummyItem8);
+
+    this.dummyItems = [];
+    this.dummyItems.push(dummyItem1);
+    this.dummyItems.push(dummyItem2);
+    this.dummyItems.push(dummyItem3);
+    this.dummyItems.push(dummyItem4);
+    this.dummyItems.push(dummyItem5);
+    this.dummyItems.push(dummyItem6);
+    this.dummyItems.push(dummyItem7);
+    this.dummyItems.push(dummyItem8);
 
     this.dummyUser = new User();
     this.dummyUser.userId = 12345678;
@@ -137,6 +156,16 @@ export class DummyDataService {
     } else {
       return null;
     }
+  }
+
+  getDummyItemById(itemId: number): Item {
+    var dummyItemById;
+     this.dummyItems.forEach(dummyItem => {
+       if(dummyItem.itemId == itemId) {
+         dummyItemById = dummyItem;
+       }
+    });
+    return dummyItemById;
   }
 
 }

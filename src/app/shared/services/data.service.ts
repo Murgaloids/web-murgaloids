@@ -1,3 +1,4 @@
+'use strict';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Item } from '../models/item.model';
@@ -30,6 +31,10 @@ export class DataService {
 
   getUserImageSrc(userId: number): string {
     return this.dummyDataService.getDummyUserImageSrc(userId);
+  }
+
+  getItemById(itemId: number): Item {
+    return this.dummyDataService.getDummyItemById(itemId);
   }
 
 }

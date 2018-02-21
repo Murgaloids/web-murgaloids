@@ -22,9 +22,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountService } from './shared/services/account.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
 
 const appRoutes: Routes = [
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'item/:id', component: ItemDetailsComponent}
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     ProfileComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    ItemDetailsComponent
   ],
   imports: [
     BrowserModule,

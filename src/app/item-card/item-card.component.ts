@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WindowService } from '../shared/services/window.service';
+import { Item } from '../shared/models/item.model';
 
 import { MOBILE_WIDTH } from '../shared/global';
 
@@ -9,11 +10,7 @@ import { MOBILE_WIDTH } from '../shared/global';
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
-  @Input() itemName: string;
-  @Input() itemAbout: string;
-  @Input() itemRating: number;
-  @Input() itemPrice: number;
-  @Input() itemImageSrc: string;
+  @Input() item: Item;
 
   private mobileWidth: number;
 
