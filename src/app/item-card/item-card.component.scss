@@ -1,9 +1,23 @@
-.item-card {
-  width: 300px;
-  height: 500px;
+h1 {
+  font-size: 25px;
 }
 
-div.outer-item-card {
-  padding-left: 5px;
-  padding-right: 5px;
+h2 {
+  font-size: 18px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+mat-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.center-text {
+  text-align: center;
 }
