@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WindowService } from '../shared/services/window.service';
+import { RatingModule } from 'ngx-rating';
 
 import { MOBILE_WIDTH } from '../shared/global';
 
