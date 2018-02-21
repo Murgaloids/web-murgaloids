@@ -1,18 +1,15 @@
-<div class="appcontainer">
+<div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-3">
-      <h1>Welcome back, {{ userName }}</h1>
-      <img class="profile" src="{{ userImageSrc }}">
+      <h1>Welcome, {{ userName }}</h1>
+      <img class="profile img-fluid" src="{{ userImageSrc }}">
       <h2>About {{ userName }}</h2>
       <p>{{ userAbout }}</p>
     </div>
     <div class="col-xs-12 col-md-9">
       <h2>Selling Items</h2>
-      <div fxLayout="row" fxLayout.xs="column">
+      <div class="container">
         <app-item-card
-          fxFlex="25%;"
-          fxFlex.xs="100%;"
-          class="item-card"
           *ngFor="let item of userItemsForSale"
           [itemName]="item.itemName"
           [itemAbout]="item.itemAbout"
@@ -22,11 +19,8 @@
         </app-item-card>
       </div>
       <h2>Recently Viewed Items</h2>
-      <div fxLayout="row" fxLayout.xs="column">
+      <div class="container">
         <app-item-card
-          fxFlex="25%;"
-          fxFlex.xs="100%;"
-          class="item-card"
           *ngFor="let item of userItemsViewed"
           [itemName]="item.itemName"
           [itemAbout]="item.itemAbout"
