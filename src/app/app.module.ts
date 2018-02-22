@@ -18,7 +18,7 @@ import { RatingModule } from 'ngx-rating';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 
 // Services

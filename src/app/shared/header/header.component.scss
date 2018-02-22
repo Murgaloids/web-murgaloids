@@ -34,6 +34,8 @@ li:hover {
 
 /deep/ label.mat-input-placeholder {
   color: mat-color($beach-shop-accent);
+  position: relative;
+  top: 15px;
 }
 
 #navbar-title {

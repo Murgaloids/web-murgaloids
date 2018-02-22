@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
+import { Student } from '../models/student.model';
 import { Item } from '../models/item.model';
 
-@Injectable()
 export class DummyDataService {
-
-  dummyUser: User;
+  dummyUser: Student;
   dummyItems: Item[];
 
   constructor() {
@@ -95,64 +92,24 @@ export class DummyDataService {
     this.dummyItems.push(dummyItem7);
     this.dummyItems.push(dummyItem8);
 
-    this.dummyUser = new User();
-    this.dummyUser.userId = 12345678;
-    this.dummyUser.userName = 'Derrick';
-    this.dummyUser.userAbout =
+    this.dummyUser = new Student();
+    this.dummyUser.id = 12345678;
+    this.dummyUser.name = 'Derrick';
+    this.dummyUser.aboutDesc =
     `
         Hi! I'm Derrick. I'm a computer science major at CSULB and I
         have lots of stuff to sell! For now this is just a hard
         coded bio, but eventually you'll be reading this bio after
         it's retreived from a data base!
     `;
-    this.dummyUser.userItemsForSale = dummyUserItemsForSale;
-    this.dummyUser.userItemsViewed = dummyUserItemsViewed;
-    this.dummyUser.userImageSrc = 'https://avatars0.githubusercontent.com/u/10682341?s=400&v=4';
+    this.dummyUser.itemsForSale = dummyUserItemsForSale;
+    this.dummyUser.itemsViewed = dummyUserItemsViewed;
+    this.dummyUser.profilePicture = 'https://avatars0.githubusercontent.com/u/10682341?s=400&v=4';
   }
 
-  getDummyUser(userId: number): User {
-    if(userId == this.dummyUser.userId) {
+  getDummyUser(userId: number): Student {
+    if(userId == this.dummyUser.id) {
       return this.dummyUser;
-    } else {
-      return null;
-    }
-  }
-
-  getDummyUserName(userId: number): string {2
-    if(userId == this.dummyUser.userId) {
-      return this.dummyUser.userName;
-    } else {
-      return null;
-    }
-  }
-
-  getDummyUserAbout(userId: number): string {
-    if(userId == this.dummyUser.userId) {
-      return this.dummyUser.userAbout;
-    } else {
-      return null;
-    }
-  }
-
-  getDummyUserItemsForSale(userId: number):Item[] {
-    if(userId == this.dummyUser.userId) {
-      return this.dummyUser.userItemsForSale;
-    } else {
-      return null;
-    }
-  }
-
-  getDummyUserItemsViewed(userId: number):Item[] {
-    if(userId == this.dummyUser.userId) {
-      return this.dummyUser.userItemsViewed;
-    } else {
-      return null;
-    }
-  }
-
-  getDummyUserImageSrc(userId: number): string {
-    if(userId == this.dummyUser.userId) {
-      return this.dummyUser.userImageSrc;
     } else {
       return null;
     }
@@ -167,5 +124,4 @@ export class DummyDataService {
     });
     return dummyItemById;
   }
-
 }
