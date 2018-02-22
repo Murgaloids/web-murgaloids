@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RatingModule } from 'ngx-rating';
 
 // Components
 import { AppComponent } from './app.component';
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatCardModule,
     FlexLayoutModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    RatingModule
   ],
   providers: [
     AccountService,
