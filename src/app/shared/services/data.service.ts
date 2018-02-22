@@ -32,4 +32,8 @@ export class DataService {
     return this.dummyDataService.getDummyUserImageSrc(userId);
   }
 
+  getItemById(itemId: number): Item {
+    return this.dummyDataService.getDummyItemById(itemId);
+  }
+
 }
