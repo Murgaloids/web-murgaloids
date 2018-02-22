@@ -1,15 +1,15 @@
 <mat-card
   [ngClass]="{'center-text': windowService.width < mobileWidth}"
-  [routerLink]="['/item', item.itemId]">
+  [routerLink]="['/item', item.id]">
   <div class="row">
     <div class="col-md-4">
-      <img mat-card-sm-image class="img-fluid" src="{{ item.itemImageSrc }}"/>
+      <img mat-card-sm-image class="img-fluid" src="{{ item.imageSrc }}"/>
     </div>
     <div class="col-md-8">
-      <h1>{{ item.itemName }}</h1>
-      <h2>${{ item.itemPrice }}</h2>
-      <rating class="star-icon" [(ngModel)]="item.itemRating" [readonly]="true"></rating>
-      <mat-card-content>{{ item.itemAbout }}</mat-card-content>
+      <h1>{{ item.name }}</h1>
+      <h2>${{ item.price }}</h2>
+      <rating class="star-icon" [(ngModel)]="item.rating" [readonly]="true"></rating>
+      <mat-card-content>{{ item.aboutDesc }}</mat-card-content>
     </div>
   </div>
 </mat-card>
