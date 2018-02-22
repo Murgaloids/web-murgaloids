@@ -9,7 +9,7 @@
   </mat-form-field>
   <span class="spacer"></span>
   <ul>
-    <span *ngIf="accountService.isUserLoggedIn()">
+    <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
       <li id="account-icon">
         <a>
           <mat-icon
@@ -20,13 +20,16 @@
       </li>
       <li id="sell-icon"><a><mat-icon class="material-icons">attach_money</mat-icon></a></li>
     </span>
-    <li
-      id="signup-option"
-      *ngIf="!accountService.isUserLoggedIn()"><a>Sign Up</a></li>
     <li id="login-option"><a (click)="onSignInToggle()">{{accountService.active}}</a></li>
   </ul>
 </mat-toolbar>
 <!-- End Desktop -->
+
+<!-- For Sign Up Option -->
+<ng-template #signUpOption>
+  <li id="signup-option"><a>Sign Up</a></li>
+</ng-template>
+<!-- End Sign Up Option -->
 
 <!-- For Mobile -->
 <ng-template #mobileView>
