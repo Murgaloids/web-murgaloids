@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../shared/services/data.service';
 import { Item } from '../shared/models/item.model';
@@ -9,11 +9,8 @@ import { Item } from '../shared/models/item.model';
   styleUrls: ['./item-details.component.scss'],
   providers: [DataService]
 })
-export class ItemDetailsComponent implements OnInit, OnDestroy {
-
-  itemId: number;
+export class ItemDetailsComponent implements OnInit {
   item: Item;
-  sub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,15 +18,6 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
-    this.sub = this.route.params.subscribe(params => {
-      this.itemId = +params['id'];
-      this.item = this.dataService.getItemById(this.itemId);
-    });
+    this.route.params.subscribe(params => this.item = this.dataService.getItemById(+params['id']));
   }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
 }
