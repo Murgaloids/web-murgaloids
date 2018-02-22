@@ -11,22 +11,14 @@
       <div class="container">
         <app-item-card
           *ngFor="let item of userItemsForSale"
-          [itemName]="item.itemName"
-          [itemAbout]="item.itemAbout"
-          [itemRating]="item.itemRating"
-          [itemPrice]="item.itemPrice"
-          [itemImageSrc]="item.itemImageSrc">
+          [item]="item">
         </app-item-card>
       </div>
       <h2>Recently Viewed Items</h2>
       <div class="container">
         <app-item-card
           *ngFor="let item of userItemsViewed"
-          [itemName]="item.itemName"
-          [itemAbout]="item.itemAbout"
-          [itemRating]="item.itemRating"
-          [itemPrice]="item.itemPrice"
-          [itemImageSrc]="item.itemImageSrc">
+          [item]="item">
         </app-item-card>
       </div>
     </div>
