@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WindowService } from '../shared/services/window.service';
-import { Item } from '../shared/models/item.model';
+import { WindowService } from '../services/window.service';
+import { Item } from '../models/item.model';
 
-import { MOBILE_WIDTH } from '../shared/global';
+import { MOBILE_WIDTH } from '../global';
 
 @Component({
   selector: 'app-item-card',

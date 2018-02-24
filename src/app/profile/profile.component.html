@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-3">
-      <h1>Welcome, {{ userName }}</h1>
-      <img class="profile img-fluid" src="{{ userImageSrc }}">
-      <h2>About {{ userName }}</h2>
-      <p>{{ userAbout }}</p>
+      <h1>Welcome, {{ student.name }}</h1>
+      <img class="profile img-fluid" src="{{ student.profilePicture }}">
+      <h2>About {{ student.name }}</h2>
+      <p>{{ student.aboutDesc }}</p>
     </div>
     <div class="col-xs-12 col-md-9">
       <h2>Selling Items</h2>
       <div class="container">
         <app-item-card
-          *ngFor="let item of userItemsForSale"
+          *ngFor="let item of student.itemsForSale"
           [item]="item">
         </app-item-card>
       </div>
       <h2>Recently Viewed Items</h2>
       <div class="container">
         <app-item-card
-          *ngFor="let item of userItemsViewed"
+          *ngFor="let item of student.itemsViewed"
           [item]="item">
         </app-item-card>
       </div>

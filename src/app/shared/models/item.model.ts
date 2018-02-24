@@ -1,8 +1,8 @@
 export class Item {
-  itemId: number;
-  itemName: string;
-  itemAbout: string;
-  itemRating: number;
-  itemPrice: number;
-  itemImageSrc: string;
+  id: number;
+  name: string;
+  aboutDesc: string;
+  rating: number;
+  price: number;
+  imageSrc: string;
 }

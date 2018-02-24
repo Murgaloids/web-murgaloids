@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
-import { Item } from '../shared/models/item.model';
-import { ItemCardComponent } from '../item-card/item-card.component';
+import { Student } from '../shared/models/student.model';
 
 @Component({
   selector: 'app-profile',
@@ -11,21 +10,12 @@ import { ItemCardComponent } from '../item-card/item-card.component';
 })
 export class ProfileComponent implements OnInit {
   id: number;
-  userName: string;
-  userAbout: string;
-  userItemsForSale: Item[];
-  userItemsViewed: Item[];
-  userImageSrc: string;
+  student: Student;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.id = 12345678;
-    this.userName = this.dataService.getUserName(this.id);
-    this.userAbout = this.dataService.getUserAbout(this.id);
-    this.userItemsForSale = this.dataService.getUserItemsForSale(this.id);
-    this.userItemsViewed = this.dataService.getUserItemsViewed(this.id);
-    this.userImageSrc = this.dataService.getUserImageSrc(this.id);
+    this.student = this.dataService.getStudent(this.id);
   }
-
 }
