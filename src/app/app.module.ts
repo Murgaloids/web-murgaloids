@@ -7,11 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { RatingModule } from 'ngx-rating';
 
 // Components
@@ -48,11 +46,9 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
     MatToolbarModule,
-    MatInputModule,
     MatIconModule,
     MatMenuModule,
     MatCardModule,
-    FlexLayoutModule,
     RatingModule,
     RouterModule.forRoot(appRoutes)
   ],

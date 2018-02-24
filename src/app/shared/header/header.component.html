@@ -1,96 +1,95 @@
 <!-- For Desktop -->
 <mat-toolbar
-  id="navbar"
   color="primary"
   *ngIf="windowService.width > mobileWidth; else mobileView">
   <a
     routerLink="/"
     routerLinkActive="active"><span id="navbar-title">Murgaloids</span></a>
-  <mat-form-field
+  <form
     color="accent"
     (keydown)="onInputEnter($event)">
-    <input
-      matInput
-      type="text"
-      placeholder="Search for anything..." />
-  </mat-form-field>
+    <input type="text" placeholder="Search for anything...">
+  </form>
   <span class="spacer"></span>
   <ul>
     <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
-      <a
-        routerLink="/profile"
-        routerLinkActive="active">
-        <li id="account-icon">
-          <mat-icon class="material-icons">account_circle</mat-icon>
-        </li>
-      </a>
-      <a><li id="sell-icon"><mat-icon class="material-icons">attach_money</mat-icon></li></a>
+      <li><a>Account</a></li>
+      <li><a>Orders</a></li>
+      <li><a>Sell</a></li>
+      <li>
+        <a
+          routerLink="/profile"
+          routerLinkActive="active">Profile</a>
+      </li>
     </span>
     <span [ngSwitch]="accountService.active">
-      <a
-        *ngSwitchCase="SIGN_OUT_CONST"
-        (click)="onSignInToggle()"
-        routerLink="/"
-        routerLinkActive="active"><li id="login-option">{{ SIGN_OUT_CONST }}</li></a>
-      <a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()"><li id="login-option">{{ SIGN_IN_CONST }}</li></a>
+      <li>
+        <a
+          *ngSwitchCase="SIGN_OUT_CONST"
+          (click)="onSignInToggle()"
+          routerLink="/"
+          routerLinkActive="active">{{ SIGN_OUT_CONST }}</a>
+      </li>
+      <li><a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()">{{ SIGN_IN_CONST }}</a></li>
     </span>
   </ul>
 </mat-toolbar>
 <!-- End Desktop -->
 
+
 <!-- For Sign Up Option -->
 <ng-template #signUpOption>
-  <li id="signup-option"><a>Sign Up</a></li>
+  <li><a>Sign Up</a></li>
 </ng-template>
 <!-- End Sign Up Option -->
 
+
 <!-- For Mobile -->
 <ng-template #mobileView>
-  <mat-toolbar id="navbar" color="primary">
+  <mat-toolbar color="primary">
     <mat-icon
-      class="material-icons"
       (click)="onSearchIconToggle()"
       *ngIf="!isInputVisible; else mobileInputForm">search</mat-icon>
     <span class="spacer"></span>
-    <mat-icon
-      class="material-icons"
-      [matMenuTriggerFor]="menu">menu</mat-icon>
+    <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
     <mat-menu #menu="matMenu">
       <div *ngIf="accountService.isUserLoggedIn()">
+        <button mat-menu-item>Account</button>
+        <button mat-menu-item>Orders</button>
+        <button mat-menu-item>Sell</button>
         <button
           mat-menu-item
           routerLink="/profile"
           routerLinkActive="active">Profile</button>
-        <button mat-menu-item>
-          <a>Sell</a>
-        </button>
       </div>
-      <button mat-menu-item>
-        <span [ngSwitch]="accountService.active">
-          <a
-            *ngSwitchCase="SIGN_OUT_CONST"
-            (click)="onSignInToggle()"
-            routerLink="/"
-            routerLinkActive="active">{{ SIGN_OUT_CONST }}</a>
-          <a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()">{{ SIGN_IN_CONST }}</a>
-        </span>
-      </button>
+      <span [ngSwitch]="accountService.active">
+        <button
+          mat-menu-item
+          *ngSwitchCase="SIGN_OUT_CONST"
+          (click)="onSignInToggle()"
+          routerLink="/"
+          routerLinkActive="active">{{ SIGN_OUT_CONST }}</button>
+        <button
+          mat-menu-item
+          (click)="onSignInToggle()"
+          *ngSwitchCase="SIGN_IN_CONST">{{ SIGN_IN_CONST }}</button>
+      </span>
     </mat-menu>
   </mat-toolbar>
 </ng-template>
 <!-- End Mobile -->
 
+
 <!-- For Mobile Input Toggle -->
 <ng-template #mobileInputForm>
-  <mat-form-field
+  <form
     id="mobile-input-form"
     color="accent"
     (keydown)="onInputEnter($event)">
     <input
       autofocus
-      matInput
       placeholder="Search for anything..."
       (blur)="onSearchIconToggle()">
-  </mat-form-field>
+  </form>
 </ng-template>
 <!-- End Mobile Input Toggle -->

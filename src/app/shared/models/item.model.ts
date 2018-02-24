@@ -1,8 +1,12 @@
 export class Item {
-  id: number;
-  name: string;
-  aboutDesc: string;
-  rating: number;
-  price: number;
-  imageSrc: string;
+  public id: number;
+  public name: string;
+  public aboutDesc: string;
+  public rating: number;
+  public price: number;
+  public imageSrc: string;
+
+  public constructor(init?:Partial<Item>) {
+    Object.assign(this, init);
+  }
 }
