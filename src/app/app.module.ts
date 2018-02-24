@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     HomepageComponent,
     ProfileComponent,
     ItemCardComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
   ],
   imports: [
     BrowserModule,

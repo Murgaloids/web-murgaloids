@@ -9,7 +9,7 @@
   <mat-form-field
     color="accent"
     (keydown)="onInputEnter($event)">
-    <input #search
+    <input
       matInput
       type="text"
       placeholder="Search for anything..." />
@@ -82,7 +82,10 @@
 
 <!-- For Mobile Input Toggle -->
 <ng-template #mobileInputForm>
-  <mat-form-field id="mobile-input-form" color="accent">
+  <mat-form-field
+    id="mobile-input-form"
+    color="accent"
+    (keydown)="onInputEnter($event)">
     <input
       autofocus
       matInput
