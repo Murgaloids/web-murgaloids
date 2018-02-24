@@ -13,6 +13,11 @@ mat-toolbar { height: 115px; }
 
 mat-form-field { width: 25%; }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 ul {
   font-size: 14px;
   list-style-type: none;

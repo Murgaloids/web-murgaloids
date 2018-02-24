@@ -3,24 +3,37 @@
   id="navbar"
   color="primary"
   *ngIf="windowService.width > mobileWidth; else mobileView">
-  <span id="navbar-title">Murgaloids</span>
-  <mat-form-field color="accent">
-    <input matInput placeholder="Search for anything...">
+  <a
+    routerLink="/"
+    routerLinkActive="active"><span id="navbar-title">Murgaloids</span></a>
+  <mat-form-field
+    color="accent"
+    (keydown)="onInputEnter($event)">
+    <input #search
+      matInput
+      type="text"
+      placeholder="Search for anything..." />
   </mat-form-field>
   <span class="spacer"></span>
   <ul>
     <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
       <li id="account-icon">
-        <a>
-          <mat-icon
-            class="material-icons"
-            routerLink="/profile"
-            routerLinkActive="active">account_circle</mat-icon>
+        <a
+          routerLink="/profile"
+          routerLinkActive="active">
+          <mat-icon class="material-icons">account_circle</mat-icon>
         </a>
       </li>
       <li id="sell-icon"><a><mat-icon class="material-icons">attach_money</mat-icon></a></li>
     </span>
-    <li id="login-option"><a (click)="onSignInToggle()">{{accountService.active}}</a></li>
+    <span [ngSwitch]="accountService.active">
+      <a
+        *ngSwitchCase="SIGN_OUT_CONST"
+        (click)="onSignInToggle()"
+        routerLink="/"
+        routerLinkActive="active"><li id="login-option">{{ SIGN_OUT_CONST }}</li></a>
+      <a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()"><li id="login-option">{{ SIGN_IN_CONST }}</li></a>
+    </span>
   </ul>
 </mat-toolbar>
 <!-- End Desktop -->
@@ -53,7 +66,14 @@
         </button>
       </div>
       <button mat-menu-item>
-        <a (click)="onSignInToggle()">{{accountService.active}}</a>
+        <span [ngSwitch]="accountService.active">
+          <a
+            *ngSwitchCase="SIGN_OUT_CONST"
+            (click)="onSignInToggle()"
+            routerLink="/"
+            routerLinkActive="active">{{ SIGN_OUT_CONST }}</a>
+          <a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()">{{ SIGN_IN_CONST }}</a>
+        </span>
       </button>
     </mat-menu>
   </mat-toolbar>
