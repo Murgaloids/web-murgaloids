@@ -2,19 +2,26 @@
 @import '../../../beach-shop-theme.scss';
 @include mat-core();
 
-.spacer { flex: 1 1 auto; }
+input {
+  font-size: 16px;
+  border: none;
+  border-radius: 100px;
+  background-color: #fafafa;
+  padding: 5px 16px;
+  margin-left: 8px;
+  width: 150%;
+  max-width: 200%;
+  height: 50%;
+}
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
-
-mat-toolbar { height: 115px; }
-
-mat-form-field { width: 25%; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 ul {
   font-size: 14px;
+  list-style-position: inside;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -32,23 +39,20 @@ li:hover {
   cursor: pointer;
 }
 
-/deep/ label.mat-input-placeholder {
-  color: mat-color($beach-shop-accent);
-  position: relative;
-  top: 15px;
-}
-
 #navbar-title {
   font-size: 24px;
   margin-right: 25px;
 }
 
-#account-icon,
-#sell-icon {
-  position: relative;
-  top: 6px;
+#mobile-input-form,
+#mobile-input-form input {
+  width: 80%;
 }
 
-#mobile-input-form {
-  width: 80%;
+.spacer { flex: 1 1 auto; }
+
+mat-toolbar {
+  height: 115px;
+  padding-left: 30px;
+  padding-right: 30px;
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { MOBILE_WIDTH } from '../global';
-
+import { MOBILE_WIDTH, SIGN_IN, SIGN_OUT } from '../global';
 import { AccountService } from '../services/account.service';
 import { WindowService } from '../services/window.service';
 
@@ -11,8 +9,11 @@ import { WindowService } from '../services/window.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private SIGN_IN_CONST = SIGN_IN;
+  private SIGN_OUT_CONST = SIGN_OUT;
   private mobileWidth: number;
   private isInputVisible: boolean;
+  private input: string;
 
   constructor(
      private accountService: AccountService,
@@ -30,5 +31,13 @@ export class HeaderComponent implements OnInit {
 
   onSearchIconToggle() {
     this.isInputVisible = !this.isInputVisible;
+  }
+
+  onInputEnter(event: any) {
+    if (event.keyCode == 13) {
+      this.input = event.target.value;
+      event.target.value = '';
+      event.target.blur();
+    }
   }
 }

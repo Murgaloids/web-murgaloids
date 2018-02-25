@@ -7,4 +7,8 @@ export class Student {
   profilePicture: string;
   itemsForSale: Item[];
   itemsViewed: Item[];
+
+  public constructor(init?:Partial<Student>) {
+    Object.assign(this, init);
+  }
 }

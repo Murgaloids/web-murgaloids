@@ -7,16 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { RatingModule } from 'ngx-rating';
 
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
@@ -26,6 +25,7 @@ import { AccountService } from './shared/services/account.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
 
 const appRoutes: Routes = [
+  { path: '', component: HomepageComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'item/:id', component: ItemDetailsComponent}
 ];
@@ -34,9 +34,10 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomepageComponent,
     ProfileComponent,
     ItemCardComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,13 +46,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
     MatToolbarModule,
-    MatInputModule,
     MatIconModule,
     MatMenuModule,
     MatCardModule,
-    FlexLayoutModule,
-    RouterModule.forRoot(appRoutes),
-    RatingModule
+    RatingModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AccountService,
