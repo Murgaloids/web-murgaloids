@@ -5,8 +5,7 @@ import { Student } from '../shared/models/student.model';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  providers: [DataService]
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   id: number;

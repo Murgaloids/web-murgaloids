@@ -115,20 +115,14 @@ export class DummyDataService {
   }
 
   getDummyUser(userId: number): Student {
-    if(userId == this.dummyUser.id) {
-      return this.dummyUser;
-    } else {
-      return null;
-    }
+    return (userId === this.dummyUser.id) ? this.dummyUser : null;
   }
 
   getDummyItemById(id: number): Item {
-    let dummyItemById = null;
-     this.dummyItems.forEach(dummyItem => {
-       if(dummyItem.id == id) {
-         dummyItemById = dummyItem;
-       }
-    });
-    return dummyItemById;
+    return this.dummyItems.find(item => item.id === id);
+  }
+
+  getRecentItemsForSale() {
+    return this.dummyItems.slice(0, 8);
   }
 }
