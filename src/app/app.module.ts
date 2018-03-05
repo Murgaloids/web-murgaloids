@@ -15,6 +15,7 @@ import { RatingModule } from 'ngx-rating';
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     HomepageComponent,
     ProfileComponent,
     ItemCardComponent,
