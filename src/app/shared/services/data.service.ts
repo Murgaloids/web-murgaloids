@@ -14,4 +14,8 @@ export class DataService {
   getItemById(itemId: number): Item {
     return this.dummyDataService.getDummyItemById(itemId);
   }
+
+  getRecentItemsForSale(): Item[] {
+    return this.dummyDataService.getRecentItemsForSale();
+  }
 }

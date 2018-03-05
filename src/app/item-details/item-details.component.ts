@@ -6,8 +6,7 @@ import { Item } from '../shared/models/item.model';
 @Component({
   selector: 'app-item-details',
   templateUrl: './item-details.component.html',
-  styleUrls: ['./item-details.component.scss'],
-  providers: [DataService]
+  styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements OnInit {
   item: Item;
@@ -15,7 +14,7 @@ export class ItemDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => this.item = this.dataService.getItemById(+params['id']));
