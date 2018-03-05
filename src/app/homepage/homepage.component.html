@@ -1,5 +1,7 @@
 <div class="container">
-  <p>
-    homepage works!
-  </p>
+  <h1>Recent Items for Sale</h1>
+  <app-item-card
+    *ngFor="let item of recentItemsForSale"
+    [item]="item">
+  </app-item-card>
 </div>
