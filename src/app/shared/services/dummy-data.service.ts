@@ -41,7 +41,7 @@ export class DummyDataService {
       price: 25.00,
       imageSrc: 'https://www.umsl.edu/technology/frc/images/student-iclicker.png'
     });
-    
+
     let dummyItem5 = new Item({
       id: 5,
       name: 'Calculator',
@@ -50,7 +50,7 @@ export class DummyDataService {
       price: 5.00,
       imageSrc: 'https://www.goodsamaritan.ms/uploads/1/2/7/7/12777965/s736176615899143325_p466_i1_w1200.jpeg'
     });
-    
+
     let dummyItem6 = new Item({
       id: 6,
       name: 'Pencils',
@@ -59,7 +59,7 @@ export class DummyDataService {
       price: 1.00,
       imageSrc: 'http://www.hobbycraft.co.uk/supplyimages/597152_1000_1_800.jpg'
     });
-    
+
     let dummyItem7 = new Item({
       id: 7,
       name: 'Backpack',
@@ -68,7 +68,7 @@ export class DummyDataService {
       price: 40.00,
       imageSrc: 'https://i5.walmartimages.com/asr/1afc32ce-b86e-4545-aae8-fe0fb6d1dd6c_1.1123d86c3a7f30ef2dcebb1582a1dc4f.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
     });
-    
+
     let dummyItem8 = new Item({
       id: 8,
       name: 'Skateboard',

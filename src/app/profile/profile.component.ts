@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     this.dataService.getStudentObservable(this.id).subscribe(student => {
       this.dataService.getItemsForSaleObservable(this.id).subscribe(item => {
         var itemsForSale = this.dataService.buildItemsForSale(item);
-        this.student = this.dataService.buildStudent(student[0], itemsForSale);
+        this.student = this.dataService.buildStudent(student, itemsForSale);
         this.ready = true;
       });
     });
