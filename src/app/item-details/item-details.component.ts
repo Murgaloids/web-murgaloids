@@ -10,6 +10,7 @@ import { Item } from '../shared/models/item.model';
 })
 export class ItemDetailsComponent implements OnInit {
   item: Item;
+  ready: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,6 +18,11 @@ export class ItemDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.item = this.dataService.getItemById(+params['id']));
+    this.route.params.subscribe(params => {
+      this.dataService.getItemObservable(+params['id']).subscribe(item => {
+        this.item = this.dataService.buildItem(item);
+        this.ready = true;
+      });
+    });
   }
 }
