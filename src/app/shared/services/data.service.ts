@@ -29,7 +29,7 @@ export class DataService {
   }
 
   getItemObservable(itemId: number): Observable<any> {
-    return this.http.get(this.url + 'items/get?id=', this.httpOptions);
+    return this.http.get(this.url + 'items/get?id=' + itemId, this.httpOptions);
   }
 
   buildStudent(studentObservable: any, itemsForSale: Item[]): Student {
@@ -62,14 +62,12 @@ export class DataService {
     })
   }
 
-  //eventually user photos will be mapped in local storage
   getUserPhoto(userId: number): string {
-    return 'https://avatars0.githubusercontent.com/u/10682341?s=400&v=4';
+    return localStorage.getItem('user' + userId);
   }
 
-  //eventually item photos will be mapped in local storage
   getItemPhoto(itemId: number): string {
-    return 'https://www.obaku.com/content/collection/V213GUCURZ.jpg';
+    return localStorage.getItem('item' + itemId);
   }
 
   //eventually this will be converted to use real data
