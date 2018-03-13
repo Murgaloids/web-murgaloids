@@ -58,7 +58,7 @@ export class DataService {
       aboutDesc: itemsObservable.description,
       rating: itemsObservable.rating,
       price: itemsObservable.price,
-      imageSrc: this.getItemPhoto(itemsObservable.id);
+      imageSrc: this.getItemPhoto(itemsObservable.id)
     })
   }
 

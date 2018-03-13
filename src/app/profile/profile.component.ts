@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
 import { Student } from '../shared/models/student.model';
+import { Item } from '../shared/models/item.model';
 
 @Component({
   selector: 'app-profile',
