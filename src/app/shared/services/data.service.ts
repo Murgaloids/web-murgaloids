@@ -74,4 +74,18 @@ export class DataService {
   getRecentItemsForSale(): Item[] {
     return this.dummyDataService.getRecentItemsForSale();
   }
+
+  addNewItem(
+    itemName: string,
+    sellerID:number,
+    conditionTypeID:number,
+    categoryTypeID:number,
+    description:string,
+    price:number,
+    isItemSold:number,
+    rating:number,
+    pictureURL:string) {
+      //for now this data is only being printed. once there is a backend api it will add a new item to the database.
+      console.log(itemName + sellerID + conditionTypeID + categoryTypeID + description + price + isItemSold + rating + pictureURL);
+  }
 }

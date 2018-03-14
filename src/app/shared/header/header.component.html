@@ -56,7 +56,10 @@
       <div *ngIf="accountService.isUserLoggedIn()">
         <button mat-menu-item>Account</button>
         <button mat-menu-item>Orders</button>
-        <button mat-menu-item>Sell</button>
+        <button
+          mat-menu-item
+          routerLink="/sell"
+          routerLinkActive="active">Sell</button>
         <button
           mat-menu-item
           routerLink="/profile"
