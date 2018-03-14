@@ -14,7 +14,8 @@ export class SellItemPageComponent {
   constructor(private dataService: DataService) { }
 
   submit() {
-    this.dataService.addNewItem(this.item);
+    this.item.itemSold = false;
+    this.dataService.addNewItem(this.item).subscribe();
   }
 
 }

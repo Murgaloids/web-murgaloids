@@ -1,12 +1,12 @@
 export class Item {
   public id: number;
-  public name: string;
-  public seller: number;
-  public conditionType: number;
-  public categoryType: number;
-  public aboutDesc: string;
+  public itemName: string;
+  public sellerId: number;
+  public conditionTypeId: number;
+  public categoryTypeId: number;
+  public description: string;
   public price: number;
-  public isItemSold: number;
+  public itemSold: boolean;
   public rating: number;
   public imageSrc: string;
 
