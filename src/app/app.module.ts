@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemDetailsComponent } from './item-details/item-details.component';
+import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 
 
 // Components
@@ -26,7 +27,6 @@ import { ItemCardComponent } from './shared/item-card/item-card.component';
 // Services
 import { AccountService } from './shared/services/account.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
-import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
