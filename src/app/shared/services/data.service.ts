@@ -80,9 +80,6 @@ export class DataService {
   }
 
   addNewItem(item: Item) {
-      return this.http.post(
-        this.url + "items/add", item,
-        this.httpOptions
-      );
+      return this.http.post(this.url + "items/add", item, this.httpOptions);
   }
 }
