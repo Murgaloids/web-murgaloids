@@ -12,6 +12,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
+import { ItemDetailsComponent } from './item-details/item-details.component';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -20,7 +22,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';

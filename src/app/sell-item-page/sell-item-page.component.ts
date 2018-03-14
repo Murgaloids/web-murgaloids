@@ -9,30 +9,12 @@ import { Item } from '../shared/models/item.model';
 })
 export class SellItemPageComponent {
 
-  itemName: string;
-  sellerID: number;
-  conditionTypeID: number;
-  categoryTypeID: number;
-  description: string;
-  price: number;
-  isItemSold: number;
-  rating: number;
-  pictureURL: string;
+  item: Item = new Item();
 
   constructor(private dataService: DataService) { }
 
   submit() {
-    this.dataService.addNewItem(
-      this.itemName,
-      this.sellerID,
-      this.conditionTypeID,
-      this.categoryTypeID,
-      this.description,
-      this.price,
-      this.isItemSold,
-      this.rating,
-      this.pictureURL
-    );
+    this.dataService.addNewItem(this.item);
   }
 
 }

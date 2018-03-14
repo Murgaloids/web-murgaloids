@@ -15,7 +15,10 @@
     <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
       <li><a>Account</a></li>
       <li><a>Orders</a></li>
-      <li><a>Sell</a></li>
+      <li><a
+        routerLink="/sell"
+        routerLinkActive="active">Sell</a>
+      </li>
       <li>
         <a
           routerLink="/profile"
