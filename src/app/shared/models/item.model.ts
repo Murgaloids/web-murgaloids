@@ -1,9 +1,13 @@
 export class Item {
   public id: number;
-  public name: string;
-  public aboutDesc: string;
-  public rating: number;
+  public itemName: string;
+  public sellerId: number;
+  public conditionTypeId: number;
+  public categoryTypeId: number;
+  public description: string;
   public price: number;
+  public itemSold: boolean;
+  public rating: number;
   public imageSrc: string;
 
   public constructor(init?:Partial<Item>) {

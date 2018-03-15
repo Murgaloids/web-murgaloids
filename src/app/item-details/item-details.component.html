@@ -4,10 +4,10 @@
       <img class="img-fluid" src="{{ item.imageSrc }}">
     </div>
     <div class="col-xs-12 col-md-3">
-      <h1>{{ item.name }}</h1>
+      <h1>{{ item.itemName }}</h1>
       <rating class="star-icon" [(ngModel)]="item.rating" [readonly]="true"></rating>
       <h2>${{ item.price }}</h2>
-      <p>{{ item.aboutDesc }}</p>
+      <p>{{ item.description }}</p>
     </div>
   </div>
 </div>

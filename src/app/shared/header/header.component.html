@@ -15,7 +15,10 @@
     <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
       <li><a>Account</a></li>
       <li><a>Orders</a></li>
-      <li><a>Sell</a></li>
+      <li><a
+        routerLink="/sell"
+        routerLinkActive="active">Sell</a>
+      </li>
       <li>
         <a
           routerLink="/profile"
@@ -56,7 +59,10 @@
       <div *ngIf="accountService.isUserLoggedIn()">
         <button mat-menu-item>Account</button>
         <button mat-menu-item>Orders</button>
-        <button mat-menu-item>Sell</button>
+        <button
+          mat-menu-item
+          routerLink="/sell"
+          routerLinkActive="active">Sell</button>
         <button
           mat-menu-item
           routerLink="/profile"

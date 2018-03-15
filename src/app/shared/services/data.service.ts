@@ -12,6 +12,7 @@ export class DataService {
   //eventually authorization will be moved to the account service
   private httpOptions: any = {
     headers: new HttpHeaders({
+      'Content-Type':  'application/json',
       'Authorization': 'Murgaloids eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWNoYWVsYmx4Y2tAZ21haWwuY29tIiwiZXhwIjoxNTIxNDAzNjM5fQ.9-Ar9rDS-N0ExbK2vMGIMtAX5GOukt8kb6vY-PWYnxSqPMvADqUJlnhmb5Co98caIoeMjaJ8nh7LrcQcZuiFlQ'
     })
   };
@@ -54,8 +55,11 @@ export class DataService {
   buildItem(itemsObservable: any): Item {
     return new Item({
       id: itemsObservable.id,
-      name: itemsObservable.itemName,
-      aboutDesc: itemsObservable.description,
+      itemName: itemsObservable.itemName,
+      sellerId: itemsObservable.sellerId,
+      conditionTypeId: itemsObservable.conditionTypeId,
+      categoryTypeId: itemsObservable.categoryTypeId,
+      description: itemsObservable.description,
       rating: itemsObservable.rating,
       price: itemsObservable.price,
       imageSrc: this.getItemPhoto(itemsObservable.id)
@@ -73,5 +77,9 @@ export class DataService {
   //eventually this will be converted to use real data
   getRecentItemsForSale(): Item[] {
     return this.dummyDataService.getRecentItemsForSale();
+  }
+
+  addNewItem(item: Item) {
+      return this.http.post(this.url + "items/add", item, this.httpOptions);
   }
 }

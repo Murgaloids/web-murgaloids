@@ -7,10 +7,10 @@
       <img mat-card-lg-image class="img-fluid" src="{{ item.imageSrc }}"/>
     </div>
     <div class="col-md-8">
-      <mat-card-title>{{ item.name }}</mat-card-title>
+      <mat-card-title>{{ item.itemName }}</mat-card-title>
       <mat-card-subtitle>${{ item.price }}</mat-card-subtitle>
       <rating [(ngModel)]="item.rating" [readonly]="true"></rating>
-      <mat-card-content>{{ item.aboutDesc }}</mat-card-content>
+      <mat-card-content>{{ item.description }}</mat-card-content>
     </div>
   </div>
 </mat-card>

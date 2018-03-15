@@ -8,8 +8,8 @@ export class DummyDataService {
   constructor() {
     let dummyItem1 = new Item({
       id: 1,
-      name: 'Laptop',
-      aboutDesc: 'About the laptop.',
+      itemName: 'Laptop',
+      description: 'About the laptop.',
       rating: 5.0,
       price: 1000.00,
       imageSrc: 'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/T/V9/TV901/TV901_AV1?wid=1000&hei=1000&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1465509119024'
@@ -17,8 +17,8 @@ export class DummyDataService {
 
     let dummyItem2 = new Item({
       id: 2,
-      name: 'Watch',
-      aboutDesc: 'About the watch.',
+      itemName: 'Watch',
+      description: 'About the watch.',
       rating: 4.0,
       price: 100.00,
       imageSrc: 'https://www.obaku.com/content/collection/V213GUCURZ.jpg'
@@ -26,8 +26,8 @@ export class DummyDataService {
 
     let dummyItem3 = new Item({
       id: 3,
-      name: 'Textbook',
-      aboutDesc: 'About the textbook.',
+      itemName: 'Textbook',
+      description: 'About the textbook.',
       rating: 3.0,
       price: 50.00,
       imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNKRtgGPWEqw9T5cETltCf8IVKcrtoCNPlJiW12-3EjNIXmo'
@@ -35,8 +35,8 @@ export class DummyDataService {
 
     let dummyItem4 = new Item({
       id: 4,
-      name: 'iClicker',
-      aboutDesc: 'About the iClicker',
+      itemName: 'iClicker',
+      description: 'About the iClicker',
       rating: 2.0,
       price: 25.00,
       imageSrc: 'https://www.umsl.edu/technology/frc/images/student-iclicker.png'
@@ -44,8 +44,8 @@ export class DummyDataService {
 
     let dummyItem5 = new Item({
       id: 5,
-      name: 'Calculator',
-      aboutDesc: 'About the calculator.',
+      itemName: 'Calculator',
+      description: 'About the calculator.',
       rating: 5.0,
       price: 5.00,
       imageSrc: 'https://www.goodsamaritan.ms/uploads/1/2/7/7/12777965/s736176615899143325_p466_i1_w1200.jpeg'
@@ -53,8 +53,8 @@ export class DummyDataService {
 
     let dummyItem6 = new Item({
       id: 6,
-      name: 'Pencils',
-      aboutDesc: 'About the pencils.',
+      itemName: 'Pencils',
+      description: 'About the pencils.',
       rating: 4.0,
       price: 1.00,
       imageSrc: 'http://www.hobbycraft.co.uk/supplyimages/597152_1000_1_800.jpg'
@@ -62,8 +62,8 @@ export class DummyDataService {
 
     let dummyItem7 = new Item({
       id: 7,
-      name: 'Backpack',
-      aboutDesc: 'About the backpack description',
+      itemName: 'Backpack',
+      description: 'About the backpack description',
       rating: 2.0,
       price: 40.00,
       imageSrc: 'https://i5.walmartimages.com/asr/1afc32ce-b86e-4545-aae8-fe0fb6d1dd6c_1.1123d86c3a7f30ef2dcebb1582a1dc4f.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
@@ -71,8 +71,8 @@ export class DummyDataService {
 
     let dummyItem8 = new Item({
       id: 8,
-      name: 'Skateboard',
-      aboutDesc: 'About the skateboard.',
+      itemName: 'Skateboard',
+      description: 'About the skateboard.',
       rating: 5.0,
       price: 120.00,
       imageSrc: 'https://gloimg.gbtcdn.com/gb/pdm-product-pic/Electronic/2017/07/18/goods-img/1500610680603760593.jpg'

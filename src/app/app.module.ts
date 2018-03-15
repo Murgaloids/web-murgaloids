@@ -21,6 +21,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
+import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';
@@ -29,7 +30,8 @@ import { DummyDataService } from './shared/services/dummy-data.service';
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'item/:id', component: ItemDetailsComponent}
+  { path: 'item/:id', component: ItemDetailsComponent},
+  { path: 'sell', component: SellItemPageComponent}
 ];
 
 @NgModule({
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     HomepageComponent,
     ProfileComponent,
     ItemCardComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    SellItemPageComponent
   ],
   imports: [
     BrowserModule,
