@@ -15,7 +15,9 @@ export class SellItemPageComponent {
 
   submit() {
     this.item.itemSold = false;
-    this.dataService.addNewItem(this.item).subscribe();
+    this.dataService.addNewItem(this.item).subscribe(id => {
+      localStorage.setItem('item' + id, this.item.imageSrc);
+    });
   }
 
 }
