@@ -22,6 +22,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
+import { SuccessComponent } from './success/success.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'item/:id', component: ItemDetailsComponent},
-  { path: 'sell', component: SellItemPageComponent}
+  { path: 'sell', component: SellItemPageComponent},
+  { path: 'success', component: SuccessComponent}
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     ItemCardComponent,
     ItemDetailsComponent,
-    SellItemPageComponent
+    SellItemPageComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
