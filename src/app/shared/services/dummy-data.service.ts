@@ -21,7 +21,7 @@ export class DummyDataService {
       description: 'About the watch.',
       rating: 4.0,
       price: 100.00,
-      imageSrc: 'https://www.obaku.com/content/collection/V213GUCURZ.jpg'
+      imageSrc: 'https://media.gq.com/photos/58210bd50669a1613142bf78/master/pass/november-selects-shinola-watch.jpg'
     });
 
     let dummyItem3 = new Item({

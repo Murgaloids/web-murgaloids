@@ -13,7 +13,7 @@ export class DataService {
   private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Murgaloids eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWNoYWVsYmx4Y2tAZ21haWwuY29tIiwiZXhwIjoxNTIxNDAzNjM5fQ.9-Ar9rDS-N0ExbK2vMGIMtAX5GOukt8kb6vY-PWYnxSqPMvADqUJlnhmb5Co98caIoeMjaJ8nh7LrcQcZuiFlQ'
+      'Authorization': 'Murgaloids eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJyaWNrQGdtYWlsLmNvbSIsImV4cCI6MTUyMjI2ODkwNn0.T8G01Oa53klptcgZv3c1xcBzNMWVn9Rh4MfsfR4qblg7Cb4W0mH0_orCqNe2bJh0qzEG4Oe9F_H1nTH_XsCulg'
     })
   };
 
@@ -81,5 +81,9 @@ export class DataService {
 
   addNewItem(item: Item) {
       return this.http.post(this.url + "items/add", item, this.httpOptions);
+  }
+
+  getUserId() {
+    return 1;
   }
 }
