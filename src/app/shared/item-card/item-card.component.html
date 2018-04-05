@@ -1,4 +1,4 @@
-z<mat-card
+<mat-card *ngIf="ready"
   class="item-card"
   [ngClass]="{'center-text': windowService.width < mobileWidth}"
   [routerLink]="['/item', item.id]">
