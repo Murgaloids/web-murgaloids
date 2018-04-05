@@ -42,7 +42,7 @@ export class SellItemPageComponent {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
     this.currentFileUpload = new FileUpload(file);
-    this.pushFileToStorage(this.currentFileUpload, this.progress));
+    this.pushFileToStorage(this.currentFileUpload, this.progress);
   }
 
   selectFile(event) {
@@ -81,10 +81,11 @@ export class SellItemPageComponent {
   }
 
   private saveFileData(fileUpload: FileUpload) {
-    this.item.imageSrc = this.db.list(`${this.basePath}/`).push(fileUpload).path.pieces_[1]);
-    this.dataService.addNewItem(this.item).subscribe(id => {
-      localStorage.setItem('item' + id, this.item.imageSrc);
-      this.router.navigate(['/success']);
+    this.db.list(`${this.basePath}/`).push(fileUpload).then(data => {
+      this.dataService.addNewItem(this.item).subscribe(id => {
+        localStorage.setItem('item' + id, this.item.imageSrc);
+        this.router.navigate(['/success']);
+      });
     });
   }
 
