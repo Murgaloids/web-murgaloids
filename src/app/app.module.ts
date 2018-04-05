@@ -26,14 +26,10 @@ import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 import { SuccessComponent } from './success/success.component';
-import { FormUploadComponent } from './upload/form-upload/form-upload.component';
-import { ListUploadComponent } from './upload/list-upload/list-upload.component';
-import { DetailsUploadComponent } from './upload/details-upload/details-upload.component';
 
 // Services
 import { AccountService } from './shared/services/account.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
-import { UploadFileService } from './shared/services/upload-file.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -53,10 +49,7 @@ const appRoutes: Routes = [
     ItemCardComponent,
     ItemDetailsComponent,
     SellItemPageComponent,
-    SuccessComponent,
-    FormUploadComponent,
-    ListUploadComponent,
-    DetailsUploadComponent
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -76,8 +69,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AccountService,
-    DummyDataService,
-    UploadFileService
+    DummyDataService
   ],
   bootstrap: [AppComponent]
 })
