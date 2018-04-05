@@ -22,7 +22,7 @@ export class ItemCardComponent implements OnInit {
 
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
-    var id = localStorage.getItem('item' + this.item.id);
+    var id = String(localStorage.getItem('item' + this.item.id));
     const ref = firebase.database().ref(`${this.basePath}/${id}`)
       .once('value').then(snapshot => {
         this.item.imageSrc = snapshot.node_.children_.root_.value.value_;

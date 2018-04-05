@@ -81,7 +81,10 @@ export class SellItemPageComponent {
 
   private saveFileData(fileUpload: FileUpload) {
     this.db.list(`${this.basePath}/`).push(fileUpload).then(data => {
-      this.item.imageSrc = " "; //data.path.pieces_[1];
+      console.log(String(data.path).split("-")[1]);
+      console.log("path ", data.path);
+      this.item.imageSrc = "-" + String(data.path).split("-")[1];
+      console.log(this.item.imageSrc);
       this.dataService.addNewItem(this.item).subscribe(id => {
         localStorage.setItem('item' + id, this.item.imageSrc);
         this.router.navigate(['/success']);
