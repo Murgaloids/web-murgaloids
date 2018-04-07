@@ -19,14 +19,14 @@ import * as firebase from 'firebase';
 })
 export class SellItemPageComponent {
   //item attributes
-  item: Item = new Item();
-  itemCondition: string;
-  itemCategory: string;
+  private item: Item = new Item();
+  private itemCondition: string;
+  private itemCategory: string;
   //firebase attributes
-  selectedFiles: FileList;
-  currentFileUpload: FileUpload;
-  progress: { percentage: number } = { percentage: 0 };
-  basePath:string = '/uploads';
+  private selectedFiles: FileList;
+  private currentFileUpload: FileUpload;
+  private progress: { percentage: number } = { percentage: 0 };
+  private basePath:string = '/uploads';
 
   constructor(
     private dataService: DataService,
@@ -51,7 +51,7 @@ export class SellItemPageComponent {
       if(file.type.match('image.*')) {
         this.selectedFiles = event.target.files;
       } else {
-        alert('invalid format!');
+        alert('INVALID FORMAT');
       }
     }
   }
@@ -81,10 +81,7 @@ export class SellItemPageComponent {
 
   private saveFileData(fileUpload: FileUpload) {
     this.db.list(`${this.basePath}/`).push(fileUpload).then(data => {
-      console.log(String(data.path).split("/uploads/"));
-      console.log("path ", data.path);
       this.item.imageSrc = String(data.path).split("/uploads/")[1];
-      console.log(this.item.imageSrc);
       this.dataService.addNewItem(this.item).subscribe(id => {
         localStorage.setItem('item' + id, this.item.imageSrc);
         this.router.navigate(['/success']);
