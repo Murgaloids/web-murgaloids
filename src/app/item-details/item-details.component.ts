@@ -32,7 +32,7 @@ export class ItemDetailsComponent implements OnInit {
           const ref = firebase.database().ref(`${this.basePath}/${id}`)
             .once('value').then(snapshot => {
               this.item = this.dataService.buildItem(item);
-              this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
+              this.getItemImageSource(snapshot);
               this.ready = true;
             }).catch(e => {
               console.log("ERROR ACCESSING IMAGE: ", e);
@@ -41,5 +41,9 @@ export class ItemDetailsComponent implements OnInit {
         }
       });
     });
+  }
+
+  private getItemImageSource(snapshot:any):void {
+    this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
   }
 }

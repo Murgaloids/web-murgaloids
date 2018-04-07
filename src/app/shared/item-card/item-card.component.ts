@@ -33,12 +33,16 @@ export class ItemCardComponent implements OnInit {
     if(id != null) {
       const ref = firebase.database().ref(`${this.basePath}/${id}`)
         .once('value').then(snapshot => {
-          this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
+          this.getItemImageSource(snapshot);
           this.ready = true;
         }).catch(e => {
           console.log("ERROR ACCESSING IMAGE: ", e);
           this.ready = true;
         });
     }
+  }
+
+  private getItemImageSource(snapshot:any):void {
+    this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
   }
 }

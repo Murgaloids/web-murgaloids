@@ -81,12 +81,16 @@ export class SellItemPageComponent {
 
   private saveFileData(fileUpload: FileUpload) {
     this.db.list(`${this.basePath}/`).push(fileUpload).then(data => {
-      this.item.imageSrc = String(data.path).split("/uploads/")[1];
+      this.item.imageSrc = this.parseItemImageSrc(data);
       this.dataService.addNewItem(this.item).subscribe(id => {
         localStorage.setItem('item' + id, this.item.imageSrc);
         this.router.navigate(['/success']);
       });
     });
+  }
+
+  private parseItemImageSrc(data:any):string {
+    return String(data.path).split("/uploads/")[1];
   }
 
 }
