@@ -24,13 +24,18 @@ export class ItemDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.dataService.getItemObservable(+params['id']).subscribe(item => {
+        if(item != null) { //added for the dummy items
         var id = localStorage.getItem('item' + item.id);
         const ref = firebase.database().ref(`${this.basePath}/${id}`)
           .once('value').then(snapshot => {
             this.item = this.dataService.buildItem(item);
             this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
             this.ready = true;
+          }).catch(e => {
+            console.log("there was an error ");
+            this.ready = true;
           });
+        }
       });
     });
   }

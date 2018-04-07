@@ -22,11 +22,20 @@ export class ItemCardComponent implements OnInit {
 
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
+    console.log("ITEM ID ", this.item.id);
     var id = String(localStorage.getItem('item' + this.item.id));
+    console.log("PHOTO ID ", id);
+    if(id != null) {
     const ref = firebase.database().ref(`${this.basePath}/${id}`)
       .once('value').then(snapshot => {
+        console.log("SNAPSHOT", snapshot);
         this.item.imageSrc = snapshot.node_.children_.root_.value.value_;
         this.ready = true;
+      })
+      .catch(e => {
+        console.log("there was an error ");
+        this.ready = true;
       });
+    }
   }
 }
