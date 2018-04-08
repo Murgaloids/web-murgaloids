@@ -13,7 +13,7 @@ export class DataService {
   private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Murgaloids eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJyaWNrQGdtYWlsLmNvbSIsImV4cCI6MTUyMjI2ODkwNn0.T8G01Oa53klptcgZv3c1xcBzNMWVn9Rh4MfsfR4qblg7Cb4W0mH0_orCqNe2bJh0qzEG4Oe9F_H1nTH_XsCulg'
+      'Authorization': 'Murgaloids eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJyaWNrMkBnbWFpbC5jb20iLCJleHAiOjE1MjM1NzA1OTV9.ZGQAel8S6KO7J1SkY3i6jVSA18XWrDcgk5ssjlbPLvwy-eroeqp5rsmopQmD1DtgM4EOUcPD8d_u8XtCse63oA'
     })
   };
 
