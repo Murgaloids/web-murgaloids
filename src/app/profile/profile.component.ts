@@ -13,7 +13,7 @@ import { Item } from '../shared/models/item.model';
 export class ProfileComponent implements OnInit {
   private id: number;
   private student: Student;
-  private ready: boolean = false;
+  private ready: boolean;
 
   constructor(private dataService: DataService) { }
 

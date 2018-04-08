@@ -9,7 +9,7 @@ import { FileUpload } from '../shared/models/file-upload.model'
 import { ItemCondition } from '../shared/global';
 import { ItemCategory } from '../shared/global';
 //firebase
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 @Component({
@@ -34,17 +34,21 @@ export class SellItemPageComponent {
     private db: AngularFireDatabase) { }
 
   submit() {
+    // set the item attributes
     this.item.sellerId = this.dataService.getUserId();
     this.item.itemSold = false;
     this.item.rating = 0;
     this.item.conditionTypeId = ItemCondition[this.itemCondition];
     this.item.categoryTypeId = ItemCategory[this.itemCategory];
+    // set up for uploading the item image
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
     this.currentFileUpload = new FileUpload(file);
     this.pushFileToStorage(this.currentFileUpload, this.progress);
   }
 
+  // event handler for selecting item image to be uploaded, see
+  // firebase docs
   selectFile(event) {
     const file = event.target.files.item(0);
     if(file.type.match('image.*')) {
@@ -56,6 +60,7 @@ export class SellItemPageComponent {
     }
   }
 
+  // handles uploading the item image to firebase, see firebase docs
   pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number }): any {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
@@ -74,14 +79,18 @@ export class SellItemPageComponent {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
+        // once the file has been successfully uploaded, call saveFileData
         this.saveFileData(fileUpload);
       }
     );
   }
 
+  // now that the image has been successfully uploaded, we can save its data
   private saveFileData(fileUpload: FileUpload) {
     this.db.list(`${this.basePath}/`).push(fileUpload).then(data => {
+      // parse out and save the image source id
       this.item.imageSrc = this.parseItemImageSrc(data);
+      // add the new item to the database and redirect to success page
       this.dataService.addNewItem(this.item).subscribe(id => {
         localStorage.setItem('item' + id, this.item.imageSrc);
         this.router.navigate(['/success']);

@@ -14,7 +14,7 @@ import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -30,6 +30,9 @@ import { SuccessComponent } from './success/success.component';
 // Services
 import { AccountService } from './shared/services/account.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
+
+// Environment
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
