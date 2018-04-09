@@ -3,8 +3,9 @@ import SHA256 = require('crypto-js/hmac-sha256');
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { Router } from "@angular/router";
 import { Challenge } from '../models/challenge.model';
+
 
 const SERVER_URL: string = 'http://localhost:8080';
 const SALT_ROUNDS: number = 10;
@@ -19,7 +20,10 @@ export class AuthenticationService {
   private mUserId: number;
   private mToken: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   set firstName(firstName: string) {
     this.mFirstname = firstName;
@@ -102,7 +106,13 @@ export class AuthenticationService {
               .then(hash => {
                 const tag = SHA256(challenge, hash).toString();
                 this.http.post(`${SERVER_URL}/students/validate-tag`, {email, challenge, tag}, {observe: 'response'})
-                  .subscribe(res => this.mSalt = res.headers.get('authorization'));
+                  .subscribe((res: any) => {
+                    this.mToken = res.headers.get('authorization');
+                    if (this.mToken && res.body.data.id) {
+                      this.userId = res.body.data.id;
+                      this.router.navigate(['/']);
+                    }
+                  });
               });
           }
         });
@@ -130,7 +140,13 @@ export class AuthenticationService {
       }
 
       this.http.post(`${SERVER_URL}/students/add`, body, {observe: 'response'})
-        .subscribe(res => this.mToken = res.headers.get('authorization'));
+        .subscribe((res: any) => {
+          this.mToken = res.headers.get('authorization')
+          if (this.mToken && res.body.data.id) {
+            this.userId = res.body.data.id;
+            this.router.navigate(['/']);
+          }
+        });
     }
   }
 }
