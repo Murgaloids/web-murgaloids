@@ -7,44 +7,38 @@
     routerLinkActive="active"><span id="navbar-title">Murgaloids</span></a>
   <form
     color="accent"
-    (keydown)="onInputEnter($event)">
-    <input type="text" placeholder="Search for anything...">
+    (keydown)="submitHandler($event)">
+    <input
+      [value]="inputValue"
+      (input)="onSearchTermChange($event.target.value)"
+      type="text"
+      placeholder="Search for anything...">
   </form>
   <span class="spacer"></span>
   <ul>
-    <span *ngIf="accountService.isUserLoggedIn(); else signUpOption">
+    <span *ngIf="authenticationService.userId; else signUpOption">
       <li><a>Account</a></li>
       <li><a>Orders</a></li>
-      <li><a
-        routerLink="/sell"
-        routerLinkActive="active">Sell</a>
+      <li>
+        <a
+          routerLink="/sell"
+          routerLinkActive="active">Sell</a>
       </li>
       <li>
         <a
           routerLink="/profile"
           routerLinkActive="active">Profile</a>
       </li>
-    </span>
-    <span [ngSwitch]="accountService.active">
       <li>
         <a
-          *ngSwitchCase="SIGN_OUT_CONST"
-          (click)="onSignInToggle()"
+          (click)="signOutClickHandler()"
           routerLink="/"
-          routerLinkActive="active">{{ SIGN_OUT_CONST }}</a>
+          routerLinkActive="active">Sign Out</a>
       </li>
-      <li><a *ngSwitchCase="SIGN_IN_CONST" (click)="onSignInToggle()">{{ SIGN_IN_CONST }}</a></li>
     </span>
   </ul>
 </mat-toolbar>
 <!-- End Desktop -->
-
-
-<!-- For Sign Up Option -->
-<ng-template #signUpOption>
-  <li><a>Sign Up</a></li>
-</ng-template>
-<!-- End Sign Up Option -->
 
 
 <!-- For Mobile -->
@@ -56,7 +50,7 @@
     <span class="spacer"></span>
     <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
     <mat-menu #menu="matMenu">
-      <div *ngIf="accountService.isUserLoggedIn()">
+      <div *ngIf="authenticationService.userId; else mobileSignUpOption">
         <button mat-menu-item>Account</button>
         <button mat-menu-item>Orders</button>
         <button
@@ -67,19 +61,12 @@
           mat-menu-item
           routerLink="/profile"
           routerLinkActive="active">Profile</button>
-      </div>
-      <span [ngSwitch]="accountService.active">
         <button
           mat-menu-item
-          *ngSwitchCase="SIGN_OUT_CONST"
-          (click)="onSignInToggle()"
+          (click)="signOutClickHandler()"
           routerLink="/"
-          routerLinkActive="active">{{ SIGN_OUT_CONST }}</button>
-        <button
-          mat-menu-item
-          (click)="onSignInToggle()"
-          *ngSwitchCase="SIGN_IN_CONST">{{ SIGN_IN_CONST }}</button>
-      </span>
+          routerLinkActive="active">Sign Out</button>
+      </div>
     </mat-menu>
   </mat-toolbar>
 </ng-template>
@@ -91,11 +78,29 @@
   <form
     id="mobile-input-form"
     color="accent"
-    (keydown)="onInputEnter($event)">
+    (keydown)="submitHandler($event)">
     <input
+      [value]="inputValue"
+      (input)="onSearchTermChange($event.target.value)"
       autofocus
       placeholder="Search for anything..."
       (blur)="onSearchIconToggle()">
   </form>
 </ng-template>
 <!-- End Mobile Input Toggle -->
+
+
+<!-- For Sign Up Option -->
+<ng-template #signUpOption>
+  <li><a [routerLink]="['/register']">Sign Up</a></li>
+  <li><a [routerLink]="['/login']">Sign In</a></li>
+</ng-template>
+<!-- End Sign Up Option -->
+
+
+<!-- For Mobile Sign Up Option -->
+<ng-template #mobileSignUpOption>
+  <button mat-menu-item [routerLink]="['/register']">Sign Up</button>
+  <button mat-menu-item [routerLink]="['/login']">Sign In</button>
+</ng-template>
+<!-- End Mobile Sign Up Option -->

@@ -11,7 +11,10 @@ import { DataService } from './shared/services/data.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [WindowService, DataService]
+  providers: [
+    WindowService,
+    DataService
+  ]
 })
 export class AppComponent {
   constructor(private windowService: WindowService) {}

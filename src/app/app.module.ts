@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -18,6 +17,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
@@ -25,11 +26,13 @@ import { SellItemPageComponent } from './sell-item-page/sell-item-page.component
 import { SuccessComponent } from './success/success.component';
 
 // Services
-import { AccountService } from './shared/services/account.service';
+import { AuthenticationService } from './shared/services/authentication.service';
 import { DummyDataService } from './shared/services/dummy-data.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'item/:id', component: ItemDetailsComponent},
   { path: 'sell', component: SellItemPageComponent},
@@ -46,14 +49,15 @@ const appRoutes: Routes = [
     ItemCardComponent,
     ItemDetailsComponent,
     SellItemPageComponent,
-    SuccessComponent
+    SuccessComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
-    AngularFontAwesomeModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
@@ -63,7 +67,7 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
   providers: [
-    AccountService,
+    AuthenticationService,
     DummyDataService
   ],
   bootstrap: [AppComponent]

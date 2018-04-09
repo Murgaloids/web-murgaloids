@@ -1,0 +1,19 @@
+<form>
+  <!-- Email Input -->
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="text" class="form-control" [value]="authenticationService.email" (input)="onEmailChange($event.target.value)" name="Email Address" required>
+  </div>
+
+  <!-- Password Input -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" [value]="authenticationService.password" (input)="onPasswordChange($event.target.value)" name="Password" required>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="authenticationService.hasError" class="error">Unable to login user</div>
+
+  <!-- Submit Button -->
+  <button type="submit" (click)="submitHandler()" class="btn btn-success">Login</button>
+</form>
