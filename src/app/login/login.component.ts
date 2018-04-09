@@ -7,14 +7,10 @@ import { AuthenticationService } from '../shared/services/authentication.service
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private isLoading: boolean;
-  private error: string;
-
-  constructor(
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
+    this.authenticationService.clearError();
     this.authenticationService.clearEverything();
   }
 
@@ -27,14 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   submitHandler() {
-     const {
-       email,
-       password,
-       attemptUserLogin
-     } = this.authenticationService;
+     const {email, password, attemptUserLogin} = this.authenticationService;
 
      if (email && password) {
-       this.isLoading = true;
        attemptUserLogin.call(this.authenticationService, {email, password});
      }
   }

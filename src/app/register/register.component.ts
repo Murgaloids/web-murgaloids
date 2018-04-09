@@ -7,12 +7,10 @@ import { AuthenticationService } from '../shared/services/authentication.service
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor(
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
+    this.authenticationService.clearError();
     this.authenticationService.clearEverything();
   }
 
