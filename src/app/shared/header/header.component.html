@@ -9,6 +9,7 @@
     color="accent"
     (keydown)="submitHandler($event)">
     <input
+      [value]="inputValue"
       (input)="onSearchTermChange($event.target.value)"
       type="text"
       placeholder="Search for anything...">
@@ -30,6 +31,7 @@
       </li>
       <li>
         <a
+          (click)="signOutClickHandler()"
           routerLink="/"
           routerLinkActive="active">Sign Out</a>
       </li>
@@ -61,6 +63,7 @@
           routerLinkActive="active">Profile</button>
         <button
           mat-menu-item
+          (click)="signOutClickHandler()"
           routerLink="/"
           routerLinkActive="active">Sign Out</button>
       </div>
@@ -77,6 +80,7 @@
     color="accent"
     (keydown)="submitHandler($event)">
     <input
+      [value]="inputValue"
       (input)="onSearchTermChange($event.target.value)"
       autofocus
       placeholder="Search for anything..."

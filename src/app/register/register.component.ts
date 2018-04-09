@@ -17,19 +17,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onFirstNameChange(firstname: string) {
-    this.authenticationService.firstName = firstname;
+    this.authenticationService.changeFirstName(firstname);
   }
 
   onLastNameChange(lastname: string) {
-    this.authenticationService.lastName = lastname;
+    this.authenticationService.changeLastName(lastname);
   }
 
   onEmailChange(email: string) {
-    this.authenticationService.email = email;
+    this.authenticationService.changeEmail(email);
   }
 
   onPasswordChange(password: string) {
-    this.authenticationService.password = password;
+    this.authenticationService.changePassword(password);
   }
 
   submitHandler() {

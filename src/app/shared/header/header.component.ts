@@ -11,7 +11,7 @@ import { WindowService } from '../services/window.service';
 export class HeaderComponent implements OnInit {
   private mobileWidth: number;
   private isInputVisible: boolean;
-  private inputValue: string;
+  private inputValue: string = '';
 
   constructor(
      private authenticationService: AuthenticationService,
@@ -36,5 +36,10 @@ export class HeaderComponent implements OnInit {
       event.target.value = '';
       event.target.blur();
     }
+  }
+
+  signOutClickHandler() {
+    this.authenticationService.clearEverything();
+    this.authenticationService.clearIsError();
   }
 }

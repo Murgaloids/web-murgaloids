@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   onEmailChange(email: string) {
-    this.authenticationService.email = email;
+    this.authenticationService.changeEmail(email);
   }
 
   onPasswordChange(password: string) {
-    this.authenticationService.password = password;
+    this.authenticationService.changePassword(password);
   }
 
   submitHandler() {
