@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit {
 
   signOutClickHandler() {
     this.authenticationService.clearEverything();
-    this.authenticationService.clearIsError();
+    this.authenticationService.clearError();
   }
 }

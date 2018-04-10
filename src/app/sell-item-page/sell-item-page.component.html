@@ -1,40 +1,42 @@
-<form>
-  <div class="form-group">
-    <label for="itemName">Item Name</label>
-    <input type="text" class="form-control" id="itemName" [(ngModel)]="item.itemName" name="Item Name" required>
-  </div>
-  <div class="form-group">
-    <label for="conditionTypeID">Condition</label>
-    <select [(ngModel)]="itemCondition" name="Item Condition" class="form-control">
-      <option>Good</option>
-      <option>Fair</option>
-      <option>Poor</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="categoryTypeID">Category</label>
-    <select [(ngModel)]="itemCategory" name="Item Category" class="form-control">
-      <option>Books</option>
-      <option>Electronics</option>
-      <option>Clothes</option>
-      <option>Furniture</option>
-      <option>Appliances</option>
-      <option>Supplies</option>
-      <option>Media</option>
-      <option>Other</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input type="text" class="form-control" id="description" [(ngModel)]="item.description" name="Description" required>
-  </div>
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input type="number" class="form-control" id="price" [(ngModel)]="item.price" name="Price" required>
-  </div>
-  <div class="form-group">
-    <label for="pictureURL">Picture URL</label>
-    <input type="text" class="form-control" id="pictureURL" [(ngModel)]="item.imageSrc" name="Picture URL" required>
-  </div>
-   <button type="submit" (click)="submit()" class="btn btn-success">Submit</button>
-</form>
+<div class="container">
+  <form autocomplete="off">
+    <div class="form-group">
+      <label for="itemName">Item Name</label>
+      <input type="text" class="form-control" id="itemName" [(ngModel)]="item.itemName" name="Item Name" required>
+    </div>
+    <div class="form-group">
+      <label for="conditionTypeID">Condition</label>
+      <select [(ngModel)]="itemCondition" name="Item Condition" class="form-control">
+        <option>Good</option>
+        <option>Fair</option>
+        <option>Poor</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="categoryTypeID">Category</label>
+      <select [(ngModel)]="itemCategory" name="Item Category" class="form-control">
+        <option>Books</option>
+        <option>Electronics</option>
+        <option>Clothes</option>
+        <option>Furniture</option>
+        <option>Appliances</option>
+        <option>Supplies</option>
+        <option>Media</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" [(ngModel)]="item.description" name="Description" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" [(ngModel)]="item.price" name="Price" required>
+    </div>
+    <div class="form-group">
+      <label for="pictureURL">Picture URL</label>
+      <input type="text" class="form-control" id="pictureURL" [value]="item.imageSrc" (input)="onImageSourceChange($event.target.value)" name="Picture URL" required>
+    </div>
+     <button type="submit" (click)="submitHandler()" class="btn btn-success">Submit</button>
+  </form>
+</div>

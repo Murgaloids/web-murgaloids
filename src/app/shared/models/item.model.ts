@@ -7,6 +7,7 @@ export class Item {
   public description: string;
   public price: number;
   public itemSold: boolean;
+  public itemRated: boolean;
   public rating: number;
   public imageSrc: string;
 

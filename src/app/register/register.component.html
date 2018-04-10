@@ -1,31 +1,33 @@
-<form>
-  <!-- First Name Input -->
-  <div class="form-group">
-    <label for="firstname">First Name</label>
-    <input type="text" class="form-control" [value]="authenticationService.firstName" (input)="onFirstNameChange($event.target.value)" name="Email Address" required>
-  </div>
+<div class="container">
+  <form autocomplete="off">
+    <!-- First Name Input -->
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" [value]="authenticationService.firstName" (input)="onFirstNameChange($event.target.value)" name="Email Address" required>
+    </div>
 
-  <!-- Last Name Input -->
-  <div class="form-group">
-    <label for="lastname">Last Name</label>
-    <input type="text" class="form-control" [value]="authenticationService.lastName" (input)="onLastNameChange($event.target.value)" name="Email Address" required>
-  </div>
+    <!-- Last Name Input -->
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" [value]="authenticationService.lastName" (input)="onLastNameChange($event.target.value)" name="Email Address" required>
+    </div>
 
-  <!-- Email Address Input -->
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input type="text" class="form-control" [value]="authenticationService.email" (input)="onEmailChange($event.target.value)" name="Email Address" required>
-  </div>
+    <!-- Email Address Input -->
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="text" class="form-control" [value]="authenticationService.email" (input)="onEmailChange($event.target.value)" name="Email Address" required>
+    </div>
 
-  <!-- Password Input -->
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" [value]="authenticationService.password" (input)="onPasswordChange($event.target.value)" name="Password" required>
-  </div>
+    <!-- Password Input -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" [value]="authenticationService.password" (input)="onPasswordChange($event.target.value)" name="Password" required>
+    </div>
 
-  <!-- Error Message -->
-  <div *ngIf="authenticationService.hasError" class="error">Unable to signup user</div>
+    <!-- Error Message -->
+    <div *ngIf="authenticationService.hasError" class="error">Unable to signup user</div>
 
-  <!-- Submit Button -->
-  <button type="submit" (click)="submitHandler()" class="btn btn-success">Login</button>
-</form>
+    <!-- Submit Button -->
+    <button type="submit" (click)="submitHandler()" class="btn btn-success">Login</button>
+  </form>
+</div>
