@@ -1,8 +1,8 @@
-import bcryptjs = require('bcryptjs');
-import SHA256 = require('crypto-js/hmac-sha256');
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
+import bcryptjs = require('bcryptjs');
+import SHA256 = require('crypto-js/hmac-sha256');
 
 const SERVER_URL: string = 'http://localhost:8080';
 const SALT_ROUNDS: number = 10;

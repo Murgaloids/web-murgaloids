@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../shared/services/data.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { ItemsService } from '../shared/services/items.service';
 import { Item } from '../shared/models/item.model';
 import { ItemCondition } from '../shared/global';
 import { ItemCategory } from '../shared/global';
@@ -11,25 +12,42 @@ import { ItemCategory } from '../shared/global';
   styleUrls: ['./sell-item-page.component.scss']
 })
 export class SellItemPageComponent {
+  private item: Item = new Item();
+  private itemCondition: string;
+  private itemCategory: string;
 
-  item: Item = new Item();
-  itemCondition: string;
-  itemCategory: string;
-
-  constructor(private dataService: DataService, private router: Router) { }
-
-  submit() {
-    this.item.sellerId = this.dataService.getUserId();
+  constructor(
+    private authenticationService: AuthenticationService,
+    private itemsService: ItemsService,
+    private router: Router
+  ) {
     this.item.itemSold = false;
-    this.item.rating = 0;
-    this.item.conditionTypeId = ItemCondition[this.itemCondition];
-    this.item.categoryTypeId = ItemCategory[this.itemCategory];
-    this.dataService.addNewItem(this.item).subscribe(id => {
-      //the content of this method will change when the
-      //api is updated to return a json object
-      localStorage.setItem('item' + id, this.item.imageSrc);
-      this.router.navigate(['/success']);
-    });
+    this.item.itemRated = false;
+    this.item.imageSrc = ''
   }
 
+  onImageSourceChange(imageSource) {
+    this.item.imageSrc = imageSource;
+  }
+
+  submitHandler() {
+    // Sets the owner of the item
+    this.item.sellerId = this.authenticationService.userId;
+    this.item.conditionTypeId = ItemCondition[this.itemCondition];
+    this.item.categoryTypeId = ItemCategory[this.itemCategory];
+
+    const {
+      itemName,
+      sellerId,
+      conditionTypeId,
+      categoryTypeId,
+      description,
+      price
+    } = this.item;
+
+    if (itemName && sellerId && conditionTypeId &&
+        categoryTypeId && description && price) {
+      this.itemsService.addItemToServer.call(this.itemsService, this.item);
+    }
+  }
 }
