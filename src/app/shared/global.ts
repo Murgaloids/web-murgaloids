@@ -10,6 +10,7 @@ export enum ItemCategory {
   Media,
   Other
 }
+
 export enum ItemCondition {
   Good = 1,
   Fair,

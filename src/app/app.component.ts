@@ -6,6 +6,7 @@ import {
 
 import { WindowService } from './shared/services/window.service';
 import { DataService } from './shared/services/data.service';
+import { ItemsService } from './shared/services/items.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { DataService } from './shared/services/data.service';
   styleUrls: ['./app.component.scss'],
   providers: [
     WindowService,
-    DataService
+    DataService,
+    ItemsService
   ]
 })
 export class AppComponent {

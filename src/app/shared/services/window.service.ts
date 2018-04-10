@@ -4,16 +4,7 @@ function _window(): object {
 
 export class WindowService {
   private widthSize = window.innerWidth;
-
-  get nativeWindow(): object {
-    return _window();
-  }
-
-  get width(): number {
-    return this.widthSize;
-  }
-
-  set width(num: number) {
-    this.widthSize = num;
-  }
+  get nativeWindow(): object { return _window(); }
+  get width(): number { return this.widthSize; }
+  set width(num: number) { this.widthSize = num; }
 }

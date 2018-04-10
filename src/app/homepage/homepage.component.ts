@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/services/data.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { ItemsService } from '../shared/services/items.service';
 import { Item } from '../shared/models/item.model';
+
+const NUM_OF_ITEMS_TO_FETCH = 10;
 
 @Component({
   selector: 'app-homepage',
@@ -11,9 +16,13 @@ import { Item } from '../shared/models/item.model';
 export class HomepageComponent implements OnInit {
   recentItemsForSale: Item[];
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private itemsService: ItemsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.recentItemsForSale = this.dataService.getRecentItemsForSale();
+    this.itemsService.getRecentItems(NUM_OF_ITEMS_TO_FETCH)
   }
 }
