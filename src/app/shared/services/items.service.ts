@@ -44,7 +44,6 @@ export class ItemsService {
 
     if (sellerId && conditionTypeId && categoryTypeId &&
         itemName && description && price) {
-
       const headers = {'Authorization': this.authenticationService.token};
 
       this.http.post(`${SERVER_URL}/items/add`, item, {headers, observe: 'response'})
