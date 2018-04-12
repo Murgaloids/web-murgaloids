@@ -62,7 +62,7 @@ export class DataService {
       description: itemsObservable.description,
       rating: itemsObservable.rating,
       price: itemsObservable.price,
-      imageSrc: this.getItemPhoto(itemsObservable.id)
+      imageSource: this.getItemPhoto(itemsObservable.id)
     })
   }
 
