@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/services/data.service';
+import { StudentsService } from '../shared/services/students.service';
+import { ItemsService } from '../shared/services/items.service';
 import { Student } from '../shared/models/student.model';
 import { Item } from '../shared/models/item.model';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [ StudentsService ]
 })
 export class ProfileComponent implements OnInit {
   id: number;
   student: Student;
   ready: boolean = false;
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private studentsService: StudentsService,
+    private itemsService: ItemsService
+  ) { }
 
   ngOnInit() {
 
     //currently hardcoding the id here
     this.id = 1;
-    this.dataService.getStudentObservable(this.id).subscribe(student => {
-      this.dataService.getItemsForSaleObservable(this.id).subscribe(item => {
-        let itemsForSale: Item[] = this.dataService.buildItemsForSale(item);
-        this.student = this.dataService.buildStudent(student, itemsForSale);
+    this.studentsService.getStudentObservable(this.id).subscribe(student => {
+      this.itemsService.getItemsForSaleObservable(this.id).subscribe(item => {
+        let itemsForSale: Item[] = this.itemsService.buildItemsForSale(item.data);
+        this.student = this.studentsService.buildStudent(student, itemsForSale);
         this.ready = true;
       });
     });
