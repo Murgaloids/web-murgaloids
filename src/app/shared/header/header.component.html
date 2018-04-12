@@ -3,7 +3,7 @@
   color="primary"
   *ngIf="windowService.width > mobileWidth; else mobileView">
   <a
-    routerLink="/"
+    (click)="titleClickHandler()"
     routerLinkActive="active"><span id="navbar-title">Murgaloids</span></a>
   <form
     color="accent"

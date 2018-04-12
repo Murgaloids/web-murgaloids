@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/services/data.service';
 import { Student } from '../shared/models/student.model';
 import { Item } from '../shared/models/item.model';
 
@@ -9,23 +8,7 @@ import { Item } from '../shared/models/item.model';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  id: number;
-  student: Student;
-  ready: boolean = false;
+  constructor() { }
 
-  constructor(private dataService: DataService) { }
-
-  ngOnInit() {
-
-    //currently hardcoding the id here
-    this.id = 1;
-    this.dataService.getStudentObservable(this.id).subscribe(student => {
-      this.dataService.getItemsForSaleObservable(this.id).subscribe(item => {
-        let itemsForSale: Item[] = this.dataService.buildItemsForSale(item);
-        this.student = this.dataService.buildStudent(student, itemsForSale);
-        this.ready = true;
-      });
-    });
-
-  }
+  ngOnInit() {}
 }

@@ -23,11 +23,11 @@ export class SellItemPageComponent {
   ) {
     this.item.itemSold = false;
     this.item.itemRated = false;
-    this.item.imageSrc = ''
+    this.item.imageSource = ''
   }
 
   onImageSourceChange(imageSource) {
-    this.item.imageSrc = imageSource;
+    this.item.imageSource = imageSource;
   }
 
   submitHandler() {

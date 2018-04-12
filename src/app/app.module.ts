@@ -24,13 +24,14 @@ import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 import { SuccessComponent } from './success/success.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
-import { DummyDataService } from './shared/services/dummy-data.service';
 
 const appRoutes: Routes = [
-  { path: '', component: HomepageComponent },
+  { path: '', component: WelcomeComponent },
+  { path: 'home', component: HomepageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     SellItemPageComponent,
     SuccessComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -67,8 +69,7 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
   providers: [
-    AuthenticationService,
-    DummyDataService
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

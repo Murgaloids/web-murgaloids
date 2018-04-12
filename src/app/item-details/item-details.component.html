@@ -1,13 +1,15 @@
-<div *ngIf="ready" class="container">
+<div *ngIf="itemsService.mIsDataSet" class="container">
   <div class="row">
     <div class="col-xs-12 col-md-9">
-      <img class="img-fluid" src="{{ item.imageSrc }}">
+      <img class="img-fluid" src="{{ itemsService.displayedItem.imageSource }}">
     </div>
     <div class="col-xs-12 col-md-3">
-      <h1>{{ item.itemName }}</h1>
-      <rating class="star-icon" [(ngModel)]="item.rating" [readonly]="true"></rating>
-      <h2>${{ item.price }}</h2>
-      <p>{{ item.description }}</p>
+      <h1>{{ itemsService.displayedItem.itemName }}</h1>
+      <div *ngIf="itemsService.displayedItem.itemRated">
+        <rating class="star-icon" [(ngModel)]="itemsService.displayedItem.rating" [readonly]="true"></rating>
+      </div>
+      <h2>${{ itemsService.displayedItem.price }}</h2>
+      <p>{{ itemsService.displayedItem.description }}</p>
     </div>
   </div>
 </div>

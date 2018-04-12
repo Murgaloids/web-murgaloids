@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
+import { SERVER_URL } from '../global';
 import bcryptjs = require('bcryptjs');
 import SHA256 = require('crypto-js/hmac-sha256');
 
-const SERVER_URL: string = 'http://localhost:8080';
 const SALT_ROUNDS: number = 10;
 
 @Injectable()
@@ -137,7 +137,7 @@ export class AuthenticationService {
             this.mPassword = '';
             this.mSalt = '';
             this.mHasError = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           }
         },
         this.errorHandler.bind(this));
@@ -174,7 +174,7 @@ export class AuthenticationService {
           this.mPassword = '';
           this.mSalt = '';
           this.mHasError = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       },
       this.errorHandler.bind(this));
