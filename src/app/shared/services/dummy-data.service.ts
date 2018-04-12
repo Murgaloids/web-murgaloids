@@ -12,7 +12,7 @@ export class DummyDataService {
       description: 'About the laptop.',
       rating: 5.0,
       price: 1000.00,
-      imageSrc: 'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/T/V9/TV901/TV901_AV1?wid=1000&hei=1000&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1465509119024'
+      imageSource: 'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/T/V9/TV901/TV901_AV1?wid=1000&hei=1000&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1465509119024'
     });
 
     let dummyItem2 = new Item({
@@ -21,7 +21,7 @@ export class DummyDataService {
       description: 'About the watch.',
       rating: 4.0,
       price: 100.00,
-      imageSrc: 'https://media.gq.com/photos/58210bd50669a1613142bf78/master/pass/november-selects-shinola-watch.jpg'
+      imageSource: 'https://media.gq.com/photos/58210bd50669a1613142bf78/master/pass/november-selects-shinola-watch.jpg'
     });
 
     let dummyItem3 = new Item({
@@ -30,7 +30,7 @@ export class DummyDataService {
       description: 'About the textbook.',
       rating: 3.0,
       price: 50.00,
-      imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNKRtgGPWEqw9T5cETltCf8IVKcrtoCNPlJiW12-3EjNIXmo'
+      imageSource: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNKRtgGPWEqw9T5cETltCf8IVKcrtoCNPlJiW12-3EjNIXmo'
     });
 
     let dummyItem4 = new Item({
@@ -39,7 +39,7 @@ export class DummyDataService {
       description: 'About the iClicker',
       rating: 2.0,
       price: 25.00,
-      imageSrc: 'https://www.umsl.edu/technology/frc/images/student-iclicker.png'
+      imageSource: 'https://www.umsl.edu/technology/frc/images/student-iclicker.png'
     });
 
     let dummyItem5 = new Item({
@@ -48,7 +48,7 @@ export class DummyDataService {
       description: 'About the calculator.',
       rating: 5.0,
       price: 5.00,
-      imageSrc: 'https://www.goodsamaritan.ms/uploads/1/2/7/7/12777965/s736176615899143325_p466_i1_w1200.jpeg'
+      imageSource: 'https://www.goodsamaritan.ms/uploads/1/2/7/7/12777965/s736176615899143325_p466_i1_w1200.jpeg'
     });
 
     let dummyItem6 = new Item({
@@ -57,7 +57,7 @@ export class DummyDataService {
       description: 'About the pencils.',
       rating: 4.0,
       price: 1.00,
-      imageSrc: 'http://www.hobbycraft.co.uk/supplyimages/597152_1000_1_800.jpg'
+      imageSource: 'http://www.hobbycraft.co.uk/supplyimages/597152_1000_1_800.jpg'
     });
 
     let dummyItem7 = new Item({
@@ -66,7 +66,7 @@ export class DummyDataService {
       description: 'About the backpack description',
       rating: 2.0,
       price: 40.00,
-      imageSrc: 'https://i5.walmartimages.com/asr/1afc32ce-b86e-4545-aae8-fe0fb6d1dd6c_1.1123d86c3a7f30ef2dcebb1582a1dc4f.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
+      imageSource: 'https://i5.walmartimages.com/asr/1afc32ce-b86e-4545-aae8-fe0fb6d1dd6c_1.1123d86c3a7f30ef2dcebb1582a1dc4f.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
     });
 
     let dummyItem8 = new Item({
@@ -75,7 +75,7 @@ export class DummyDataService {
       description: 'About the skateboard.',
       rating: 5.0,
       price: 120.00,
-      imageSrc: 'https://gloimg.gbtcdn.com/gb/pdm-product-pic/Electronic/2017/07/18/goods-img/1500610680603760593.jpg'
+      imageSource: 'https://gloimg.gbtcdn.com/gb/pdm-product-pic/Electronic/2017/07/18/goods-img/1500610680603760593.jpg'
     });
 
     let dummyUserItemsForSale = [];

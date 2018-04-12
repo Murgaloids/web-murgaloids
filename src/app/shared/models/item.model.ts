@@ -9,7 +9,7 @@ export class Item {
   public itemSold: boolean;
   public itemRated: boolean;
   public rating: number;
-  public imageSrc: string;
+  public imageSource: string;
 
   public constructor(init?:Partial<Item>) {
     Object.assign(this, init);
