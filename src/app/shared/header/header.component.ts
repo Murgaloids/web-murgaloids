@@ -44,10 +44,11 @@ export class HeaderComponent implements OnInit {
     if (this.authenticationService.token)
       this.router.navigate(['/home'])
     else
-      this.router.navigate(['/']);
+      this.router.navigate(['/welcome']);
   }
 
   signOutClickHandler() {
+    localStorage.clear();
     this.authenticationService.clearEverything();
     this.authenticationService.clearError();
   }
