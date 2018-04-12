@@ -48,6 +48,7 @@ export class SellItemPageComponent {
     this.selectedFiles = undefined;
     this.currentFileUpload = new FileUpload(file);
     this.pushFileToStorage(this.currentFileUpload, this.progress);
+    // this.addItem();
   }
 
   // Event handler for selecting image
