@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL, DEFAULT_ITEM_IMAGE_PATH } from '../global';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ItemsService {
@@ -82,5 +83,32 @@ export class ItemsService {
         }
         this.mIsDataSet = true;
       });
+  }
+
+  getUserItemsObservable(userId: number): Observable<any>  {
+    const headers = {'Authorization': this.authenticationService.token};
+    return this.http.get(`${SERVER_URL}/items/all?userId=${userId}`, {headers});
+  }
+
+  buildItemsForSale(itemsObservable: any[]): Item[] {
+    var items: Item[] = [];
+    itemsObservable.forEach(item => {
+      items.push(this.buildItem(item));
+    });
+    return items;
+  }
+
+  buildItem(itemsObservable: any): Item {
+    return new Item({
+      id: itemsObservable.id,
+      itemName: itemsObservable.itemName,
+      sellerId: itemsObservable.sellerId,
+      conditionTypeId: itemsObservable.conditionTypeId,
+      categoryTypeId: itemsObservable.categoryTypeId,
+      description: itemsObservable.description,
+      rating: itemsObservable.rating,
+      price: itemsObservable.price,
+      imageSource: itemsObservable.imageSource
+    })
   }
 }
