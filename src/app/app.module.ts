@@ -9,10 +9,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,6 +38,7 @@ import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-
 
 // Environment
 import { environment } from '../environments/environment';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -60,7 +65,8 @@ const appRoutes: Routes = [
     SuccessComponent,
     LoginComponent,
     RegisterComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -72,10 +78,14 @@ const appRoutes: Routes = [
     MatIconModule,
     MatMenuModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
     RatingModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFontAwesomeModule
   ],
   providers: [
     AuthenticationService,

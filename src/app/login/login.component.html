@@ -1,22 +1,41 @@
-<div class="container">
-  <h1>Log In to BeachShop</h1>
+<div
+*ngIf="!authenticationService.isProcessing; else loading"
+class="container app-login">
+  <h1 class="header">Log in to BeachShop</h1>
   <form autocomplete="off">
-    <!-- Email Input -->
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input type="text" class="form-control" [value]="authenticationService.email" (input)="onEmailChange($event.target.value)" name="Email Address" required>
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Email Address"
+          [value]="authenticationService.email"
+          (input)="onEmailChange($event.target.value)" />
+      </mat-form-field>
     </div>
 
-    <!-- Password Input -->
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" [value]="authenticationService.password" (input)="onPasswordChange($event.target.value)" name="Password" required>
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          [value]="authenticationService.password"
+          (input)="onPasswordChange($event.target.value)" />
+      </mat-form-field>
     </div>
 
-    <!-- Error Message -->
     <div *ngIf="authenticationService.hasError" class="error">Unable to login user</div>
 
-    <!-- Submit Button -->
-    <button type="submit" (click)="submitHandler()" class="btn btn-success">Login</button>
+    <div>
+      <button
+        type="submit"
+        mat-button
+        color="primary"
+        (click)="submitHandler()">Sign In</button>
+    </div>
   </form>
 </div>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

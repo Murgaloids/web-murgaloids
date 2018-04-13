@@ -11,3 +11,8 @@ $beach-shop-theme: mat-light-theme($beach-shop-primary, $beach-shop-accent, $bea
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body { font-family: 'Roboto', sans-serif; }
+
+.header {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
