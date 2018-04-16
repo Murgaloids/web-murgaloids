@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
+import { SERVER_URL } from '../global';
 import bcryptjs = require('bcryptjs');
 import SHA256 = require('crypto-js/hmac-sha256');
 
-const SERVER_URL: string = 'http://localhost:8080';
 const SALT_ROUNDS: number = 10;
+const LOCAL_STORAGE_KEY = 'beach-shop';
 
 @Injectable()
 export class AuthenticationService {
@@ -43,14 +44,44 @@ export class AuthenticationService {
 
   // These methods are used to capture immediate user input
   // to set the member variables.
-  changeFirstName(firstname: string) { this.mFirstName = firstname; }
-  changeLastName(lastname: string) { this.mLastName = lastname; }
-  changeEmail(email: string) { this.mEmail = email; }
-  changePassword(password: string) { this.mPassword = password; }
+  changeFirstName(firstname: string): void { this.mFirstName = firstname; }
+  changeLastName(lastname: string): void { this.mLastName = lastname; }
+  changeEmail(email: string): void { this.mEmail = email; }
+  changePassword(password: string): void { this.mPassword = password; }
+
+  getAuthenticationFromLocalStorage(): void {
+    if (localStorage) {
+      const localStorageData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
+      if (localStorageData) {
+        this.mFirstName = localStorageData.auth.firstName;
+        this.mLastName = localStorageData.auth.lastName;
+        this.mEmail = localStorageData.auth.email;
+        this.mUserId = localStorageData.auth.userId;
+        this.mToken = localStorageData.auth.token;
+      }
+    }
+  }
+
+  setAuthenticationToLocalStorage(): void {
+    if (localStorage) {
+      localStorage.clear();
+    }
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({
+      auth: {
+        firstName: this.mFirstName,
+        lastName: this.mLastName,
+        email: this.mEmail,
+        userId: this.mUserId,
+        token: this.mToken
+      }
+    }));
+  }
 
   // Particularly used when there is an error or when the
   // user signs out of the application.
-  clearEverything() {
+  clearEverything(): void {
     this.mFirstName = '';
     this.mLastName = '';
     this.mEmail = '';
@@ -134,10 +165,11 @@ export class AuthenticationService {
           const httpStatus = res.status;
 
           if (this.mToken && this.mUserId && (httpStatus === 201)) {
+            this.setAuthenticationToLocalStorage();
             this.mPassword = '';
             this.mSalt = '';
             this.mHasError = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           }
         },
         this.errorHandler.bind(this));
@@ -171,10 +203,11 @@ export class AuthenticationService {
         const httpStatus = res.status;
 
         if (this.mToken && this.mUserId && (httpStatus === 200)) {
+          this.setAuthenticationToLocalStorage();
           this.mPassword = '';
           this.mSalt = '';
           this.mHasError = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       },
       this.errorHandler.bind(this));

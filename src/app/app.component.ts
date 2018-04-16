@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 
 import { WindowService } from './shared/services/window.service';
-import { DataService } from './shared/services/data.service';
 import { ItemsService } from './shared/services/items.service';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,18 @@ import { ItemsService } from './shared/services/items.service';
   styleUrls: ['./app.component.scss'],
   providers: [
     WindowService,
-    DataService,
     ItemsService
   ]
 })
-export class AppComponent {
-  constructor(private windowService: WindowService) {}
+export class AppComponent implements OnInit {
+  constructor(
+    private windowService: WindowService,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit() {
+    this.authenticationService.getAuthenticationFromLocalStorage();
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

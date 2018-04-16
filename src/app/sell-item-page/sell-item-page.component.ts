@@ -120,7 +120,6 @@ export class SellItemPageComponent {
       price,
       imageSource
     } = this.item;
-    console.log("CONST ", this.item);
 
     if (itemName && sellerId && conditionTypeId &&
         categoryTypeId && description && price && imageSource) {

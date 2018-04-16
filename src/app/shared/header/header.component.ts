@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { MOBILE_WIDTH } from '../global';
 import { AuthenticationService } from '../services/authentication.service';
 import { WindowService } from '../services/window.service';
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
      private authenticationService: AuthenticationService,
-     private windowService: WindowService
+     private windowService: WindowService,
+     private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,7 +40,15 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  titleClickHandler() {
+    if (this.authenticationService.token)
+      this.router.navigate(['/home'])
+    else
+      this.router.navigate(['/welcome']);
+  }
+
   signOutClickHandler() {
+    localStorage.clear();
     this.authenticationService.clearEverything();
     this.authenticationService.clearError();
   }

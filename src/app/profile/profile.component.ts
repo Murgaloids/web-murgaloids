@@ -18,19 +18,16 @@ export class ProfileComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private itemsService: ItemsService
-  ) { }
+  ) {}
 
   ngOnInit() {
-
-    //currently hardcoding the id here
     this.id = 1;
     this.studentsService.getStudentObservable(this.id).subscribe(student => {
-      this.itemsService.getItemsForSaleObservable(this.id).subscribe(item => {
+      this.itemsService.getUserItemsObservable(this.id).subscribe(item => {
         let itemsForSale: Item[] = this.itemsService.buildItemsForSale(item.data);
         this.student = this.studentsService.buildStudent(student, itemsForSale);
         this.ready = true;
       });
     });
-
   }
 }

@@ -26,22 +26,25 @@ import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 import { SuccessComponent } from './success/success.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
-import { DummyDataService } from './shared/services/dummy-data.service';
+import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 
 // Environment
 import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
-  { path: '', component: HomepageComponent },
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'item/:id', component: ItemDetailsComponent},
-  { path: 'sell', component: SellItemPageComponent},
-  { path: 'success', component: SuccessComponent}
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard] },
+  { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
+  { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
+  { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -56,11 +59,13 @@ const appRoutes: Routes = [
     SellItemPageComponent,
     SuccessComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -69,13 +74,12 @@ const appRoutes: Routes = [
     MatCardModule,
     RatingModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
   providers: [
     AuthenticationService,
-    DummyDataService
+    AuthRouteGuard
   ],
   bootstrap: [AppComponent]
 })

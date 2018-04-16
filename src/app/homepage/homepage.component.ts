@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/services/data.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { ItemsService } from '../shared/services/items.service';
@@ -23,6 +22,6 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.itemsService.getRecentItems(NUM_OF_ITEMS_TO_FETCH)
+    this.itemsService.setRecentItems(NUM_OF_ITEMS_TO_FETCH);
   }
 }
