@@ -31,6 +31,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
 import { SuccessComponent } from './success/success.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -38,7 +39,6 @@ import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-
 
 // Environment
 import { environment } from '../environments/environment';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
