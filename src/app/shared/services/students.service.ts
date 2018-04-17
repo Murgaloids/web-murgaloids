@@ -25,9 +25,9 @@ export class StudentsService {
 
   buildStudent(studentObservable: any, itemsForSale: Item[]): Student {
     return new Student({
-      id: studentObservable.id,
-      name: studentObservable.firstName,
-      aboutDesc: studentObservable.description,
+      id: studentObservable.data.id,
+      name: studentObservable.data.firstName,
+      aboutDesc: studentObservable.data.description,
       profilePicture: '', // have yet to implement
       itemsForSale: itemsForSale,
       itemsViewed: []

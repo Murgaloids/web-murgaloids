@@ -1,51 +1,88 @@
-<div class="container">
+<div class="container app-sell-item-page">
+  <h1 class="header">Sell an Item</h1>
+
   <form autocomplete="off">
-    <div class="form-group">
-      <label for="itemName">Item Name</label>
-      <input type="text" class="form-control" id="itemName" [(ngModel)]="item.itemName" name="Item Name" required>
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Item Name"
+          name="Item Name"
+          [(ngModel)]="item.itemName" />
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <label for="conditionTypeID">Condition</label>
-      <select [(ngModel)]="itemCondition" name="Item Condition" class="form-control">
-        <option>Good</option>
-        <option>Fair</option>
-        <option>Poor</option>
-      </select>
+
+    <div>
+      <mat-form-field>
+        <mat-select
+          matInput
+          placeholder="Condition"
+          name="Item Condition"
+          [(ngModel)]="itemCondition">
+          <mat-option value="Good">Good</mat-option>
+          <mat-option value="Fair">Fair</mat-option>
+          <mat-option value="Poor">Poor</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <label for="categoryTypeID">Category</label>
-      <select [(ngModel)]="itemCategory" name="Item Category" class="form-control">
-        <option>Books</option>
-        <option>Electronics</option>
-        <option>Clothes</option>
-        <option>Furniture</option>
-        <option>Appliances</option>
-        <option>Supplies</option>
-        <option>Media</option>
-        <option>Other</option>
-      </select>
+
+    <div>
+      <mat-form-field>
+        <mat-select
+          matInput
+          placeholder="Category"
+          name="Item Cateogry"
+          [(ngModel)]="itemCategory">
+          <mat-option value="Books">Books</mat-option>
+          <mat-option value="Electronics">Electronics</mat-option>
+          <mat-option value="Clothes">Clothes</mat-option>
+          <mat-option value="Furniture">Furniture</mat-option>
+          <mat-option value="Appliance">Appliances</mat-option>
+          <mat-option value="Supplies">Supplies</mat-option>
+          <mat-option value="Media">Media</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" [(ngModel)]="item.description" name="Description" required>
+
+    <div>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Description"
+          name="Item Description"
+          matAutosizeMinRows="1"
+          matAutosizeMatRows="5"
+          [(ngModel)]="item.description"></textarea>
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <label for="price">Price</label>
-      <input type="number" class="form-control" id="price" [(ngModel)]="item.price" name="Price" required>
+
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Price"
+          name="Item Price"
+          type="number"
+          [(ngModel)]="item.price" />
+        <span matPrefix>$&nbsp;</span>
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <label for="picture">Picture</label>
+
     <div *ngIf="currentFileUpload" class="progress">
-    	<div class="progress-bar progress-bar-info progress-bar-striped"
-    		role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-    		aria-valuemin="0" aria-valuemax="100"
-    		[ngStyle]="{width:progress.percentage+'%'}">
-    		{{progress.percentage}}%</div>
+      <div class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+        aria-valuemin="0" aria-valuemax="100"
+        [ngStyle]="{width:progress.percentage+'%'}">
+        {{progress.percentage}}%</div>
     </div>
-    <label class="btn btn-default"> <input type="file"
-    	(change)="selectFile($event)">
-    </label>
-    </div>
-     <button type="submit" (click)="submitHandler()" class="btn btn-success">Submit</button>
+
+    <input type="file" #imgFileInput (change)="selectFile($event)"/>
+
+    <button
+      type="submit"
+      mat-button
+      color="primary"
+      (click)="submitHandler()">Submit</button>
   </form>
 </div>

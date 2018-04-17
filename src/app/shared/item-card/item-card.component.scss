@@ -1,11 +1,7 @@
-h1 { font-size: 25px; }
-h2 { font-size: 18px; }
-
-.center-text {
-  text-align: center;
-}
-
+.center-text { text-align: center; }
 .item-card {
   margin-top: 10px;
   margin-bottom: 10px;
+  min-width: 250px;
+  max-width: 250px;
 }
