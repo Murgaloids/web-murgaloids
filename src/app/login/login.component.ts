@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.clearError();
-    this.authenticationService.clearEverything();
+    this.authenticationService.clearEverythingExceptErrors();
   }
 
   onEmailChange(email: string) {
