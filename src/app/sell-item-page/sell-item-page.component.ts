@@ -123,7 +123,7 @@ export class SellItemPageComponent {
     } = this.item;
 
     if (itemName && sellerId && conditionTypeId &&
-        categoryTypeId && description && price && imageSource) {
+        categoryTypeId && description && (price >= 0) && imageSource) {
       this.itemsService.addItemToServer.call(this.itemsService, this.item);
     }
   }

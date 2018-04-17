@@ -1,10 +1,10 @@
 <div *ngIf="itemsService.mIsDataSet" class="container">
+  <h1 class="header">{{ itemsService.displayedItem.itemName }}</h1>
   <div class="row">
-    <div class="col-xs-12 col-md-9">
+    <div class="col-md-5">
       <img class="img-fluid" src="{{ itemsService.displayedItem.imageSource }}">
     </div>
-    <div class="col-xs-12 col-md-3">
-      <h1>{{ itemsService.displayedItem.itemName }}</h1>
+    <div class="col-md-5 mx-auto">
       <div *ngIf="itemsService.displayedItem.itemRated">
         <rating class="star-icon" [(ngModel)]="itemsService.displayedItem.rating" [readonly]="true"></rating>
       </div>

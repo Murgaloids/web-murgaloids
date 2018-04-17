@@ -1,0 +1,12 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header { font-size: 56px; }
+.sub-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}

@@ -1,5 +1,9 @@
-.app-sell-item-page { text-align: center; }
+.error { color: red; }
+.app-login { text-align: center; }
+
+button { font-size: 18px; }
 mat-form-field { width: 50%; }
+
 @media only screen and (max-width: 768px) {
   mat-form-field { width: 85%; }
 }

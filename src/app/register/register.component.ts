@@ -4,14 +4,14 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     this.authenticationService.clearError();
-    this.authenticationService.clearEverything();
+    this.authenticationService.clearEverythingExceptErrors();
   }
 
   onFirstNameChange(firstname: string) {
