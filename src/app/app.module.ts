@@ -48,7 +48,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard] },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
