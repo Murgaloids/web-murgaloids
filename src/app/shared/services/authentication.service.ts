@@ -20,6 +20,7 @@ export class AuthenticationService {
   private mToken: string;
   private mHasError: boolean;
   private mErrorMessage: string;
+  private mIsProcessing: boolean;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +42,7 @@ export class AuthenticationService {
   get token(): string { return this.mToken; }
   get hasError(): boolean { return this.mHasError; }
   get errorMessage(): string { return this.mErrorMessage; }
+  get isProcessing(): boolean { return this.mIsProcessing; }
 
   // These methods are used to capture immediate user input
   // to set the member variables.
@@ -87,8 +89,9 @@ export class AuthenticationService {
     this.mEmail = '';
     this.mPassword = '';
     this.mSalt = '';
-    this.mUserId = null;
     this.mToken = '';
+    this.mUserId = null;
+    this.mIsProcessing = false;
   }
 
   clearError() {
@@ -102,6 +105,7 @@ export class AuthenticationService {
   // to prevent man-in-the-middle attacks.
   attemptUserRegistration({firstName, lastName, email, password}) {
     if (firstName && lastName && email && password) {
+      this.mIsProcessing = true;
       bcryptjs.genSalt(SALT_ROUNDS)
         .then(this.hashUserPassword.bind(this, password))
         .then(this.registerUserToServer.bind(this))
@@ -121,6 +125,7 @@ export class AuthenticationService {
   // challenge-response authentication technique.
   attemptUserLogin({email, password}) {
     if (email && password) {
+      this.mIsProcessing = true;
       const bodyObject: object = {email};
 
       this.http.post(`${SERVER_URL}/students/get-challenge`, bodyObject, {observe: 'response'})
@@ -169,6 +174,7 @@ export class AuthenticationService {
             this.mPassword = '';
             this.mSalt = '';
             this.mHasError = false;
+            this.mIsProcessing = false;
             this.router.navigate(['/home']);
           }
         },
@@ -207,6 +213,7 @@ export class AuthenticationService {
           this.mPassword = '';
           this.mSalt = '';
           this.mHasError = false;
+          this.mIsProcessing = true;
           this.router.navigate(['/home']);
         }
       },
@@ -215,6 +222,7 @@ export class AuthenticationService {
 
   errorHandler(err: any) {
     this.mHasError = true;
+    this.mIsProcessing = false;
     this.clearEverything();
   }
 }
