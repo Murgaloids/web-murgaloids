@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { StudentsService } from '../shared/services/students.service';
 import { ItemsService } from '../shared/services/items.service';
 import { Student } from '../shared/models/student.model';
@@ -16,17 +17,19 @@ export class ProfileComponent implements OnInit {
   ready: boolean = false;
 
   constructor(
+    private route: ActivatedRoute,
     private studentsService: StudentsService,
     private itemsService: ItemsService
   ) {}
 
   ngOnInit() {
-    this.id = 1;
-    this.studentsService.getStudentObservable(this.id).subscribe(student => {
-      this.itemsService.getUserItemsObservable(this.id).subscribe(item => {
-        let itemsForSale: Item[] = this.itemsService.buildItemsForSale(item.data);
-        this.student = this.studentsService.buildStudent(student, itemsForSale);
-        this.ready = true;
+    this.route.params.subscribe(params => {
+      this.studentsService.getStudentObservable(+params['id']).subscribe(student => {
+        this.itemsService.getUserItemsObservable(+params['id']).subscribe(item => {
+          let itemsForSale: Item[] = this.itemsService.buildItemsForSale(item.data);
+          this.student = this.studentsService.buildStudent(student, itemsForSale);
+          this.ready = true;
+        });
       });
     });
   }

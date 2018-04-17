@@ -44,10 +44,7 @@ export class ItemsService {
       price
     } = item;
 
-    this.mIsDataSet = false;
-
-    if (sellerId && conditionTypeId && categoryTypeId &&
-        itemName && description && price) {
+    if (sellerId && conditionTypeId && categoryTypeId && itemName && description && (price >= 0)) {
       const headers = {'Authorization': this.authenticationService.token};
       this.http.post(`${SERVER_URL}/items/add`, item, {headers, observe: 'response'})
         .subscribe((res: any) => {

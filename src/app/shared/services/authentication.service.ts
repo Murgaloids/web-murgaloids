@@ -83,7 +83,7 @@ export class AuthenticationService {
 
   // Particularly used when there is an error or when the
   // user signs out of the application.
-  clearEverything(): void {
+  clearEverythingExceptErrors(): void {
     this.mFirstName = '';
     this.mLastName = '';
     this.mEmail = '';
@@ -165,18 +165,18 @@ export class AuthenticationService {
 
       this.http.post(`${SERVER_URL}/students/add`, body, {observe: 'response'})
         .subscribe((res: any) => {
-          this.mToken = res.headers.get('authorization');
-          this.mUserId = res.body.data.id;
-          const httpStatus = res.status;
+          if (res && res.headers && res.body && res.body.data && res.status) {
+            this.mToken = res.headers.get('authorization');
+            this.mUserId = res.body.data.id;
+            const httpStatus = res.status;
 
-          if (this.mToken && this.mUserId && (httpStatus === 201)) {
-            this.setAuthenticationToLocalStorage();
-            this.mPassword = '';
-            this.mSalt = '';
-            this.mHasError = false;
-            this.mIsProcessing = false;
-            this.router.navigate(['/home']);
-          }
+            if (this.mToken && this.mUserId && (httpStatus === 200)) {
+              this.setAuthenticationToLocalStorage();
+              this.clearPasswordSaltAndErrors();
+              this.router.navigate(['/home']);
+            }
+          } else
+            this.errorHandler.call(this);
         },
         this.errorHandler.bind(this));
     }
@@ -186,13 +186,18 @@ export class AuthenticationService {
   //
   // This is a helper method to validate a user during login.
   hashPasswordAndGenerateTag(email: string, password: string, res: any) {
-    const {salt, challenge} = res.body;
-    const httpStatus = res.status;
+    if (res && res.body && res.status) {
+      const {salt, challenge} = res.body;
+      const httpStatus = res.status;
 
-    if (email && password && salt && challenge && (httpStatus === 200)) {
-      bcryptjs.hash(password, salt)
-        .then(this.generateTag.bind(this, email, challenge))
-        .catch(this.errorHandler.bind(this));
+      if (email && password && salt && challenge && (httpStatus === 200)) {
+        bcryptjs.hash(password, salt)
+          .then(this.generateTag.bind(this, email, challenge))
+          .catch(this.errorHandler.bind(this));
+      } else
+        this.errorHandler.call(this);
+    } else {
+      this.errorHandler.call(this);
     }
   }
 
@@ -204,25 +209,32 @@ export class AuthenticationService {
 
     this.http.post(`${SERVER_URL}/students/validate-tag`, {email, challenge, tag}, {observe: 'response'})
       .subscribe((res: any) => {
-        this.mToken = res.headers.get('authorization');
-        this.mUserId = res.body.data.id;
-        const httpStatus = res.status;
+        if (res && res.headers && res.body && res.body.data && res.status) {
+          this.mToken = res.headers.get('authorization');
+          this.mUserId = res.body.data.id;
+          const httpStatus = res.status;
 
-        if (this.mToken && this.mUserId && (httpStatus === 200)) {
-          this.setAuthenticationToLocalStorage();
-          this.mPassword = '';
-          this.mSalt = '';
-          this.mHasError = false;
-          this.mIsProcessing = true;
-          this.router.navigate(['/home']);
-        }
+          if (this.mToken && this.mUserId && (httpStatus === 200)) {
+            this.setAuthenticationToLocalStorage();
+            this.clearPasswordSaltAndErrors();
+            this.router.navigate(['/home']);
+          } else
+            this.errorHandler.call(this);
+        } else
+        this.errorHandler.call(this);
       },
       this.errorHandler.bind(this));
   }
 
   errorHandler(err: any) {
     this.mHasError = true;
+    this.clearEverythingExceptErrors();
+  }
+
+  clearPasswordSaltAndErrors() {
+    this.mPassword = '';
+    this.mSalt = '';
+    this.mHasError = false;
     this.mIsProcessing = false;
-    this.clearEverything();
   }
 }

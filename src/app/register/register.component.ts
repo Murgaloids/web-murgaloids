@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.clearError();
-    this.authenticationService.clearEverything();
+    this.authenticationService.clearEverythingExceptErrors();
   }
 
   onFirstNameChange(firstname: string) {

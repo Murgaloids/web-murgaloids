@@ -2,15 +2,14 @@
   class="item-card"
   [ngClass]="{'center-text': windowService.width < mobileWidth}"
   [routerLink]="['/item', item.id]">
-  <div class="row">
-    <div class="col-md-4">
-      <img mat-card-lg-image class="img-fluid" src="{{ item.imageSource }}"/>
-    </div>
-    <div class="col-md-8">
-      <mat-card-title>{{ item.itemName }}</mat-card-title>
-      <mat-card-subtitle>${{ item.price }}</mat-card-subtitle>
-      <rating [(ngModel)]="item.rating" [readonly]="true"></rating>
-      <mat-card-content>{{ item.description }}</mat-card-content>
-    </div>
-  </div>
+  <mat-card-header>
+    <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
+    <mat-card-subtitle><b>${{ item.price }}</b></mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="{{ item.imageSource }}">
+  <mat-card-content>
+    <p>{{ item.description }}</p>
+  </mat-card-content>
 </mat-card>

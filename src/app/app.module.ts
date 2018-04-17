@@ -11,7 +11,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -45,7 +48,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard] },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
@@ -80,7 +83,10 @@ const appRoutes: Routes = [
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatButtonModule,
+    MatDividerModule,
+    MatGridListModule,
     RatingModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),

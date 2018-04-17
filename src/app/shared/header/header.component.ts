@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
   signOutClickHandler() {
     localStorage.clear();
-    this.authenticationService.clearEverything();
     this.authenticationService.clearError();
+    this.authenticationService.clearEverythingExceptErrors();
   }
 }
