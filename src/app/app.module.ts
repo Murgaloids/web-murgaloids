@@ -39,6 +39,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
+import { StudentsService } from './shared/services/students.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -95,7 +96,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthenticationService,
-    AuthRouteGuard
+    AuthRouteGuard,
+    StudentsService
   ],
   bootstrap: [AppComponent]
 })
