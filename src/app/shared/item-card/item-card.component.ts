@@ -23,13 +23,10 @@ export class ItemCardComponent implements OnInit {
 
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
-    this.getSellerName(this.item.sellerId);
-  }
-
-  getSellerName(id: number):string {
-    this.studentsService.getStudentObservable(id).subscribe(student => {
-        let student = this.studentsService.buildStudent(student, null);
-        this.sellerName = student.name;
+    this.studentsService.getStudentObservable(this.item.sellerId).subscribe(student => {
+        let builtStudent = this.studentsService.buildStudent(student, null);
+        this.sellerName = builtStudent.name;
         this.ready = true;
     });
+  }
 }
