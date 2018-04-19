@@ -5,6 +5,7 @@
       <img class="profile img-fluid" src="{{ student.profilePicture }}">
       <h2>About</h2>
       <p>{{ student.aboutDesc }}</p>
+      <a [routerLink]="['/edit-profile']" *ngIf="id === authenticationService.userId" class="edit-profile-container">Edit Your Profile</a>
     </div>
     <div class="col-xs-12 col-md-9">
       <h2>Selling Items</h2>

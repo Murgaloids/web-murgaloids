@@ -11,6 +11,7 @@ import { Item } from '../models/item.model';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item: Item;
+  private hover: boolean;
 
   private mobileWidth: number;
   private sellerName: string;

@@ -35,6 +35,7 @@ import { SellItemPageComponent } from './sell-item-page/sell-item-page.component
 import { SuccessComponent } from './success/success.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard] },
@@ -71,7 +73,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     WelcomeComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
