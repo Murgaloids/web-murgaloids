@@ -16,8 +16,10 @@
       mat-card-image
       src="{{ item.imageSource }}">
     <mat-card-content>
-      <p *ngIf="item.description.length < 30; else limitedDescription">{{ item.description }}</p>
-      <div class="seller">
+      <p *ngIf="item.description.length < 60; else limitedDescription">{{ item.description }}</p>
+      <div
+        *ngIf="!router.url.includes('/profile')"
+        class="seller">
         <a>Student Seller:</a>
         <a [routerLink]="['/profile', item.sellerId]">{{ sellerName }}</a>
       </div>
@@ -26,5 +28,5 @@
 </div>
 
 <ng-template #limitedDescription>
-  <p>{{ item.description.substring(0, 30)}}...</p>
+  <p>{{ item.description.substring(0, 60)}}...</p>
 </ng-template>

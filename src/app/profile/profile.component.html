@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-3">
       <h1>{{ student.name }}</h1>
-      <img class="profile img-fluid" src="{{ student.imageSource }}">
+      <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
       <h2>About</h2>
       <p>{{ student.aboutDesc }}</p>
       <a [routerLink]="['/edit-profile']" *ngIf="id === authenticationService.userId" class="edit-profile-container">Edit Your Profile</a>

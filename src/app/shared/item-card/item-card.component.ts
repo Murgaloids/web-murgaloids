@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MOBILE_WIDTH } from '../global';
 import { WindowService } from '../services/window.service';
 import { StudentsService } from '../services/students.service';
@@ -19,7 +20,8 @@ export class ItemCardComponent implements OnInit {
 
   constructor(
     private windowService: WindowService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
