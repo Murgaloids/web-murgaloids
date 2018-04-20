@@ -51,7 +51,7 @@ export class AuthenticationService {
   changeEmail(email: string): void { this.mEmail = email; }
   changePassword(password: string): void { this.mPassword = password; }
 
-  getAuthenticationFromLocalStorage(): void {
+  public getAuthenticationFromLocalStorage(): void {
     if (localStorage) {
       const localStorageData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
@@ -65,7 +65,7 @@ export class AuthenticationService {
     }
   }
 
-  setAuthenticationToLocalStorage(): void {
+  private setAuthenticationToLocalStorage(): void {
     if (localStorage) {
       localStorage.clear();
     }
@@ -83,7 +83,7 @@ export class AuthenticationService {
 
   // Particularly used when there is an error or when the
   // user signs out of the application.
-  clearEverythingExceptErrors(): void {
+  public clearEverythingExceptErrors(): void {
     this.mFirstName = '';
     this.mLastName = '';
     this.mEmail = '';
@@ -94,16 +94,42 @@ export class AuthenticationService {
     this.mIsProcessing = false;
   }
 
-  clearError() {
+  public clearError() {
     this.mHasError = false;
     this.mErrorMessage = '';
+  }
+
+  public editUserInformation({email, firstName, lastName, description, imageSource}): void {
+    if (email && (firstName || lastName || description || imageSource)) {
+      const bodyObject: object = {email};
+      const headers = {'Authorization': this.token};
+
+      if (firstName) Object.assign(bodyObject, {firstName});
+      if (lastName) Object.assign(bodyObject, {lastName});
+      if (description) Object.assign(bodyObject, {description});
+      if (imageSource) Object.assign(bodyObject, {imageSource});
+
+      this.http.post(`${SERVER_URL}/students/update`, bodyObject, {headers})
+        .subscribe(
+          (res: any) => {
+            if (res && res.data) {
+              this.mFirstName = res.data.firstName;
+              this.mLastName = res.data.lastName;
+              this.mUserId = res.data.id;
+              this.mEmail = res.data.email;
+              this.router.navigate([`/profile/${this.mUserId}`]);
+            }
+          },
+          this.errorHandler.bind(this)
+         );
+    }
   }
 
   // Attempts to register a new user.
   //
   // Hashes the user's password before sending to the server
   // to prevent man-in-the-middle attacks.
-  attemptUserRegistration({firstName, lastName, email, password}) {
+  public attemptUserRegistration({firstName, lastName, email, password}) {
     if (firstName && lastName && email && password) {
       this.mIsProcessing = true;
       bcryptjs.genSalt(SALT_ROUNDS)
@@ -123,7 +149,7 @@ export class AuthenticationService {
   // Notice that at no point in this method does the user's password
   // ever get sent to the server. This is known as the
   // challenge-response authentication technique.
-  attemptUserLogin({email, password}) {
+  public attemptUserLogin({email, password}) {
     if (email && password) {
       this.mIsProcessing = true;
       const bodyObject: object = {email};
@@ -139,7 +165,7 @@ export class AuthenticationService {
   // Hashese the user's password.
   //
   // This is a helper method to register a user.
-  hashUserPassword(password: string, salt: string) {
+  private hashUserPassword(password: string, salt: string) {
     if (password && salt) {
       this.mSalt = salt;
       return bcryptjs.hash(password, salt);
@@ -151,7 +177,7 @@ export class AuthenticationService {
   // Registers the user to the server.
   //
   // This is a helper method to register a user.
-  registerUserToServer(hashedPassword: string) {
+  private registerUserToServer(hashedPassword: string) {
     if (hashedPassword) {
       this.changePassword(hashedPassword);
 
@@ -185,7 +211,7 @@ export class AuthenticationService {
   // Hashes the user's password and generates a tag.
   //
   // This is a helper method to validate a user during login.
-  hashPasswordAndGenerateTag(email: string, password: string, res: any) {
+  private hashPasswordAndGenerateTag(email: string, password: string, res: any) {
     if (res && res.body && res.status) {
       const {salt, challenge} = res.body;
       const httpStatus = res.status;
@@ -204,7 +230,7 @@ export class AuthenticationService {
   // Generates a tag to send back to the server to validate.
   //
   // This is a helper method to validate a user during login.
-  generateTag(email: string, challenge: string, hashedPassword: string) {
+  private generateTag(email: string, challenge: string, hashedPassword: string) {
     const tag = SHA256(challenge, hashedPassword).toString();
 
     this.http.post(`${SERVER_URL}/students/validate-tag`, {email, challenge, tag}, {observe: 'response'})
@@ -215,6 +241,10 @@ export class AuthenticationService {
           const httpStatus = res.status;
 
           if (this.mToken && this.mUserId && (httpStatus === 200)) {
+            this.mEmail = res.body.data.email;
+            this.mFirstName = res.body.data.firstName;
+            this.mLastName = res.body.data.lastName;
+
             this.setAuthenticationToLocalStorage();
             this.clearPasswordSaltAndErrors();
             this.router.navigate(['/home']);
@@ -226,12 +256,12 @@ export class AuthenticationService {
       this.errorHandler.bind(this));
   }
 
-  errorHandler(err: any) {
+  private errorHandler(err: any) {
     this.mHasError = true;
     this.clearEverythingExceptErrors();
   }
 
-  clearPasswordSaltAndErrors() {
+  private clearPasswordSaltAndErrors() {
     this.mPassword = '';
     this.mSalt = '';
     this.mHasError = false;

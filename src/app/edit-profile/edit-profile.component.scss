@@ -1,0 +1,5 @@
+.container { text-align: center; }
+mat-form-field { width: 50%; }
+@media only screen and (max-width: 768px) {
+  mat-form-field { width: 85%; }
+}

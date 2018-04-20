@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { ItemsService } from '../shared/services/items.service';
 import { Item } from '../shared/models/item.model';
@@ -18,7 +17,6 @@ export class HomepageComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private itemsService: ItemsService,
-    private router: Router
   ) {}
 
   ngOnInit() {

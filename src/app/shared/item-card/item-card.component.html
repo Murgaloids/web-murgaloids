@@ -1,7 +1,12 @@
 <div *ngIf="ready">
   <mat-card
     class="item-card"
-    [ngClass]="{'center-text': windowService.width < mobileWidth}"
+    (mouseover)="hover = true"
+    (mouseout)="hover = false"
+    [ngClass]="{
+      'center-text': windowService.width < mobileWidth,
+      'animated pulse': hover === true
+    }"
     [routerLink]="['/item', item.id]">
     <mat-card-header>
       <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
@@ -11,11 +16,15 @@
       mat-card-image
       src="{{ item.imageSource }}">
     <mat-card-content>
-      <p>{{ item.description }}</p>
+      <p *ngIf="item.description.length < 30; else limitedDescription">{{ item.description }}</p>
       <div class="seller">
         <a>Student Seller:</a>
-        <a href="/profile/{{ item.sellerId }}">{{ sellerName }}</a>
+        <a [routerLink]="['/profile', item.sellerId]">{{ sellerName }}</a>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #limitedDescription>
+  <p>{{ item.description.substring(0, 30)}}...</p>
+</ng-template>

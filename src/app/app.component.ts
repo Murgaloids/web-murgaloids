@@ -7,7 +7,6 @@ import {
 import { WindowService } from './shared/services/window.service';
 import { ItemsService } from './shared/services/items.service';
 import { AuthenticationService } from './shared/services/authentication.service';
-import { StudentsService } from './shared/services/students.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +14,7 @@ import { StudentsService } from './shared/services/students.service';
   styleUrls: ['./app.component.scss'],
   providers: [
     WindowService,
-    ItemsService,
-    StudentsService
+    ItemsService
   ]
 })
 export class AppComponent implements OnInit {

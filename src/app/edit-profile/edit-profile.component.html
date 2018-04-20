@@ -1,3 +1,53 @@
-<p>
-  edit-profile works!
-</p>
+<div class="container">
+  <h1 class="header">Edit Profile</h1>
+
+  <form autocomplete="off" s>
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Edit your first name"
+          name="First Name"
+          [(ngModel)]="firstName" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Edit your last name"
+          name="Last Name"
+          [(ngModel)]="lastName" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Edit your about me section"
+          name="About Me"
+          matAutosizeMinRows="1"
+          matAutosizeMatRows="5"
+          [(ngModel)]="aboutMe"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="currentFileUpload" class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+        aria-valuemin="0" aria-valuemax="100"
+        [ngStyle]="{width:progress.percentage+'%'}">
+        {{progress.percentage}}%</div>
+    </div>
+
+    <input type="file" #imgFileInput (change)="selectFile($event)"/>
+
+    <button
+      type="submit"
+      mat-button
+      color="primary"
+      (click)="submitHandler()">Edit</button>
+  </form>
+</div>

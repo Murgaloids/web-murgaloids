@@ -26,9 +26,9 @@ export class StudentsService {
   buildStudent(studentObservable: any, itemsForSale: Item[]): Student {
     return new Student({
       id: studentObservable.data.id,
-      name: studentObservable.data.firstName,
+      name: `${studentObservable.data.firstName} ${studentObservable.data.lastName}`,
       aboutDesc: studentObservable.data.description,
-      profilePicture: '', // have yet to implement
+      imageSource: studentObservable.data.imageSource,
       itemsForSale: itemsForSale,
       itemsViewed: []
     });
