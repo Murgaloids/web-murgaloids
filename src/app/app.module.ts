@@ -44,6 +44,7 @@ import { StudentsService } from './shared/services/students.service';
 
 // Environment
 import { environment } from '../environments/environment';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'edit-item', component: EditItemComponent, canActivate: [AuthRouteGuard]},
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     WelcomeComponent,
     SpinnerComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,
