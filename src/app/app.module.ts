@@ -57,7 +57,7 @@ const appRoutes: Routes = [
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
-  { path: 'edit-item', component: EditItemComponent, canActivate: [AuthRouteGuard]},
+  { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard]},
   { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 

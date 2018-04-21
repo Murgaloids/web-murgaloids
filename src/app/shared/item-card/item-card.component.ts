@@ -17,6 +17,7 @@ export class ItemCardComponent implements OnInit {
   private mobileWidth: number;
   private sellerName: string;
   private ready: boolean;
+  private soldByThisStudent: boolean;
 
   constructor(
     private windowService: WindowService,
@@ -29,6 +30,9 @@ export class ItemCardComponent implements OnInit {
     this.studentsService.getStudentObservable(this.item.sellerId).subscribe(student => {
         let builtStudent = this.studentsService.buildStudent(student, null);
         this.sellerName = builtStudent.name;
+        if(this.router.url.includes("/profile/" + this.item.sellerId )) {
+          this.soldByThisStudent = true;
+        }
         this.ready = true;
     });
   }

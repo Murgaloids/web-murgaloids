@@ -55,6 +55,29 @@ export class ItemsService {
     }
   }
 
+  updateItem(item: Item): void {
+    console.log(item);
+    const {
+      sellerId,
+      conditionTypeId,
+      categoryTypeId,
+      itemName,
+      description,
+      price
+    } = item;
+
+    if (sellerId || conditionTypeId || categoryTypeId || itemName || description || (price >= 0)) {
+      const headers = {'Authorization': this.authenticationService.token};
+      this.http.post(`${SERVER_URL}/items/update`, item, {headers, observe: 'response'})
+        .subscribe((res: any) => {
+          console.log(res);
+          if (res.status === 200)
+            this.router.navigate(['/success']);
+          this.mIsDataSet = true;
+        });
+    }
+  }
+
   setRecentItems(numOfItems: number): void {
     this.mIsDataSet = false;
     const headers = {'Authorization': this.authenticationService.token};
@@ -63,7 +86,7 @@ export class ItemsService {
         this.mRecentItems = res.data;
         this.mRecentItems.forEach((item: Item) => {
           if (!item.imageSource)
-            item.imageSource = DEFAULT_ITEM_IMAGE_PATH; 
+            item.imageSource = DEFAULT_ITEM_IMAGE_PATH;
         });
         this.mIsDataSet = true;
       });
