@@ -69,17 +69,21 @@ export class ItemsService {
       });
   }
 
-  setDisplayItemById(id: number): void {
-    this.mIsDataSet = false;
-    const headers = {'Authorization': this.authenticationService.token};
-    this.http.get(`${SERVER_URL}/items/get?id=${id}`, {headers})
-      .subscribe((res: any) => {
-        this.mDisplayedItem = res.data;
-        if (!this.mDisplayedItem.imageSource) {
-          this.mDisplayedItem.imageSource = DEFAULT_ITEM_IMAGE_PATH;
-        }
-        this.mIsDataSet = true;
-      });
+  setDisplayItemById(id: number) {
+    return new Promise((resolve, reject) => {
+      this.mIsDataSet = false;
+      const headers = {'Authorization': this.authenticationService.token};
+      this.http.get(`${SERVER_URL}/items/get?id=${id}`, {headers})
+        .subscribe((res: any) => {
+          this.mDisplayedItem = res.data;
+          if (!this.mDisplayedItem.imageSource) {
+            this.mDisplayedItem.imageSource = DEFAULT_ITEM_IMAGE_PATH;
+          }
+          this.mIsDataSet = true;
+          resolve(this.mDisplayedItem.sellerId);
+        },
+        err => reject(err));
+    });
   }
 
   getUserItemsObservable(userId: number): Observable<any>  {

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -83,6 +86,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+
     MatIconModule,
     MatMenuModule,
     MatCardModule,
@@ -92,6 +96,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatDividerModule,
     MatGridListModule,
+    MatTabsModule,
+
     RatingModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),

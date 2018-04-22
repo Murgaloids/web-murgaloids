@@ -1,4 +1,4 @@
-<div *ngIf="itemsService.mIsDataSet" class="container">
+<div *ngIf="ready" class="container">
   <h1 class="header">{{ itemsService.displayedItem.itemName }}</h1>
   <div class="row">
     <div class="col-md-5">
@@ -9,7 +9,17 @@
         <rating class="star-icon" [(ngModel)]="itemsService.displayedItem.rating" [readonly]="true"></rating>
       </div>
       <h2>${{ itemsService.displayedItem.price }}</h2>
-      <p>{{ itemsService.displayedItem.description }}</p>
+      <mat-tab-group>
+        <mat-tab label="Description">{{ itemsService.displayedItem.description }}</mat-tab>
+        <mat-tab label="Seller">
+          <h2 [routerLink]="['/profile', seller.id]">{{ seller.name }}</h2>
+          <p *ngIf="seller.aboutDesc.length < 150; else limitedSellerDescription">{{ seller.aboutDesc }}</p>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
+
+<ng-template #limitedSellerDescription>
+  <p>{{ seller.aboutDesc.substring(0, 150)}}...</p>
+</ng-template>
