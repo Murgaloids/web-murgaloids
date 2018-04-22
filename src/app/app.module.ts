@@ -40,6 +40,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -52,6 +53,7 @@ import { environment } from '../environments/environment';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
+  { path: 'search-results', component: SearchResultComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'register', component: RegisterComponent },
@@ -80,7 +82,8 @@ const appRoutes: Routes = [
     WelcomeComponent,
     SpinnerComponent,
     EditProfileComponent,
-    EditItemComponent
+    EditItemComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

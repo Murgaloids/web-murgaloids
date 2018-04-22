@@ -10,8 +10,8 @@
     color="accent"
     (keydown)="submitHandler($event)">
     <input
-      [value]="inputValue"
-      (input)="onSearchTermChange($event.target.value)"
+      [(ngModel)]="inputValue"
+      name="Input"
       type="text"
       placeholder="Search for anything...">
   </form>
@@ -77,8 +77,8 @@
     color="accent"
     (keydown)="submitHandler($event)">
     <input
-      [value]="inputValue"
-      (input)="onSearchTermChange($event.target.value)"
+      [(ngModel)]="inputValue"
+      name="Input"
       autofocus
       placeholder="Search for anything..."
       (blur)="onSearchIconToggle()">
