@@ -8,12 +8,12 @@
       'animated pulse': hover === true
     }"
     [routerLink]="['/item', item.id]">
-    <mat-card-header class="header">
+    <mat-card-header>
       <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
       <mat-card-subtitle><b>${{ item.price }}</b></mat-card-subtitle>
-        <button *ngIf="soldByThisStudent" mat-icon-button>
-          <mat-icon [routerLink]="['/edit-item', item.id]"aria-label="edit-item">settings</mat-icon>
-        </button>
+      <button  class="edit-item" *ngIf="soldByThisStudent" mat-icon-button>
+        <mat-icon [routerLink]="['/edit-item', item.id]"aria-label="edit-item">settings</mat-icon>
+      </button>
     </mat-card-header>
     <img
       mat-card-image
