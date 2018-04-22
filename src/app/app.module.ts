@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -37,6 +40,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -49,6 +53,7 @@ import { environment } from '../environments/environment';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
+  { path: 'search-results', component: SearchResultComponent, canActivate: [AuthRouteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'register', component: RegisterComponent },
@@ -77,7 +82,8 @@ const appRoutes: Routes = [
     WelcomeComponent,
     SpinnerComponent,
     EditProfileComponent,
-    EditItemComponent
+    EditItemComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +92,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+
     MatIconModule,
     MatMenuModule,
     MatCardModule,
@@ -95,6 +102,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatDividerModule,
     MatGridListModule,
+    MatTabsModule,
+
     RatingModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
