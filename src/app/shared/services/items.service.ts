@@ -55,22 +55,24 @@ export class ItemsService {
     }
   }
 
-  updateItem(item: Item): void {
-    console.log(item);
-    const {
-      sellerId,
-      conditionTypeId,
-      categoryTypeId,
-      itemName,
-      description,
-      price
-    } = item;
+  updateItem({id, itemName, sellerId, conditionTypeId, categoryTypeId, description, price, itemSold, itemRated, rating, imageSource}): void {
+    const bodyObject: object = {id, sellerId};
 
-    if (sellerId || conditionTypeId || categoryTypeId || itemName || description || (price >= 0)) {
+    if (conditionTypeId || categoryTypeId || itemName || description || (price >= 0) || itemSold || itemRated || rating || imageSource ) {
       const headers = {'Authorization': this.authenticationService.token};
-      this.http.post(`${SERVER_URL}/items/update`, item, {headers, observe: 'response'})
+
+      if (conditionTypeId) Object.assign(bodyObject, {conditionTypeId});
+      if (categoryTypeId) Object.assign(bodyObject, {categoryTypeId});
+      if (itemName) Object.assign(bodyObject, {itemName});
+      if (description) Object.assign(bodyObject, {description});
+      if (price) Object.assign(bodyObject, {price});
+      if (itemSold) Object.assign(bodyObject, {itemSold});
+      if (itemRated) Object.assign(bodyObject, {itemRated});
+      if (rating) Object.assign(bodyObject, {rating});
+      if (imageSource) Object.assign(bodyObject, {imageSource});
+
+      this.http.post(`${SERVER_URL}/items/update`, bodyObject, {headers, observe: 'response'})
         .subscribe((res: any) => {
-          console.log(res);
           if (res.status === 200)
             this.router.navigate(['/success']);
           this.mIsDataSet = true;
