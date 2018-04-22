@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { MOBILE_WIDTH } from '../global';
 import { AuthenticationService } from '../services/authentication.service';
+import { ItemsService } from '../services/items.service';
 import { WindowService } from '../services/window.service';
 
 @Component({
@@ -12,11 +13,12 @@ import { WindowService } from '../services/window.service';
 export class HeaderComponent implements OnInit {
   private mobileWidth: number;
   private isInputVisible: boolean;
-  private inputValue: string = '';
+  private inputValue: string;
 
   constructor(
      private authenticationService: AuthenticationService,
      private windowService: WindowService,
+     private itemsService: ItemsService,
      private router: Router
   ) {}
 
@@ -29,14 +31,14 @@ export class HeaderComponent implements OnInit {
     this.isInputVisible = !this.isInputVisible;
   }
 
-  onSearchTermChange(value: string) {
-    this.inputValue = value;
-  }
-
   submitHandler(event: any) {
     if (event.keyCode == 13) {
-      event.target.value = '';
-      event.target.blur();
+      if (this.inputValue) {
+        this.itemsService.setSearchedItemsByQuery(this.inputValue)
+          .then(() => this.router.navigate(['/search-result']));
+      }
+
+      this.inputValue = ''
     }
   }
 
