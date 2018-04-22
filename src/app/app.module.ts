@@ -38,7 +38,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+<<<<<<< HEAD
 import { DeleteItemDialog } from './edit-item/edit-item.component';
+=======
+>>>>>>> 0ed08e3cc6c742be5786e5b1115bf0a03715b04f
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -79,8 +82,12 @@ const appRoutes: Routes = [
     WelcomeComponent,
     SpinnerComponent,
     EditProfileComponent,
+<<<<<<< HEAD
     EditItemComponent,
     DeleteItemDialog
+=======
+    EditItemComponent
+>>>>>>> 0ed08e3cc6c742be5786e5b1115bf0a03715b04f
   ],
   imports: [
     BrowserModule,

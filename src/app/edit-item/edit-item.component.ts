@@ -140,6 +140,7 @@ export class EditItemComponent implements OnInit {
       this.itemsService.updateItem.call(this.itemsService, this.item);
     }
   }
+<<<<<<< HEAD
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DeleteItemDialog, {
@@ -175,4 +176,6 @@ export class DeleteItemDialog {
     this.dialogRef.close();
   }
 
+=======
+>>>>>>> 0ed08e3cc6c742be5786e5b1115bf0a03715b04f
 }
