@@ -35,10 +35,11 @@ export class HeaderComponent implements OnInit {
     if (event.keyCode == 13) {
       if (this.inputValue) {
         this.itemsService.setSearchedItemsByQuery(this.inputValue)
-          .then(() => this.router.navigate(['/search-result']));
+          .then(() => {
+            this.router.navigate(['/search-results', {query: this.inputValue}]);
+            this.inputValue = '';
+          });
       }
-
-      this.inputValue = ''
     }
   }
 
