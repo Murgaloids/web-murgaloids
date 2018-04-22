@@ -30,7 +30,7 @@ export class ItemDetailsComponent implements OnInit {
                 this.seller = new Student({
                   name: `${res.data.firstName} ${res.data.lastName}`,
                   imageSource: res.data.imageSource,
-                  aboutDesc: res.data.description,
+                  aboutDesc: res.data.description || '',
                   id: res.data.id
                 });
                 this.ready = true;
