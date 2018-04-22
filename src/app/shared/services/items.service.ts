@@ -55,6 +55,31 @@ export class ItemsService {
     }
   }
 
+  updateItem({id, itemName, sellerId, conditionTypeId, categoryTypeId, description, price, itemSold, itemRated, rating, imageSource}): void {
+    const bodyObject: object = {id, sellerId};
+
+    if (conditionTypeId || categoryTypeId || itemName || description || (price >= 0) || itemSold || itemRated || rating || imageSource ) {
+      const headers = {'Authorization': this.authenticationService.token};
+
+      if (conditionTypeId) Object.assign(bodyObject, {conditionTypeId});
+      if (categoryTypeId) Object.assign(bodyObject, {categoryTypeId});
+      if (itemName) Object.assign(bodyObject, {itemName});
+      if (description) Object.assign(bodyObject, {description});
+      if (price) Object.assign(bodyObject, {price});
+      if (itemSold) Object.assign(bodyObject, {itemSold});
+      if (itemRated) Object.assign(bodyObject, {itemRated});
+      if (rating) Object.assign(bodyObject, {rating});
+      if (imageSource) Object.assign(bodyObject, {imageSource});
+
+      this.http.post(`${SERVER_URL}/items/update`, bodyObject, {headers, observe: 'response'})
+        .subscribe((res: any) => {
+          if (res.status === 200)
+            this.router.navigate(['/success']);
+          this.mIsDataSet = true;
+        });
+    }
+  }
+
   setRecentItems(numOfItems: number): void {
     this.mIsDataSet = false;
     const headers = {'Authorization': this.authenticationService.token};
@@ -63,7 +88,7 @@ export class ItemsService {
         this.mRecentItems = res.data;
         this.mRecentItems.forEach((item: Item) => {
           if (!item.imageSource)
-            item.imageSource = DEFAULT_ITEM_IMAGE_PATH; 
+            item.imageSource = DEFAULT_ITEM_IMAGE_PATH;
         });
         this.mIsDataSet = true;
       });

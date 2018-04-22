@@ -39,6 +39,7 @@ import { SuccessComponent } from './success/success.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard]},
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     WelcomeComponent,
     SpinnerComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,
