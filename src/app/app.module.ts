@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
     MatDividerModule,
     MatGridListModule,
     MatTabsModule,
+    MatSnackBarModule,
 
     RatingModule,
     RouterModule.forRoot(appRoutes),

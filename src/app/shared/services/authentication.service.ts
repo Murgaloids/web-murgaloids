@@ -99,30 +99,34 @@ export class AuthenticationService {
     this.mErrorMessage = '';
   }
 
-  public editUserInformation({email, firstName, lastName, description, imageSource}): void {
-    if (email && (firstName || lastName || description || imageSource)) {
-      const bodyObject: object = {email};
-      const headers = {'Authorization': this.token};
+  public editUserInformation({email, firstName, lastName, description, imageSource}) {
+    return new Promise((resolve, reject) => {
+      if (email && (firstName || lastName || description || imageSource)) {
+        const bodyObject: object = {email};
+        const headers = {'Authorization': this.token};
 
-      if (firstName) Object.assign(bodyObject, {firstName});
-      if (lastName) Object.assign(bodyObject, {lastName});
-      if (description) Object.assign(bodyObject, {description});
-      if (imageSource) Object.assign(bodyObject, {imageSource});
+        if (firstName) Object.assign(bodyObject, {firstName});
+        if (lastName) Object.assign(bodyObject, {lastName});
+        if (description) Object.assign(bodyObject, {description});
+        if (imageSource) Object.assign(bodyObject, {imageSource});
 
-      this.http.post(`${SERVER_URL}/students/update`, bodyObject, {headers})
-        .subscribe(
-          (res: any) => {
-            if (res && res.data) {
-              this.mFirstName = res.data.firstName;
-              this.mLastName = res.data.lastName;
-              this.mUserId = res.data.id;
-              this.mEmail = res.data.email;
-              this.router.navigate([`/profile/${this.mUserId}`]);
-            }
-          },
-          this.errorHandler.bind(this)
-         );
-    }
+        this.http.post(`${SERVER_URL}/students/update`, bodyObject, {headers})
+          .subscribe(
+            (res: any) => {
+              if (res && res.data) {
+                this.mFirstName = res.data.firstName;
+                this.mLastName = res.data.lastName;
+                this.mUserId = res.data.id;
+                this.mEmail = res.data.email;
+                resolve();
+              }
+            },
+            this.errorHandler.bind(this)
+           );
+      } else {
+        reject();
+      }
+    });
   }
 
   // Attempts to register a new user.

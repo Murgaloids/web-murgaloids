@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 // Services
@@ -36,7 +37,8 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private angularFireDatabase: AngularFireDatabase,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.item.itemSold = false;
     this.item.itemRated = false;
@@ -137,7 +139,11 @@ export class EditItemComponent implements OnInit {
 
     if (itemName || conditionTypeId ||
         categoryTypeId || description || (price >= 0) || imageSource) {
-      this.itemsService.updateItem.call(this.itemsService, this.item);
+      this.itemsService.updateItem.call(this.itemsService, this.item)
+        .then(() => {
+          this.router.navigate(['profile', sellerId]);
+          this.snackBar.open('Edits saved!', null, { duration: 1500 });
+        });
     }
   }
 
@@ -151,15 +157,17 @@ export class EditItemComponent implements OnInit {
 
 @Component({
   selector: 'delete-item-dialog',
-  templateUrl: 'delete-item.html',
-  providers: [ItemsService]
+  templateUrl: 'delete-item.html'
 })
 export class DeleteItemDialog {
 
   constructor(
+    private authenticationService: AuthenticationService,
     public dialogRef: MatDialogRef<DeleteItemDialog>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   onNoClick(): void {
@@ -171,7 +179,11 @@ export class DeleteItemDialog {
   }
 
   yes(): void {
-    this.itemsService.deleteItem(this.data.id);
-    this.dialogRef.close();
+    this.itemsService.deleteItem(this.data.id)
+      .then(() => {
+        this.router.navigate(['/profile', this.authenticationService.userId]);
+        this.dialogRef.close();
+        this.snackBar.open('Item deleted!', null, { duration: 1500 });
+      });
   }
 }

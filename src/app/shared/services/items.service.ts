@@ -55,39 +55,55 @@ export class ItemsService {
     }
   }
 
-  updateItem({id, itemName, sellerId, conditionTypeId, categoryTypeId, description, price, itemSold, itemRated, rating, imageSource}): void {
-    const bodyObject: object = {id, sellerId};
+  updateItem({
+    id,
+    itemName,
+    sellerId,
+    conditionTypeId,
+    categoryTypeId,
+    description,
+    price,
+    itemSold,
+    itemRated,
+    rating,
+    imageSource}) {
+    return new Promise((resolve, reject) => {
+      const bodyObject: object = {id, sellerId};
 
-    if (conditionTypeId || categoryTypeId || itemName || description || (price >= 0) || itemSold || itemRated || rating || imageSource ) {
-      const headers = {'Authorization': this.authenticationService.token};
+      if (conditionTypeId || categoryTypeId || itemName || description ||
+          (price >= 0) || itemSold || itemRated || rating || imageSource ) {
+        const headers = {'Authorization': this.authenticationService.token};
 
-      if (conditionTypeId) Object.assign(bodyObject, {conditionTypeId});
-      if (categoryTypeId) Object.assign(bodyObject, {categoryTypeId});
-      if (itemName) Object.assign(bodyObject, {itemName});
-      if (description) Object.assign(bodyObject, {description});
-      if (price) Object.assign(bodyObject, {price});
-      if (itemSold) Object.assign(bodyObject, {itemSold});
-      if (itemRated) Object.assign(bodyObject, {itemRated});
-      if (rating) Object.assign(bodyObject, {rating});
-      if (imageSource) Object.assign(bodyObject, {imageSource});
+        if (conditionTypeId) Object.assign(bodyObject, {conditionTypeId});
+        if (categoryTypeId) Object.assign(bodyObject, {categoryTypeId});
+        if (itemName) Object.assign(bodyObject, {itemName});
+        if (description) Object.assign(bodyObject, {description});
+        if (price) Object.assign(bodyObject, {price});
+        if (itemSold) Object.assign(bodyObject, {itemSold});
+        if (itemRated) Object.assign(bodyObject, {itemRated});
+        if (rating) Object.assign(bodyObject, {rating});
+        if (imageSource) Object.assign(bodyObject, {imageSource});
 
-      this.http.post(`${SERVER_URL}/items/update`, bodyObject, {headers, observe: 'response'})
-        .subscribe((res: any) => {
-          if (res.status === 200)
-            this.router.navigate(['/success']);
-          this.mIsDataSet = true;
-        });
-    }
+        this.http.post(`${SERVER_URL}/items/update`, bodyObject, {headers, observe: 'response'})
+          .subscribe((res: any) => {
+            if (res.status === 200) resolve();
+            this.mIsDataSet = true;
+          },
+          err => reject(err));
+      }
+    });
   }
 
-  deleteItem(id: number):void {
-    const headers = {'Authorization': this.authenticationService.token};
-    this.http.post(`${SERVER_URL}/items/delete`, id, {headers, observe: 'response'})
-      .subscribe((res: any) => {
-        if (res.status === 200)
-          this.router.navigate(['/success']);
-        this.mIsDataSet = true;
-      });
+  deleteItem(id: number) {
+    return new Promise((resolve, reject) => {
+      const headers = {'Authorization': this.authenticationService.token};
+      this.http.post(`${SERVER_URL}/items/delete`, id, {headers, observe: 'response'})
+        .subscribe((res: any) => {
+          if (res.status === 200) resolve();
+          this.mIsDataSet = true;
+        },
+        err => reject(err));
+    });
   }
 
   setRecentItems(numOfItems: number): void {

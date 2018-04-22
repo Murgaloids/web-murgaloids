@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { Router } from "@angular/router";
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { FileUpload } from '../shared/models/file-upload.model';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -23,7 +25,9 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private angularFireDatabase: AngularFireDatabase
+    private angularFireDatabase: AngularFireDatabase,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {}
@@ -109,6 +113,10 @@ export class EditProfileComponent implements OnInit {
     const { email } = this.authenticationService;
 
     const userObj = { email, firstName, lastName, description, imageSource };
-    this.authenticationService.editUserInformation(userObj);
+    this.authenticationService.editUserInformation(userObj)
+      .then(() => {
+        this.router.navigate(['/profile', this.authenticationService.userId])
+        this.snackBar.open('Edits saved!', null, { duration: 1500 });
+      });
   }
 }
