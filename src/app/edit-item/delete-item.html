@@ -1,5 +1,7 @@
 <div class="are-you-sure">
   <a>Are you sure?</a>
-  <button>yes</button>
-  <button>no</button>
+  <div class="yesno">
+    <button mat-button color="primary" (click)="no()">No</button>
+    <button mat-button color="warn" (click)="yes()">Yes</button>
+  </div>
 </div>

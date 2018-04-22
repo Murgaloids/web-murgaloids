@@ -144,11 +144,7 @@ export class EditItemComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DeleteItemDialog, {
       width: '250px',
-      data: { name: this.item.itemName, animal: this.item.itemName }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      data: { id: this.item.id }
     });
   }
 }
@@ -156,14 +152,26 @@ export class EditItemComponent implements OnInit {
 @Component({
   selector: 'delete-item-dialog',
   templateUrl: 'delete-item.html',
+  providers: [ItemsService]
 })
 export class DeleteItemDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteItemDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private itemsService: ItemsService
+  ) { }
 
   onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  no(): void {
+    this.dialogRef.close();
+  }
+
+  yes(): void {
+    this.itemsService.deleteItem(this.data.id);
     this.dialogRef.close();
   }
 
