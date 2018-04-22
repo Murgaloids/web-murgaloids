@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MatDialogModule } from '@angular/material';
 
 // Components
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { DeleteItemDialog } from './edit-item/edit-item.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     WelcomeComponent,
     SpinnerComponent,
     EditProfileComponent,
-    EditItemComponent
+    EditItemComponent,
+    DeleteItemDialog
   ],
   imports: [
     BrowserModule,
@@ -99,13 +102,15 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MatDialogModule
   ],
   providers: [
     AuthenticationService,
     AuthRouteGuard,
     StudentsService
   ],
+  entryComponents: [DeleteItemDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

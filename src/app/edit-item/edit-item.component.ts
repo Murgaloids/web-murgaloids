@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 // Services
@@ -34,7 +35,8 @@ export class EditItemComponent implements OnInit {
     private itemsService: ItemsService,
     private router: Router,
     private route: ActivatedRoute,
-    private angularFireDatabase: AngularFireDatabase
+    private angularFireDatabase: AngularFireDatabase,
+    private dialog: MatDialog
   ) {
     this.item.itemSold = false;
     this.item.itemRated = false;
@@ -138,4 +140,31 @@ export class EditItemComponent implements OnInit {
       this.itemsService.updateItem.call(this.itemsService, this.item);
     }
   }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DeleteItemDialog, {
+      width: '250px',
+      data: { name: this.item.itemName, animal: this.item.itemName }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+}
+
+@Component({
+  selector: 'delete-item-dialog',
+  templateUrl: 'delete-item.html',
+})
+export class DeleteItemDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteItemDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
