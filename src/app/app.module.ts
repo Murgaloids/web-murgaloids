@@ -36,6 +36,7 @@ import { SuccessComponent } from './success/success.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -44,7 +45,6 @@ import { StudentsService } from './shared/services/students.service';
 
 // Environment
 import { environment } from '../environments/environment';
-import { EditItemComponent } from './edit-item/edit-item.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },

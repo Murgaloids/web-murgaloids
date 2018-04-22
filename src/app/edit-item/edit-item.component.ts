@@ -52,10 +52,15 @@ export class EditItemComponent implements OnInit {
     this.item.conditionTypeId = ItemCondition[this.itemCondition];
     this.item.categoryTypeId = ItemCategory[this.itemCategory];
     // Set up for uploading the item to firebase
-    const file = this.selectedFiles.item(0);
-    this.selectedFiles = undefined;
-    this.currentFileUpload = new FileUpload(file);
-    this.pushFileToStorage(this.currentFileUpload, this.progress);
+    if(this.selectedFiles != null) {
+      const file = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+      this.currentFileUpload = new FileUpload(file);
+      this.pushFileToStorage(this.currentFileUpload, this.progress);
+    } else {
+      this.addItem();
+    }
+
   }
 
   // Event handler for selecting image
@@ -72,7 +77,6 @@ export class EditItemComponent implements OnInit {
   pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number}): any {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
-
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
         // In progress
@@ -119,7 +123,6 @@ export class EditItemComponent implements OnInit {
   }
 
   private addItem(): void {
-    console.log("trying");
     const {
       itemName,
       sellerId,
@@ -130,8 +133,8 @@ export class EditItemComponent implements OnInit {
       imageSource
     } = this.item;
 
-    if (itemName && sellerId && conditionTypeId &&
-        categoryTypeId && description && (price >= 0) && imageSource) {
+    if (itemName || conditionTypeId ||
+        categoryTypeId || description || (price >= 0) || imageSource) {
       this.itemsService.updateItem.call(this.itemsService, this.item);
     }
   }
