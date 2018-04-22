@@ -80,6 +80,16 @@ export class ItemsService {
     }
   }
 
+  deleteItem(id: number):void {
+    const headers = {'Authorization': this.authenticationService.token};
+    this.http.post(`${SERVER_URL}/items/delete`, id, {headers, observe: 'response'})
+      .subscribe((res: any) => {
+        if (res.status === 200)
+          this.router.navigate(['/success']);
+        this.mIsDataSet = true;
+      });
+  }
+
   setRecentItems(numOfItems: number): void {
     this.mIsDataSet = false;
     const headers = {'Authorization': this.authenticationService.token};
