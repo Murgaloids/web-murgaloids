@@ -137,4 +137,18 @@ export class ItemsService {
       imageSource: itemsObservable.imageSource
     })
   }
+
+  setSearchedItemsByQuery(query: string) {
+    return new Promise((resolve, reject) => {
+      if (query) {
+        const headers = {'Authorization': this.authenticationService.token};
+        this.http.get(`${SERVER_URL}/items/search?query=${query}`, {headers})
+          .subscribe((res: any) => {
+            this.mSearchedItems = res.data;
+            resolve();
+          },
+          err => reject(err));
+      }
+    });
+  }
 }
