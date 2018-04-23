@@ -8,6 +8,10 @@
   max-height: 300px;
 }
 
+.item-card:hover {
+  cursor: pointer;
+}
+
 img {
   width: 100%;
   display: block;
@@ -20,8 +24,4 @@ img {
 .seller {
   position: absolute;
   bottom: 0;
-}
-
-.edit-item {
-  padding-left: 50%;
 }

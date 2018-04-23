@@ -34,25 +34,28 @@ export class ItemsService {
     this.mDisplayedItem = null;
   }
 
-  addItemToServer(item: Item): void {
-    const {
-      sellerId,
-      conditionTypeId,
-      categoryTypeId,
-      itemName,
-      description,
-      price
-    } = item;
+  addItemToServer(item: Item) {
+    return new Promise((resolve, reject) => {
+      const {
+        sellerId,
+        conditionTypeId,
+        categoryTypeId,
+        itemName,
+        description,
+        price
+      } = item;
 
-    if (sellerId && conditionTypeId && categoryTypeId && itemName && description && (price >= 0)) {
-      const headers = {'Authorization': this.authenticationService.token};
-      this.http.post(`${SERVER_URL}/items/add`, item, {headers, observe: 'response'})
-        .subscribe((res: any) => {
-          if (res.status === 200)
-            this.router.navigate(['/success']);
-          this.mIsDataSet = true;
-        });
-    }
+      if (sellerId && conditionTypeId && categoryTypeId &&
+          itemName && description && (price >= 0)) {
+        const headers = {'Authorization': this.authenticationService.token};
+        this.http.post(`${SERVER_URL}/items/add`, item, {headers, observe: 'response'})
+          .subscribe((res: any) => {
+            if (res.status === 200) resolve();
+            this.mIsDataSet = true;
+          },
+          err => reject(err));
+      }
+    });
   }
 
   updateItem({

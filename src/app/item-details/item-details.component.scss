@@ -9,3 +9,21 @@ h2 {
   margin-bottom: 5px;
   font-size: 30px;
 }
+
+.header,
+.edit-item {
+  display: inline;
+}
+
+.edit-item {
+  bottom: 10px;
+}
+
+.edit-item:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.image-container {
+  margin-top: 25px;
+}

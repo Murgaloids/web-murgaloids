@@ -157,7 +157,8 @@ export class EditItemComponent implements OnInit {
 
 @Component({
   selector: 'delete-item-dialog',
-  templateUrl: 'delete-item.html'
+  templateUrl: 'delete-item.html',
+  providers: [ItemsService]
 })
 export class DeleteItemDialog {
 
