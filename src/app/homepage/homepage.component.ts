@@ -20,6 +20,7 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.itemsService.setRecentItems(NUM_OF_ITEMS_TO_FETCH);
+    this.itemsService.setRecentItems(NUM_OF_ITEMS_TO_FETCH)
+      .then(() => this.recentItemsForSale = this.itemsService.recentItems.slice(0, 8));
   }
 }
