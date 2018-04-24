@@ -1,6 +1,6 @@
 <div *ngIf="ready" class="container">
   <button class="edit-item" *ngIf="soldByThisStudent" mat-icon-button>
-    <mat-icon [routerLink]="['/edit-item', itemsService.displayedItem.id]"aria-label="edit-item">settings</mat-icon>
+    <fa [routerLink]="['/edit-item', itemsService.displayedItem.id]" name="edit" size="2x"></fa>
   </button>
   <h1 class="header">{{ itemsService.displayedItem.itemName }}</h1>
   <div class="row">

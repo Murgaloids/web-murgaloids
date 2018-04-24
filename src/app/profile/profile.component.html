@@ -7,7 +7,7 @@
       <p>{{ student.aboutDesc }}</p>
       <button mat-raised-button color="primary" [routerLink]="['/edit-profile']"
         *ngIf="id === authenticationService.userId" class="edit-profile-button">Edit Your Profile</button>
-      <button mat-raised-button color="primary" [routerLink]="['/message']"
+      <button mat-raised-button color="primary" (click)="openMessageDialog()"
         *ngIf="id != authenticationService.userId" class="message-user-button">Message {{ student.name }}</button>
     </div>
     <div class="col-xs-12 col-md-9">
