@@ -3,7 +3,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { ItemsService } from '../shared/services/items.service';
 import { Item } from '../shared/models/item.model';
 
-const NUM_OF_ITEMS_TO_FETCH = 10;
+const NUM_OF_ITEMS_TO_FETCH = 100;
 
 @Component({
   selector: 'app-homepage',

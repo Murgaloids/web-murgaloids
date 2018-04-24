@@ -57,6 +57,21 @@ export class ItemsService {
     });
   }
 
+  getItem(itemId: number) {
+    return new Promise((resolve, reject) => {
+      if (itemId) {
+        const headers = {'Authorization': this.authenticationService.token};
+        this.http.get(`${SERVER_URL}/items/get?id=${itemId}`, {headers})
+          .subscribe((res: any) => {
+            if (res && res.data) {
+              resolve(res.data);
+            }
+          },
+          err => reject(err));
+      }
+    });
+  }
+
   updateItem({
     id,
     itemName,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '../shared/services/authentication.service';
+import { StudentsService } from '../shared/services/students.service';
 import { FileUpload } from '../shared/models/file-upload.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
@@ -25,12 +26,22 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
+    private studentsService: StudentsService,
     private angularFireDatabase: AngularFireDatabase,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.studentsService.getStudentObservable(this.authenticationService.userId)
+      .subscribe(res => {
+        if (res && res.data) {
+          this.firstName = res.data.firstName;
+          this.lastName = res.data.lastName;
+          this.aboutMe = res.data.description;
+        }
+      });
+  }
 
   private submitHandler() {
     if (this.selectedFiles) {
