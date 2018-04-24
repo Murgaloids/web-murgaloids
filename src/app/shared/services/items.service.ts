@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL, DEFAULT_ITEM_IMAGE_PATH } from '../global';

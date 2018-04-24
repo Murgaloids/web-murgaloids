@@ -50,6 +50,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 import { StudentsService } from './shared/services/students.service';
+import { MessagingService } from './shared/services/messaging.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -121,7 +122,8 @@ const appRoutes: Routes = [
   providers: [
     AuthenticationService,
     AuthRouteGuard,
-    StudentsService
+    StudentsService,
+    MessagingService
   ],
   entryComponents: [
     DeleteItemDialog,
