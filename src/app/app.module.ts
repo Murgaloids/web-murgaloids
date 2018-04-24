@@ -44,12 +44,13 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { DeleteItemDialog } from './edit-item/edit-item.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { MessagesComponent } from './messages/messages.component';
+import { MessageComponent } from './message/message.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 import { StudentsService } from './shared/services/students.service';
+import { MessagingService } from './shared/services/messaging.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -66,7 +67,7 @@ const appRoutes: Routes = [
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard] },
-  { path: 'messages', component: MessagesComponent, canActivate: [AuthRouteGuard] },
+  { path: 'message', component: MessageComponent, canActivate: [AuthRouteGuard] },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
@@ -88,8 +89,8 @@ const appRoutes: Routes = [
     EditItemComponent,
     DeleteItemDialog,
     SearchResultComponent,
-    MessagesComponent,
-    MessageDialog
+    MessageDialog,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +122,8 @@ const appRoutes: Routes = [
   providers: [
     AuthenticationService,
     AuthRouteGuard,
-    StudentsService
+    StudentsService,
+    MessagingService
   ],
   entryComponents: [
     DeleteItemDialog,

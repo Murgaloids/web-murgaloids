@@ -27,3 +27,12 @@ h2 {
 .image-container {
   margin-top: 25px;
 }
+
+.user-profile-link {
+  color: black;
+}
+
+.user-profile-link:hover {
+  color: gray;
+  text-decoration: none;
+}

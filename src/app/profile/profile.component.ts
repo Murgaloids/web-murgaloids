@@ -1,11 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from "@angular/router";
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { StudentsService } from '../shared/services/students.service';
 import { ItemsService } from '../shared/services/items.service';
+import { MessagingService } from '../shared/services/messaging.service';
 import { Student } from '../shared/models/student.model';
 import { Item } from '../shared/models/item.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +22,10 @@ export class ProfileComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private authenticationService: AuthenticationService,
     private studentsService: StudentsService,
+    private messagingService: MessagingService,
     private itemsService: ItemsService,
     private dialog: MatDialog,
   ) {}
@@ -40,7 +45,14 @@ export class ProfileComponent implements OnInit {
 
   openMessageDialog(): void {
     const conversationId = [this.student.id, this.authenticationService.userId].sort().join(':');
-    const dialogRef = this.dialog.open(MessageDialog, {width: '500px'});
+    this.messagingService.doesConversationExists(conversationId)
+      .then(data => {
+        if (!data) {
+          const dialogRef = this.dialog.open(MessageDialog, {width: '500px'});
+        } else {
+          this.router.navigate(['message']);
+        }
+      })
   }
 }
 
