@@ -1,7 +1,10 @@
 <div *ngIf="ready" class="container">
+  <button class="edit-item" *ngIf="soldByThisStudent" mat-icon-button>
+    <mat-icon [routerLink]="['/edit-item', itemsService.displayedItem.id]"aria-label="edit-item">settings</mat-icon>
+  </button>
   <h1 class="header">{{ itemsService.displayedItem.itemName }}</h1>
   <div class="row">
-    <div class="col-md-5">
+    <div class="image-container col-md-5">
       <img class="img-fluid" src="{{ itemsService.displayedItem.imageSource }}">
     </div>
     <div class="col-md-5 mx-auto">
@@ -12,7 +15,7 @@
       <mat-tab-group>
         <mat-tab label="Description">{{ itemsService.displayedItem.description }}</mat-tab>
         <mat-tab label="Seller">
-          <h2 [routerLink]="['/profile', seller.id]">{{ seller.name }}</h2>
+          <a class="user-profile-link" [routerLink]="['/profile', seller.id]"><h2>{{ seller.name }}</h2></a>
           <p *ngIf="seller.aboutDesc.length && seller.aboutDesc.length < 150; else limitedSellerDescription">{{ seller.aboutDesc }}</p>
         </mat-tab>
       </mat-tab-group>

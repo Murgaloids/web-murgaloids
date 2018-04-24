@@ -37,7 +37,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
-import { SuccessComponent } from './success/success.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -64,7 +63,6 @@ const appRoutes: Routes = [
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard] },
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
-  { path: 'success', component: SuccessComponent, canActivate: [AuthRouteGuard]},
   { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard] },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
@@ -79,7 +77,6 @@ const appRoutes: Routes = [
     ItemCardComponent,
     ItemDetailsComponent,
     SellItemPageComponent,
-    SuccessComponent,
     LoginComponent,
     RegisterComponent,
     WelcomeComponent,

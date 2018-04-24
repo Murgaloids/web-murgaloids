@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // Services
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { ItemsService } from '../shared/services/items.service';
+import { MatSnackBar } from '@angular/material';
 // Models
 import { Item } from '../shared/models/item.model';
 import { FileUpload } from '../shared/models/file-upload.model';
@@ -32,7 +33,8 @@ export class SellItemPageComponent {
     private authenticationService: AuthenticationService,
     private itemsService: ItemsService,
     private router: Router,
-    private angularFireDatabase: AngularFireDatabase
+    private angularFireDatabase: AngularFireDatabase,
+    private snackBar: MatSnackBar
   ) {
     this.item.itemSold = false;
     this.item.itemRated = false;
@@ -123,7 +125,11 @@ export class SellItemPageComponent {
 
     if (itemName && sellerId && conditionTypeId &&
         categoryTypeId && description && (price >= 0) && imageSource) {
-      this.itemsService.addItemToServer.call(this.itemsService, this.item);
+      this.itemsService.addItemToServer.call(this.itemsService, this.item)
+        .then(() => {
+          this.router.navigate(['/home']);
+          this.snackBar.open('Item successfully added!', null, { duration: 1500 });
+        });
     }
   }
 }
