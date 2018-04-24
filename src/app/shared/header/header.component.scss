@@ -44,6 +44,11 @@ li:hover {
   margin-right: 25px;
 }
 
+#navbar-title:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 #mobile-input-form,
 #mobile-input-form input {
   width: 80%;

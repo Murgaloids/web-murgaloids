@@ -1,31 +1,23 @@
 <div *ngIf="ready">
   <mat-card
     class="item-card"
-    (mouseover)="hover = true"
-    (mouseout)="hover = false"
-    [ngClass]="{
-      'center-text': windowService.width < mobileWidth,
-      'animated pulse': hover === true
-    }"
+    [ngClass]="{'center-text': windowService.width < mobileWidth}"
     [routerLink]="['/item', item.id]">
     <mat-card-header>
       <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
       <mat-card-subtitle><b>${{ item.price }}</b></mat-card-subtitle>
-      <button class="edit-item" *ngIf="soldByThisStudent" mat-icon-button>
-        <mat-icon [routerLink]="['/edit-item', item.id]"aria-label="edit-item">settings</mat-icon>
-      </button>
     </mat-card-header>
     <img
       mat-card-image
       src="{{ item.imageSource }}">
     <mat-card-content>
       <p *ngIf="item.description.length < 60; else limitedDescription">{{ item.description }}</p>
-      <div
+<!--       <div
         *ngIf="!router.url.includes('/profile')"
         class="seller">
-        <a>Student Seller:</a>
+        <a>Seller:</a>
         <a [routerLink]="['/profile', item.sellerId]">{{ sellerName }}</a>
-      </div>
+      </div> -->
     </mat-card-content>
   </mat-card>
 </div>

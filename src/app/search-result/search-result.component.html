@@ -1,5 +1,9 @@
 <div *ngIf="ready; else loading;" class="container">
-  
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of itemsService.searchedItems">
+      <app-item-card [item]="item"></app-item-card>
+    </div>
+  </div>
 </div>
 
 <ng-template #loading>

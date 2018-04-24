@@ -1,6 +1,6 @@
 <!-- For Desktop -->
 <mat-toolbar
-  class="mat-elevation-z4"
+  class="header mat-elevation-z4"
   color="primary"
   *ngIf="windowService.width > mobileWidth; else mobileView">
   <a
@@ -18,22 +18,16 @@
   <span class="spacer"></span>
   <ul>
     <span *ngIf="authenticationService.userId; else signUpOption">
-      <li>
-        <a
+      <li><a
           routerLink="/sell"
-          routerLinkActive="active">Sell</a>
-      </li>
-      <li>
-        <a
+          routerLinkActive="active"><fa name="plus-circle" size="2x"></fa></a></li>
+      <li><a
           [routerLink]="['/profile', authenticationService.userId]"
-          routerLinkActive="active">Profile</a>
-      </li>
-      <li>
-        <a
+          routerLinkActive="active"><fa name="user" size="2x"></fa></a></li>
+      <li><a
           (click)="signOutClickHandler()"
           routerLink="/"
-          routerLinkActive="active">Sign Out</a>
-      </li>
+          routerLinkActive="active"><fa name="sign-out" size="2x"></fa></a></li>
     </span>
   </ul>
 </mat-toolbar>
@@ -89,8 +83,8 @@
 
 <!-- For Sign Up Option -->
 <ng-template #signUpOption>
-  <li><a [routerLink]="['/register']">Register</a></li>
-  <li><a [routerLink]="['/login']">Sign In</a></li>
+  <li><a [routerLink]="['/register']"><fa name="user-plus" size="2x"></fa></a></li>
+  <li><a [routerLink]="['/login']"><fa name="sign-in" size="2x"></fa></a></li>
 </ng-template>
 <!-- End Sign Up Option -->
 
