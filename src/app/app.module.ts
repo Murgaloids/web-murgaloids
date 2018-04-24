@@ -43,6 +43,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { DeleteItemDialog } from './edit-item/edit-item.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { MessageComponent } from './message/message.component';
 
 // Services
 import { AuthenticationService } from './shared/services/authentication.service';
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
   { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
   { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
   { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard] },
+  { path: 'message', component: MessageComponent, canActivate: [AuthRouteGuard] },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     EditProfileComponent,
     EditItemComponent,
     DeleteItemDialog,
-    SearchResultComponent
+    SearchResultComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
