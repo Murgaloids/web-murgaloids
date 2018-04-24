@@ -34,6 +34,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MessageDialog } from './profile/profile.component';
 import { ItemCardComponent } from './shared/item-card/item-card.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SellItemPageComponent } from './sell-item-page/sell-item-page.component';
@@ -49,6 +50,7 @@ import { MessageComponent } from './message/message.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 import { StudentsService } from './shared/services/students.service';
+import { MessagingService } from './shared/services/messaging.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -87,6 +89,7 @@ const appRoutes: Routes = [
     EditItemComponent,
     DeleteItemDialog,
     SearchResultComponent,
+    MessageDialog,
     MessageComponent
   ],
   imports: [
@@ -119,9 +122,13 @@ const appRoutes: Routes = [
   providers: [
     AuthenticationService,
     AuthRouteGuard,
-    StudentsService
+    StudentsService,
+    MessagingService
   ],
-  entryComponents: [DeleteItemDialog],
+  entryComponents: [
+    DeleteItemDialog,
+    MessageDialog
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

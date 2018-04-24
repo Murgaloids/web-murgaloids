@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL, DEFAULT_ITEM_IMAGE_PATH } from '../global';
@@ -109,18 +108,22 @@ export class ItemsService {
     });
   }
 
-  setRecentItems(numOfItems: number): void {
-    this.mIsDataSet = false;
-    const headers = {'Authorization': this.authenticationService.token};
-    this.http.get(`${SERVER_URL}/items/recent?numOfResults=${numOfItems}`, {headers})
-      .subscribe((res: any) => {
-        this.mRecentItems = res.data;
-        this.mRecentItems.forEach((item: Item) => {
-          if (!item.imageSource)
-            item.imageSource = DEFAULT_ITEM_IMAGE_PATH;
-        });
-        this.mIsDataSet = true;
-      });
+  setRecentItems(numOfItems: number) {
+    return new Promise((resolve, reject) => {
+      this.mIsDataSet = false;
+      const headers = {'Authorization': this.authenticationService.token};
+      this.http.get(`${SERVER_URL}/items/recent?numOfResults=${numOfItems}`, {headers})
+        .subscribe((res: any) => {
+          this.mRecentItems = res.data;
+          this.mRecentItems.forEach((item: Item) => {
+            if (!item.imageSource)
+              item.imageSource = DEFAULT_ITEM_IMAGE_PATH;
+          });
+          this.mIsDataSet = true;
+          resolve(this.mRecentItems);
+        },
+        err => reject(err));
+    });
   }
 
   setDisplayItemById(id: number) {
