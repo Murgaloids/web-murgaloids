@@ -47,6 +47,14 @@ export class EditItemComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.item.id = +params['id'];
+      this.itemsService.getItem(this.item.id)
+        .then((res: any) => {
+          this.item.itemName = res.itemName;
+          this.itemCondition = ItemCondition[res.conditionTypeId];
+          this.itemCategory = ItemCategory[res.categoryTypeId];
+          this.item.description = res.description;
+          this.item.price = res.price;
+        })
     });
   }
 
