@@ -1,5 +1,12 @@
-<li (click)="clickHandler()" class="list-group-item">
-  <div class="media-body">
-      <div class="media-heading">{{ otherStudent.name }}</div>
-  </div>
-</li>
+<mat-card
+  class="group-item"
+  (click)="clickHandler()">
+  <mat-card-header>
+      <img
+        mat-card-avatar
+        class="example-header-image"
+        src="{{ otherStudent.imageSource ? otherStudent.imageSource : 'assets/images/default-profile-image.png' }}" />
+      <mat-card-title>{{ otherStudent.name }}</mat-card-title>
+      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+  </mat-card-header>
+</mat-card>

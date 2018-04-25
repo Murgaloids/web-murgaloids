@@ -1,14 +1,25 @@
-<div class="chatroom">
-  <div *ngIf="messagingService.messages.length > 0; else nothing">
+<div
+  class="chatroom"
+  *ngIf="messagingService.messages.length > 0; else nothing">
     <h1>{{ messagingService.conversationDetail.studentName }}</h1>
+
+    <mat-divider></mat-divider>
+
     <ul class="chats">
       <li *ngFor="let chat of messagingService.messages">
-        <app-chat-item></app-chat-item>
+        <app-chat-item
+        [chat]="chat"
+        [position]="chat.senderId === authenticationService.userId ? 'right' : 'left'"></app-chat-item>
       </li>
     </ul>
-  </div>
+
+    <form (submit)="onSubmit()">
+      <mat-form-field>
+        <input matInput placeholder="Send a message">
+      </mat-form-field>
+    </form>
 </div>
 
 <ng-template #nothing>
-  <div>nothing</div>
+  <div>Select a conversation to the left...</div>
 </ng-template>

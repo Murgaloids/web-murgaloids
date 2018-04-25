@@ -1,3 +1,7 @@
-<p>
-  chat-item works!
-</p>
+<div
+  class="chat-item"
+  [ngClass]="{
+    'float-right': position === 'right'
+  }">
+  <p>{{ chat.message }}</p>
+</div>

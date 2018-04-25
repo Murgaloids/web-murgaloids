@@ -19,12 +19,6 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.messagingService.getConversations(this.authenticationService.userId)
-      .then(conversations => {
-        this.conversations = conversations || [];
-
-        if (this.conversations.length) {
-
-        }
-      });
+      .then(conversations => this.conversations = conversations || []);
   }
 }
