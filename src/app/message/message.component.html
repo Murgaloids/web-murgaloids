@@ -1,3 +1,10 @@
-<p>
-  message works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <app-message-list [conversations]="conversations"></app-message-list>
+    </div>
+    <div class="col-md-8">
+      <app-message-detail></app-message-detail>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="chatroom">
+  <div *ngIf="messagingService.messages.length > 0; else nothing">
+    <h1>{{ messagingService.conversationDetail.studentName }}</h1>
+    <ul class="chats">
+      <li *ngFor="let chat of messagingService.messages">
+        <app-chat-item></app-chat-item>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #nothing>
+  <div>nothing</div>
+</ng-template>
