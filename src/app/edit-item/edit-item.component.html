@@ -86,8 +86,14 @@
       (click)="submitHandler()">Submit</button>
 
     <button
-      type="delete"
+      type="submit"
+      mat-button
+      color="accent"
+      (click)="openDialog(false)">Close</button>
+
+    <button
+      type="submit"
       mat-button
       color="warn"
-      (click)="openDialog()">Delete</button>
+      (click)="openDialog(true)">Delete</button>
   </form>

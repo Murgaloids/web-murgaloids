@@ -155,10 +155,10 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  openDialog(): void {
+  openDialog(toggle: boolean): void {
     let dialogRef = this.dialog.open(DeleteItemDialog, {
       width: '250px',
-      data: { id: this.item.id }
+      data: { id: this.item.id, isDelete: toggle}
     });
   }
 }
@@ -188,11 +188,15 @@ export class DeleteItemDialog {
   }
 
   yes(): void {
-    this.itemsService.deleteItem(this.data.id)
-      .then(() => {
-        this.router.navigate(['/profile', this.authenticationService.userId]);
-        this.dialogRef.close();
-        this.snackBar.open('Item deleted!', null, { duration: 1500 });
-      });
+    if(this.data.isDelete === true) {
+      this.itemsService.deleteItem(this.data.id)
+        .then(() => {
+          this.router.navigate(['/profile', this.authenticationService.userId]);
+          this.dialogRef.close();
+          this.snackBar.open('Item deleted!', null, { duration: 1500 });
+        });
+    } else {
+      console.log('close');
+    }
   }
 }
