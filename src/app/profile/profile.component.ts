@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   id: number;
   student: Student;
   ready: boolean = false;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit {
       this.studentsService.getStudentObservable(this.id).subscribe(student => {
         this.itemsService.getUserItemsObservable(this.id).subscribe(item => {
           let itemsForSale: Item[] = this.itemsService.buildItemsForSale(item.data);
-          this.student = this.studentsService.buildStudent(student, itemsForSale);
+          let itemsSold: Item[] = this.itemsService.buildItemsSold(item.data);
+          this.student = this.studentsService.buildStudent(student, itemsForSale, itemsSold);
           this.ready = true;
         });
       });

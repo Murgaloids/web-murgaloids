@@ -155,24 +155,24 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  openDialog(): void {
-    let dialogRef = this.dialog.open(DeleteItemDialog, {
+  openDialog(toggle: boolean): void {
+    let dialogRef = this.dialog.open(AreYouSureDialog, {
       width: '250px',
-      data: { id: this.item.id }
+      data: { item: this.item, isDelete: toggle}
     });
   }
 }
 
 @Component({
-  selector: 'delete-item-dialog',
-  templateUrl: 'delete-item.html',
+  selector: 'are-you-sure-dialog',
+  templateUrl: 'are-you-sure.html',
   providers: [ItemsService]
 })
-export class DeleteItemDialog {
+export class AreYouSureDialog {
 
   constructor(
     private authenticationService: AuthenticationService,
-    public dialogRef: MatDialogRef<DeleteItemDialog>,
+    public dialogRef: MatDialogRef<AreYouSureDialog>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private itemsService: ItemsService,
     private router: Router,
@@ -188,11 +188,36 @@ export class DeleteItemDialog {
   }
 
   yes(): void {
-    this.itemsService.deleteItem(this.data.id)
-      .then(() => {
-        this.router.navigate(['/profile', this.authenticationService.userId]);
-        this.dialogRef.close();
-        this.snackBar.open('Item deleted!', null, { duration: 1500 });
-      });
+    if(this.data.isDelete === true) {
+      this.itemsService.deleteItem(this.data.item.id)
+        .then(() => {
+          this.router.navigate(['/profile', this.authenticationService.userId]);
+          this.dialogRef.close();
+          this.snackBar.open('Item deleted!', null, { duration: 1500 });
+        });
+    } else {
+      this.data.item.itemSold = true;
+      const {
+        itemName,
+        sellerId,
+        conditionTypeId,
+        categoryTypeId,
+        description,
+        price,
+        itemSold,
+        itemRated,
+        rating,
+        imageSource
+      } = this.data.item;
+
+      if (itemSold) {
+        this.itemsService.updateItem.call(this.itemsService, this.data.item)
+          .then(() => {
+            this.router.navigate(['home']);
+            this.dialogRef.close();
+            this.snackBar.open('Item Closed!', null, { duration: 1500 });
+          });
+      }
+    }
   }
 }
