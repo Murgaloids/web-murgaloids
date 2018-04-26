@@ -150,23 +150,20 @@ export class MessagingService {
   }
 
   setDisplayConversation(studentName: string, conversationId: string) {
-    return new Promise((resolve, reject) => {
-      if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
-          this.mConversationObj[conversationId].messages.length) {
-        this.mMessages = [...this.mConversationObj[conversationId].messages];
-      } else if (conversationId.length) {
-        const headers = {'Authorization': this.authenticationService.token};
-        this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
-          .subscribe((res: any) => {
-            this.mConversationObj[conversationId].messages = res.data;
-            this.mMessages = res.data;
-            resolve(this.mMessages);
-          },
-          err => reject(err));
-      }
+    if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
+        this.mConversationObj[conversationId].messages.length) {
+      this.mMessages = [...this.mConversationObj[conversationId].messages];
+    } else if (conversationId.length) {
+      const headers = {'Authorization': this.authenticationService.token};
+      this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
+        .subscribe((res: any) => {
+          this.mConversationObj[conversationId].messages = res.data;
+          this.mMessages = res.data;
+        },
+        err => console.log(err));
+    }
 
-      this.mConversationDetails.id = conversationId;
-      this.mConversationDetails.studentName = studentName;
-    });
+    this.mConversationDetails.id = conversationId;
+    this.mConversationDetails.studentName = studentName;
   }
 }
