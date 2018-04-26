@@ -49,7 +49,10 @@ export class ProfileComponent implements OnInit {
     this.messagingService.doesConversationExists(conversationId)
       .then(data => {
         if (!data) {
-          const dialogRef = this.dialog.open(MessageDialog, {width: '500px'});
+          const dialogRef = this.dialog.open(MessageDialog, {
+            width: '500px',
+            data: {id: this.student.id}
+          });
         } else {
           this.router.navigate(['message']);
         }
@@ -63,20 +66,30 @@ export class ProfileComponent implements OnInit {
   styleUrls: ['./profile.component.scss']
 })
 export class MessageDialog {
+  private message: string;
+
   constructor(
     public dialogRef: MatDialogRef<MessageDialog>,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private messagingService: MessagingService,
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  no(): void {
+  cancel(): void {
     this.dialogRef.close();
   }
 
-  yes(): void {
-    this.dialogRef.close();
+  send(): void {
+    this.messagingService.addConversationWithInitialMessage(this.data.id, this.message)
+      .then(res => {
+        if (res) {
+          this.router.navigate(['message']);
+          this.dialogRef.close();
+        }
+      });
   }
 }

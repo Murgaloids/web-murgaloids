@@ -54,6 +54,10 @@ import { MessagingService } from './shared/services/messaging.service';
 
 // Environment
 import { environment } from '../environments/environment';
+import { MessageListComponent } from './message/message-list/message-list.component';
+import { MessageDetailComponent } from './message/message-detail/message-detail.component';
+import { MessageItemComponent } from './message/message-item/message-item.component';
+import { ChatItemComponent } from './message/chat-item/chat-item.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -90,7 +94,11 @@ const appRoutes: Routes = [
     AreYouSureDialog,
     SearchResultComponent,
     MessageDialog,
-    MessageComponent
+    MessageComponent,
+    MessageListComponent,
+    MessageDetailComponent,
+    MessageItemComponent,
+    ChatItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MOBILE_WIDTH } from '../global';
 import { WindowService } from '../services/window.service';
-import { StudentsService } from '../services/students.service';
 import { Item } from '../models/item.model';
 
 @Component({
@@ -19,17 +17,10 @@ export class ItemCardComponent implements OnInit {
   private soldByThisStudent: boolean;
 
   constructor(
-    private windowService: WindowService,
-    private studentsService: StudentsService,
-    private router: Router
+    private windowService: WindowService
   ) {}
 
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
-    this.studentsService.getStudentObservable(this.item.sellerId).subscribe(student => {
-        let builtStudent = this.studentsService.buildStudent(student, null, null);
-        this.sellerName = builtStudent.name;
-        this.ready = true;
-    });
   }
 }

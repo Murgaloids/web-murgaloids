@@ -31,6 +31,7 @@ export class ItemsService {
     this.mSearchedItems = null;
     this.mUserItems = null;
     this.mDisplayedItem = null;
+    this.mIsDataSet = false;
   }
 
   addItemToServer(item: Item) {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { MessagingService } from '../shared/services/messaging.service';
 
 @Component({
   selector: 'app-message',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private router: Router,
+    private messagingService: MessagingService
+  ) {}
 
   ngOnInit() {
+    this.messagingService.getConversations();
   }
-
 }

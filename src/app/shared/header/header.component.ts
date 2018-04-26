@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { MOBILE_WIDTH } from '../global';
 import { AuthenticationService } from '../services/authentication.service';
 import { ItemsService } from '../services/items.service';
+import { MessagingService } from '../services/messaging.service';
 import { WindowService } from '../services/window.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
      private authenticationService: AuthenticationService,
      private windowService: WindowService,
      private itemsService: ItemsService,
+     private messagingService: MessagingService,
      private router: Router
   ) {}
 
@@ -54,5 +56,7 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.authenticationService.clearError();
     this.authenticationService.clearEverythingExceptErrors();
+    this.itemsService.clearEverything();
+    this.messagingService.clearEverything();
   }
 }

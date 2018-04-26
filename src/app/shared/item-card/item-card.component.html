@@ -1,27 +1,20 @@
-<div *ngIf="ready">
-  <mat-card
-    class="item-card"
-    [ngClass]="{'center-text': windowService.width < mobileWidth}"
-    [routerLink]="['/item', item.id]">
-    <mat-card-header>
-      <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
-      <mat-card-subtitle *ngIf="!item.itemSold"><b>${{ item.price }}</b></mat-card-subtitle>
-      <mat-card-subtitle *ngIf="item.itemSold"><b>Sold</b></mat-card-subtitle>
-    </mat-card-header>
-    <img
-      mat-card-image
-      src="{{ item.imageSource }}">
-    <mat-card-content>
-      <p *ngIf="item.description.length < 60; else limitedDescription">{{ item.description }}</p>
-<!--       <div
-        *ngIf="!router.url.includes('/profile')"
-        class="seller">
-        <a>Seller:</a>
-        <a [routerLink]="['/profile', item.sellerId]">{{ sellerName }}</a>
-      </div> -->
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-card
+  class="item-card"
+  [ngClass]="{'center-text': windowService.width < mobileWidth}"
+  [routerLink]="['/item', item.id]">
+  <mat-card-header>
+    <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
+    <mat-card-subtitle><b>${{ item.price }}</b></mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!item.itemSold"><b>${{ item.price }}</b></mat-card-subtitle>
+    <mat-card-subtitle *ngIf="item.itemSold"><b>Sold</b></mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="{{ item.imageSource }}">
+  <mat-card-content>
+    <p *ngIf="item.description.length < 60; else limitedDescription">{{ item.description }}</p>
+  </mat-card-content>
+</mat-card>
 
 <ng-template #limitedDescription>
   <p>{{ item.description.substring(0, 60)}}...</p>
