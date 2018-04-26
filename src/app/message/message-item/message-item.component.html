@@ -1,0 +1,10 @@
+<mat-card
+  class="group-item"
+  (click)="clickHandler()">
+  <mat-card-header>
+      <img
+        mat-card-avatar
+        src="{{ otherStudent.imageSource ? otherStudent.imageSource : 'assets/images/default-profile-image.png' }}" />
+      <mat-card-title>{{ otherStudent.name }}</mat-card-title>
+  </mat-card-header>
+</mat-card>

@@ -10,6 +10,13 @@ $beach-shop-theme: mat-light-theme($beach-shop-primary, $beach-shop-accent, $bea
 @include angular-material-theme($beach-shop-theme);
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
 body { font-family: 'Roboto', sans-serif; }
 
 .header {
