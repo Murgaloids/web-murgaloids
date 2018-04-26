@@ -1,7 +1,7 @@
 <div
   class="chatroom"
   *ngIf="messagingService.messages.length > 0; else nothing">
-    <h1>{{ messagingService.conversationDetail.studentName }}</h1>
+    <h1>{{ messagingService.conversationDetails.studentName }}</h1>
 
     <mat-divider></mat-divider>
 
@@ -15,7 +15,11 @@
 
     <form (submit)="onSubmit()">
       <mat-form-field>
-        <input matInput placeholder="Send a message">
+        <input
+          matInput
+          placeholder="Send a message"
+          name="message"
+          [(ngModel)]="message" />
       </mat-form-field>
     </form>
 </div>

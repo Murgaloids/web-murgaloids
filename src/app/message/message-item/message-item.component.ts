@@ -21,15 +21,15 @@ export class MessageItemComponent implements OnInit {
     this.otherStudent = new Student();
   }
  
-  ngOnInit() { 
-    this.otherStudent.id = this.authenticationService.userId !== this.conversation.student1Id ?
-                            this.conversation.student1Id : this.conversation.student2Id;
+  ngOnInit() {
+    const {student1Id, student2Id} = this.conversation.details;
+    this.otherStudent.id = this.authenticationService.userId !== student1Id ? student1Id : student2Id;
 
     this.studentsService.getStudentObservable(this.otherStudent.id)
       .subscribe(res => this.otherStudent = this.studentsService.buildStudent(res, null));
   }
 
   clickHandler() {
-    this.messagingService.setDisplayConversation(this.otherStudent.name, this.conversation.id);
+    this.messagingService.setDisplayConversation(this.otherStudent.name, this.conversation.details.id);
   }
 }

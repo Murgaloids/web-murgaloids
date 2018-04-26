@@ -33,14 +33,9 @@ export class EditProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.studentsService.getStudentObservable(this.authenticationService.userId)
-      .subscribe(res => {
-        if (res && res.data) {
-          this.firstName = res.data.firstName;
-          this.lastName = res.data.lastName;
-          this.aboutMe = res.data.description;
-        }
-      });
+    this.firstName = this.authenticationService.firstName;
+    this.lastName = this.authenticationService.lastName;
+    this.aboutMe = this.authenticationService.description;
   }
 
   private submitHandler() {

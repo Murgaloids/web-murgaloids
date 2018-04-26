@@ -15,6 +15,7 @@ export class AuthenticationService {
   private mLastName: string;
   private mEmail: string;
   private mPassword: string;
+  private mDescription: string;
   private mSalt: string;
   private mUserId: number;
   private mToken: string;
@@ -37,6 +38,7 @@ export class AuthenticationService {
   get lastName(): string { return this.mLastName; }
   get email(): string { return this.mEmail; }
   get password(): string { return this.mPassword; }
+  get description(): string { return this.mDescription; }
   get salt(): string { return this.mSalt; }
   get userId(): number { return this.mUserId; }
   get token(): string { return this.mToken; }
@@ -61,6 +63,7 @@ export class AuthenticationService {
         this.mEmail = localStorageData.auth.email;
         this.mUserId = localStorageData.auth.userId;
         this.mToken = localStorageData.auth.token;
+        this.mDescription = localStorageData.auth.description;
       }
     }
   }
@@ -76,7 +79,8 @@ export class AuthenticationService {
         lastName: this.mLastName,
         email: this.mEmail,
         userId: this.mUserId,
-        token: this.mToken
+        token: this.mToken,
+        description: this.mDescription
       }
     }));
   }
@@ -88,6 +92,7 @@ export class AuthenticationService {
     this.mLastName = '';
     this.mEmail = '';
     this.mPassword = '';
+    this.mDescription = '';
     this.mSalt = '';
     this.mToken = '';
     this.mUserId = null;
@@ -116,6 +121,7 @@ export class AuthenticationService {
               if (res && res.data) {
                 this.mFirstName = res.data.firstName;
                 this.mLastName = res.data.lastName;
+                this.mDescription = res.data.description;
                 this.mUserId = res.data.id;
                 this.mEmail = res.data.email;
                 resolve();
@@ -201,6 +207,11 @@ export class AuthenticationService {
             const httpStatus = res.status;
 
             if (this.mToken && this.mUserId && (httpStatus === 200)) {
+              this.mEmail = res.body.data.email;
+              this.mFirstName = res.body.data.firstName;
+              this.mLastName = res.body.data.lastName;
+              this.mDescription = res.body.data.description;
+
               this.setAuthenticationToLocalStorage();
               this.clearPasswordSaltAndErrors();
               this.router.navigate(['/home']);
@@ -248,6 +259,7 @@ export class AuthenticationService {
             this.mEmail = res.body.data.email;
             this.mFirstName = res.body.data.firstName;
             this.mLastName = res.body.data.lastName;
+            this.mDescription = res.body.data.description;
 
             this.setAuthenticationToLocalStorage();
             this.clearPasswordSaltAndErrors();

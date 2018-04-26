@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { MessagingService } from '../shared/services/messaging.service';
-import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-message',
@@ -9,16 +8,12 @@ import { AuthenticationService } from '../shared/services/authentication.service
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
-  private conversations;
-
   constructor(
     private router: Router,
-    private messagingService: MessagingService,
-    private authenticationService: AuthenticationService
+    private messagingService: MessagingService
   ) {}
 
   ngOnInit() {
-    this.messagingService.getConversations(this.authenticationService.userId)
-      .then(conversations => this.conversations = conversations || []);
+    this.messagingService.getConversations();
   }
 }

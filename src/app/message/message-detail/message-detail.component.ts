@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
   styleUrls: ['./message-detail.component.scss']
 })
 export class MessageDetailComponent implements OnInit, OnDestroy {
+  private message: string;
 
   constructor(
     private messagingService: MessagingService,
@@ -18,6 +19,8 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.messagingService.clearDisplayConversation();
+  }
+
+  onSubmit() {
   }
 }
