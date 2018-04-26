@@ -87,8 +87,6 @@ export class MessagingService {
                 },
                 messages: [messageRes.body.data]
               };
-
-              this.mConversationArray = _.values(this.mConversationObj);
               resolve(messageRes.body.data);
           } else reject(null);
         },
@@ -123,10 +121,10 @@ export class MessagingService {
 
   }
 
-  addMessage(conversationId: string, message: string) {
-    if (conversationId && message) {
+  addMessage(message: string) {
+    if (message) {
       const bodyObject: object = {
-        conversationId,
+        conversationId: this.mConversationDetails.id,
         senderId: this.authenticationService.userId,
         message
       };
@@ -136,14 +134,13 @@ export class MessagingService {
         .subscribe(
           (res: any) => {
             if (res && res.body) {
-              this.mMessages = this.mMessages.concat(res.body.data);
-
               if (this.mConversationObj[res.body.data.conversationId]) {
-                this.mConversationObj[res.body.data.conversationId].push(res.body.data);
+                this.mConversationObj[res.body.data.conversationId].messages.push(res.body.data);
               } else {
-                this.mConversationObj[res.body.data.conversationId] = [res.body.data];
+                this.mConversationObj[res.body.data.conversationId].messages = [res.body.data];
               }
 
+              this.mMessages = [...this.mConversationObj[this.mConversationDetails.id].messages];
               this.mConversationArray = _.values(this.mConversationObj);
             }
           },
@@ -156,7 +153,7 @@ export class MessagingService {
     return new Promise((resolve, reject) => {
       if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
           this.mConversationObj[conversationId].messages.length) {
-        this.mMessages = this.mConversationObj[conversationId].messages;
+        this.mMessages = [...this.mConversationObj[conversationId].messages];
       } else if (conversationId.length) {
         const headers = {'Authorization': this.authenticationService.token};
         this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
@@ -168,6 +165,7 @@ export class MessagingService {
           err => reject(err));
       }
 
+      this.mConversationDetails.id = conversationId;
       this.mConversationDetails.studentName = studentName;
     });
   }
