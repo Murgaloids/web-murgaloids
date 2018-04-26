@@ -26,7 +26,7 @@ export class MessageItemComponent implements OnInit {
     this.otherStudent.id = this.authenticationService.userId !== student1Id ? student1Id : student2Id;
 
     this.studentsService.getStudentObservable(this.otherStudent.id)
-      .subscribe(res => this.otherStudent = this.studentsService.buildStudent(res, null));
+      .subscribe(res => this.otherStudent = this.studentsService.buildStudent(res, null, null));
   }
 
   clickHandler() {
