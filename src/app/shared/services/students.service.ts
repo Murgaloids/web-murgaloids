@@ -23,13 +23,14 @@ export class StudentsService {
     return this.http.get(`${SERVER_URL}/students/get?id=${userId}`, {headers});
   }
 
-  buildStudent(studentObservable: any, itemsForSale: Item[]): Student {
+  buildStudent(studentObservable: any, itemsForSale: Item[], itemsSold: Item[]): Student {
     return new Student({
       id: studentObservable.data.id,
       name: `${studentObservable.data.firstName} ${studentObservable.data.lastName}`,
       aboutDesc: studentObservable.data.description,
       imageSource: studentObservable.data.imageSource,
       itemsForSale: itemsForSale,
+      itemsSold: itemsSold,
       itemsViewed: []
     });
   }

@@ -6,6 +6,7 @@ export class Student {
   aboutDesc: string;
   profilePicture: string;
   itemsForSale: Item[];
+  itemsSold: Item[];
   itemsViewed: Item[];
   imageSource: string;
 
