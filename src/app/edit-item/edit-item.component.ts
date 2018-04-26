@@ -214,6 +214,7 @@ export class AreYouSureDialog {
         this.itemsService.updateItem.call(this.itemsService, this.data.item)
           .then(() => {
             this.router.navigate(['home']);
+            this.dialogRef.close();
             this.snackBar.open('Item Closed!', null, { duration: 1500 });
           });
       }

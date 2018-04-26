@@ -27,10 +27,9 @@ export class ItemCardComponent implements OnInit {
   ngOnInit() {
     this.mobileWidth = MOBILE_WIDTH;
     this.studentsService.getStudentObservable(this.item.sellerId).subscribe(student => {
-        let builtStudent = this.studentsService.buildStudent(student, null);
+        let builtStudent = this.studentsService.buildStudent(student, null, null);
         this.sellerName = builtStudent.name;
         this.ready = true;
-        console.log(this.item);
     });
   }
 }

@@ -166,7 +166,19 @@ export class ItemsService {
   buildItemsForSale(itemsObservable: any[]): Item[] {
     var items: Item[] = [];
     itemsObservable.forEach(item => {
-      items.push(this.buildItem(item));
+      if(!item.itemSold) {
+        items.push(this.buildItem(item));
+      }
+    });
+    return items;
+  }
+
+  buildItemsSold(itemsObservable: any[]): Item[] {
+    var items: Item[] = [];
+    itemsObservable.forEach(item => {
+      if(item.itemSold) {
+        items.push(this.buildItem(item));
+      }
     });
     return items;
   }
