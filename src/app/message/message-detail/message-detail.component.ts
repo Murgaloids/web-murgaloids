@@ -22,5 +22,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.messagingService.addMessage(this.message);
+    this.message = '';
   }
 }
