@@ -42,7 +42,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import { DeleteItemDialog } from './edit-item/edit-item.component';
+import { AreYouSureDialog } from './edit-item/edit-item.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { MessageComponent } from './message/message.component';
 
@@ -87,7 +87,7 @@ const appRoutes: Routes = [
     SpinnerComponent,
     EditProfileComponent,
     EditItemComponent,
-    DeleteItemDialog,
+    AreYouSureDialog,
     SearchResultComponent,
     MessageDialog,
     MessageComponent
@@ -126,7 +126,7 @@ const appRoutes: Routes = [
     MessagingService
   ],
   entryComponents: [
-    DeleteItemDialog,
+    AreYouSureDialog,
     MessageDialog
   ],
   bootstrap: [AppComponent]

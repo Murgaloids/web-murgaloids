@@ -180,6 +180,7 @@ export class ItemsService {
       categoryTypeId: itemsObservable.categoryTypeId,
       description: itemsObservable.description,
       rating: itemsObservable.rating,
+      itemSold: itemsObservable.itemSold,
       price: itemsObservable.price,
       imageSource: itemsObservable.imageSource
     })

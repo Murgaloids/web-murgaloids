@@ -30,6 +30,7 @@ export class ItemCardComponent implements OnInit {
         let builtStudent = this.studentsService.buildStudent(student, null);
         this.sellerName = builtStudent.name;
         this.ready = true;
+        console.log(this.item);
     });
   }
 }
