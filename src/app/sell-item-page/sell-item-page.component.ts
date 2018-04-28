@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// Services
-import { AuthenticationService } from '../shared/services/authentication.service';
 import { ItemsService } from '../shared/services/items.service';
 import { MatSnackBar } from '@angular/material';
+// Services
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { FirebaseService } from '../shared/services/firebase.service';
 // Models
 import { Item } from '../shared/models/item.model';
-import { FileUpload } from '../shared/models/file-upload.model';
 // Enums
 import { ItemCondition } from '../shared/global';
 import { ItemCategory } from '../shared/global';
@@ -23,15 +23,13 @@ export class SellItemPageComponent {
   private item: Item = new Item();
   private itemCondition: string;
   private itemCategory: string;
-  // Firebase attributes
-  private selectedFiles: FileList;
-  private currentFileUpload: FileUpload;
   private progress: { percentage: number } = { percentage: 0 };
-  private basePath: string = '/uploads';
+  private isLoading: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
     private itemsService: ItemsService,
+    private firebaseService: FirebaseService,
     private router: Router,
     private angularFireDatabase: AngularFireDatabase,
     private snackBar: MatSnackBar
@@ -41,75 +39,15 @@ export class SellItemPageComponent {
   }
 
   submitHandler() {
-    // Sets the owner of the item
     this.item.sellerId = this.authenticationService.userId;
     this.item.conditionTypeId = ItemCondition[this.itemCondition];
     this.item.categoryTypeId = ItemCategory[this.itemCategory];
-    // Set up for uploading the item to firebase
-    const file = this.selectedFiles.item(0);
-    this.selectedFiles = undefined;
-    this.currentFileUpload = new FileUpload(file);
-    this.pushFileToStorage(this.currentFileUpload, this.progress);
+    this.addItemWithPhoto();
   }
 
   // Event handler for selecting image
   selectFile(event) {
-    const file = event.target.files.item(0);
-    if(file.type.match('image.*')) {
-      this.selectedFiles = event.target.files;
-    } else {
-      alert("INVALID IMAGE FORMAT");
-    }
-  }
-
-  // Handles uploading image to Firebase
-  pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number}): any {
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
-
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
-        // In progress
-        const snap = snapshot as firebase.storage.UploadTaskSnapshot;
-        progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
-      },
-      (error) => {
-        // Failure
-        console.log("ERROR UPLOADING PHOTO TO FIREBASE ", error);
-      },
-      () => {
-        // Success
-        fileUpload.url = uploadTask.snapshot.downloadURL;
-        fileUpload.name = fileUpload.file.name;
-        this.saveFileData(fileUpload);
-      }
-    );
-  }
-
-  // Handles saving item image and adding the item to database
-  private saveFileData(fileUpload: FileUpload) {
-    this.angularFireDatabase.list(`${this.basePath}`).push(fileUpload).then(
-      data => {
-        const itemImageId = this.parseItemImageId(data);
-        this.setItemImageSrc(itemImageId);
-      });
-  }
-
-  private parseItemImageId(data: any): string {
-    return String(data.path).split(this.basePath + "/")[1];
-  }
-
-  private setItemImageSrc(itemImageId: string): void {
-    const ref = firebase.database().ref(`${this.basePath}/${itemImageId}`)
-      .once('value').then(
-        snapshot => {
-          this.item.imageSource = this.getItemImageSrcFromId(snapshot);
-          this.addItem();
-        });
-  }
-
-  private getItemImageSrcFromId(snapshot: any): string {
-    return snapshot.node_.children_.root_.value.value_;
+    this.firebaseService.setFile(event);
   }
 
   private addItem(): void {
@@ -131,5 +69,28 @@ export class SellItemPageComponent {
           this.snackBar.open('Item successfully added!', null, { duration: 1500 });
         });
     }
+  }
+
+  private addItemWithPhoto(): void {
+    this.isLoading = true;
+    const uploadTask = this.firebaseService.getUploadTask(this.firebaseService.getFile());
+    uploadTask.on(this.firebaseService.getStateChanged(),
+    (snapshot) => {
+      this.progress.percentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+    },
+    (error) => {
+      console.log("ERROR UPLOADING PHOTO TO FIREBASE ", error);
+    },
+    () => {
+      this.firebaseService.addToFirebase(uploadTask).then(
+        data => {
+          this.firebaseService.saveFileData(data)
+          .once('value').then(
+            snapshot => {
+              this.item.imageSource = this.firebaseService.getItemImageSrcFromId(snapshot);
+              this.addItem();
+            });
+        })
+    });
   }
 }
