@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL } from '../global';
+import Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client/dist/sockjs.min';
+
+const SOCKET_URL = 'http://localhost:8080/conversation-websocket';
 
 @Injectable()
 export class MessagingService {
@@ -10,6 +14,9 @@ export class MessagingService {
   private mConversationArray;
   private mMessages;
   private mConversationDetails;
+
+  private mSocket;
+  private mStompClient;
 
   constructor(
     private http: HttpClient,
@@ -19,6 +26,7 @@ export class MessagingService {
     this.mConversationObj = {};
     this.mConversationArray = [];
     this.mConversationDetails = {};
+    // this.mSocket = new SockJS(SOCKET_URL);
   }
 
   get messages() { return this.mMessages; }
@@ -36,14 +44,13 @@ export class MessagingService {
     return new Promise((resolve, reject) => {
       if (conversationId) {
         const headers = {'Authorization': this.authenticationService.token};
+
         this.http.get(`${SERVER_URL}/conversations/exists?id=${conversationId}`, {headers})
           .subscribe((res: any) => {
             if (res) resolve(res.data);
           },
           err => reject(err));
-      } else {
-        resolve(false);
-      }
+      } else resolve(false);
     });
   }
 
@@ -57,6 +64,7 @@ export class MessagingService {
         };
 
         const headers = {'Authorization': this.authenticationService.token};
+
         this.http.post(`${SERVER_URL}/conversations/add`, bodyObject, {headers, observe: 'response'})
           .subscribe(
             this.addInitialMessage.bind(this, message, resolve, reject),
@@ -75,6 +83,7 @@ export class MessagingService {
       };
 
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.post(`${SERVER_URL}/messages/add`, bodyObject, {headers, observe: 'response'})
         .subscribe(
           (messageRes: any) => {
@@ -87,6 +96,7 @@ export class MessagingService {
                 },
                 messages: [messageRes.body.data]
               };
+
               resolve(messageRes.body.data);
           } else reject(null);
         },
@@ -98,6 +108,7 @@ export class MessagingService {
 
   getConversations() {
     const headers = {'Authorization': this.authenticationService.token};
+
     this.http.get(`${SERVER_URL}/conversations/get-conversations?id=${this.authenticationService.userId}`, {headers})
       .subscribe((res: any) => {
         if (res && res.data) {
@@ -118,7 +129,6 @@ export class MessagingService {
         }
       },
       err => console.log(err));
-
   }
 
   addMessage(message: string) {
@@ -130,15 +140,15 @@ export class MessagingService {
       };
 
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.post(`${SERVER_URL}/messages/add`, bodyObject, {headers, observe: 'response'})
         .subscribe(
           (res: any) => {
             if (res && res.body) {
-              if (this.mConversationObj[res.body.data.conversationId]) {
+              if (this.mConversationObj[res.body.data.conversationId])
                 this.mConversationObj[res.body.data.conversationId].messages.push(res.body.data);
-              } else {
+              else
                 this.mConversationObj[res.body.data.conversationId].messages = [res.body.data];
-              }
 
               this.mMessages = [...this.mConversationObj[this.mConversationDetails.id].messages];
               this.mConversationArray = _.values(this.mConversationObj);
@@ -150,11 +160,24 @@ export class MessagingService {
   }
 
   setDisplayConversation(studentName: string, conversationId: string) {
+    // if (this.mStompClient !== null) {
+    //   this.mStompClient.disconnect();
+    // }
+
+    // this.mStompClient = Stomp.over(this.mSocket);
+    // this.mStompClient.connect({}, (frame) => {
+    //   console.log(frame);
+    //   this.mStompClient.subscribe('/socket/conversation/messages', (msg) => {
+    //     console.log(msg);
+    //   });
+    // });
+
     if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
         this.mConversationObj[conversationId].messages.length) {
       this.mMessages = [...this.mConversationObj[conversationId].messages];
     } else if (conversationId.length) {
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
         .subscribe((res: any) => {
           this.mConversationObj[conversationId].messages = res.data;

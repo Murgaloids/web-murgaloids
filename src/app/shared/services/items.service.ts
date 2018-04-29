@@ -45,9 +45,9 @@ export class ItemsService {
         price
       } = item;
 
-      if (sellerId && conditionTypeId && categoryTypeId &&
-          itemName && description && (price >= 0)) {
+      if (sellerId && conditionTypeId && categoryTypeId && itemName && description && (price >= 0)) {
         const headers = {'Authorization': this.authenticationService.token};
+
         this.http.post(`${SERVER_URL}/items/add`, item, {headers, observe: 'response'})
           .subscribe((res: any) => {
             if (res.status === 200) resolve();
@@ -62,11 +62,10 @@ export class ItemsService {
     return new Promise((resolve, reject) => {
       if (itemId) {
         const headers = {'Authorization': this.authenticationService.token};
+
         this.http.get(`${SERVER_URL}/items/get?id=${itemId}`, {headers})
           .subscribe((res: any) => {
-            if (res && res.data) {
-              resolve(res.data);
-            }
+            if (res && res.data) resolve(res.data);
           },
           err => reject(err));
       }
@@ -115,6 +114,7 @@ export class ItemsService {
   deleteItem(id: number) {
     return new Promise((resolve, reject) => {
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.post(`${SERVER_URL}/items/delete`, id, {headers, observe: 'response'})
         .subscribe((res: any) => {
           if (res.status === 200) resolve();
@@ -126,16 +126,17 @@ export class ItemsService {
 
   setRecentItems(numOfItems: number) {
     return new Promise((resolve, reject) => {
-      this.mIsDataSet = false;
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.get(`${SERVER_URL}/items/recent?numOfResults=${numOfItems}`, {headers})
         .subscribe((res: any) => {
           this.mRecentItems = res.data;
+
           this.mRecentItems.forEach((item: Item) => {
             if (!item.imageSource)
               item.imageSource = DEFAULT_ITEM_IMAGE_PATH;
           });
-          this.mIsDataSet = true;
+
           resolve(this.mRecentItems);
         },
         err => reject(err));
@@ -144,15 +145,15 @@ export class ItemsService {
 
   setDisplayItemById(id: number) {
     return new Promise((resolve, reject) => {
-      this.mIsDataSet = false;
       const headers = {'Authorization': this.authenticationService.token};
+
       this.http.get(`${SERVER_URL}/items/get?id=${id}`, {headers})
         .subscribe((res: any) => {
           this.mDisplayedItem = res.data;
-          if (!this.mDisplayedItem.imageSource) {
+
+          if (!this.mDisplayedItem.imageSource)
             this.mDisplayedItem.imageSource = DEFAULT_ITEM_IMAGE_PATH;
-          }
-          this.mIsDataSet = true;
+
           resolve(this.mDisplayedItem.sellerId);
         },
         err => reject(err));
@@ -161,26 +162,29 @@ export class ItemsService {
 
   getUserItemsObservable(userId: number): Observable<any>  {
     const headers = {'Authorization': this.authenticationService.token};
+
     return this.http.get(`${SERVER_URL}/items/all?userId=${userId}`, {headers});
   }
 
   buildItemsForSale(itemsObservable: any[]): Item[] {
     var items: Item[] = [];
+
     itemsObservable.forEach(item => {
-      if(!item.itemSold) {
+      if(!item.itemSold)
         items.push(this.buildItem(item));
-      }
     });
+
     return items;
   }
 
   buildItemsSold(itemsObservable: any[]): Item[] {
     var items: Item[] = [];
+
     itemsObservable.forEach(item => {
-      if(item.itemSold) {
+      if(item.itemSold)
         items.push(this.buildItem(item));
-      }
     });
+
     return items;
   }
 
@@ -203,12 +207,15 @@ export class ItemsService {
     return new Promise((resolve, reject) => {
       if (query) {
         const headers = {'Authorization': this.authenticationService.token};
+
         this.http.get(`${SERVER_URL}/items/search?query=${query}`, {headers})
-          .subscribe((res: any) => {
-            this.mSearchedItems = res.data;
-            resolve();
-          },
-          err => reject(err));
+          .subscribe(
+            (res: any) => {
+              this.mSearchedItems = res.data;
+              resolve();
+            },
+            err => reject(err)
+          );
       }
     });
   }

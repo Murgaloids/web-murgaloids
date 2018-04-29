@@ -7,9 +7,11 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { FirebaseService } from '../shared/services/firebase.service';
 // Models
 import { Item } from '../shared/models/item.model';
+
 // Enums
 import { ItemCondition } from '../shared/global';
 import { ItemCategory } from '../shared/global';
+
 // Firebase
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
@@ -61,8 +63,7 @@ export class SellItemPageComponent {
       imageSource
     } = this.item;
 
-    if (itemName && sellerId && conditionTypeId &&
-        categoryTypeId && description && (price >= 0) && imageSource) {
+    if (itemName && sellerId && conditionTypeId && categoryTypeId && description && (price >= 0) && imageSource) {
       this.itemsService.addItemToServer.call(this.itemsService, this.item)
         .then(() => {
           this.router.navigate(['/home']);

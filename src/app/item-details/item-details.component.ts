@@ -37,9 +37,8 @@ export class ItemDetailsComponent implements OnInit {
                   id: res.data.id
                 });
 
-                if (this.authenticationService.userId === res.data.id) {
+                if (this.authenticationService.userId === res.data.id)
                   this.soldByThisStudent = true;
-                }
 
                 this.ready = true;
               }

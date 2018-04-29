@@ -51,8 +51,9 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 import { StudentsService } from './shared/services/students.service';
 import { MessagingService } from './shared/services/messaging.service';
-import { ItemsService } from './shared/services/items.service';
 import { FirebaseService } from './shared/services/firebase.service';
+import { WindowService } from './shared/services/window.service';
+import { ItemsService } from './shared/services/items.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -134,8 +135,9 @@ const appRoutes: Routes = [
     AuthRouteGuard,
     StudentsService,
     MessagingService,
-    ItemsService,
-    FirebaseService
+    FirebaseService,
+    WindowService,
+    ItemsService
   ],
   entryComponents: [
     AreYouSureDialog,
