@@ -119,6 +119,7 @@ export class EditProfileComponent implements OnInit {
 
     const { email } = this.authenticationService;
     const userObj = { email, firstName, lastName, description, imageSource };
+
     this.authenticationService.editUserInformation(userObj)
       .then(() => {
         this.router.navigate(['/profile', this.authenticationService.userId])
