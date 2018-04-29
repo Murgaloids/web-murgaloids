@@ -69,7 +69,7 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="currentFileUpload" class="progress">
+    <div *ngIf="isLoading" class="progress">
       <div class="progress-bar progress-bar-info progress-bar-striped"
         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
         aria-valuemin="0" aria-valuemax="100"
