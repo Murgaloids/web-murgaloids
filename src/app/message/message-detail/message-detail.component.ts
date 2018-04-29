@@ -7,11 +7,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
   templateUrl: './message-detail.component.html',
   styleUrls: ['./message-detail.component.scss']
 })
-<<<<<<< HEAD
 export class MessageDetailComponent implements OnInit {
-=======
-export class MessageDetailComponent implements OnInit, OnDestroy {
->>>>>>> attempting to persist message data to reduce less http request made.
   private message: string;
 
   constructor(
@@ -22,15 +18,8 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-<<<<<<< HEAD
   onSubmit() {
     this.messagingService.addMessage(this.message);
     this.message = '';
-=======
-  ngOnDestroy() {
-  }
-
-  onSubmit() {
->>>>>>> attempting to persist message data to reduce less http request made.
   }
 }
