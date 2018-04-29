@@ -90,18 +90,18 @@
       mat-button
       color="accent"
       *ngIf="!item.itemSold"
-      (click)="openDialog(false)">Close</button>
+      (click)="openDialog({status: 'close'})">Close</button>
 
       <button
         type="submit"
         mat-button
         color="accent"
         *ngIf="item.itemSold"
-        (click)="openDialog(false)">Open</button>
+        (click)="openDialog({status: 'open'})">Open</button>
 
     <button
       type="submit"
       mat-button
       color="warn"
-      (click)="openDialog(true)">Delete</button>
+      (click)="openDialog({status: 'delete'})">Delete</button>
   </form>

@@ -113,10 +113,10 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  openDialog(toggle: boolean): void {
+  openDialog({status}): void {
     let dialogRef = this.dialog.open(AreYouSureDialog, {
       width: '250px',
-      data: {item: this.item, isDelete: toggle}
+      data: {item: this.item, status}
     });
   }
 }
