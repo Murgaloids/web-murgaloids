@@ -78,6 +78,7 @@ export class EditProfileComponent implements OnInit {
     this.angularFireDatabase.list(`${this.basePath}`).push(fileUpload).then(
       data => {
         const userImageId = this.parseUserImageId(data);
+
         this.setUserImageSrc(userImageId);
       });
   }
@@ -101,11 +102,11 @@ export class EditProfileComponent implements OnInit {
 
   private selectFile(event) {
     const file = event.target.files.item(0);
-    if(file.type.match('image.*')) {
+
+    if(file.type.match('image.*'))
       this.selectedFiles = event.target.files;
-    } else {
+    else
       alert("INVALID IMAGE FORMAT");
-    }
   }
 
   private updateUser(): void {
@@ -117,8 +118,8 @@ export class EditProfileComponent implements OnInit {
     } = this;
 
     const { email } = this.authenticationService;
-
     const userObj = { email, firstName, lastName, description, imageSource };
+
     this.authenticationService.editUserInformation(userObj)
       .then(() => {
         this.router.navigate(['/profile', this.authenticationService.userId])

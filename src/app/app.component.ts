@@ -5,17 +5,12 @@ import {
 } from '@angular/core';
 
 import { WindowService } from './shared/services/window.service';
-import { ItemsService } from './shared/services/items.service';
 import { AuthenticationService } from './shared/services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [
-    WindowService,
-    ItemsService
-  ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   constructor(

@@ -69,9 +69,8 @@ export class AuthenticationService {
   }
 
   private setAuthenticationToLocalStorage(): void {
-    if (localStorage) {
+    if (localStorage)
       localStorage.clear();
-    }
 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({
       auth: {
@@ -129,9 +128,7 @@ export class AuthenticationService {
             },
             this.errorHandler.bind(this)
            );
-      } else {
-        reject();
-      }
+      } else reject();
     });
   }
 
@@ -142,6 +139,7 @@ export class AuthenticationService {
   public attemptUserRegistration({firstName, lastName, email, password}) {
     if (firstName && lastName && email && password) {
       this.mIsProcessing = true;
+
       bcryptjs.genSalt(SALT_ROUNDS)
         .then(this.hashUserPassword.bind(this, password))
         .then(this.registerUserToServer.bind(this))
@@ -178,6 +176,7 @@ export class AuthenticationService {
   private hashUserPassword(password: string, salt: string) {
     if (password && salt) {
       this.mSalt = salt;
+
       return bcryptjs.hash(password, salt);
     }
 
@@ -216,8 +215,7 @@ export class AuthenticationService {
               this.clearPasswordSaltAndErrors();
               this.router.navigate(['/home']);
             }
-          } else
-            this.errorHandler.call(this);
+          } else this.errorHandler.call(this);
         },
         this.errorHandler.bind(this));
     }
@@ -235,11 +233,8 @@ export class AuthenticationService {
         bcryptjs.hash(password, salt)
           .then(this.generateTag.bind(this, email, challenge))
           .catch(this.errorHandler.bind(this));
-      } else
-        this.errorHandler.call(this);
-    } else {
-      this.errorHandler.call(this);
-    }
+      } else this.errorHandler.call(this);
+    } else this.errorHandler.call(this);
   }
 
   // Generates a tag to send back to the server to validate.
@@ -264,10 +259,8 @@ export class AuthenticationService {
             this.setAuthenticationToLocalStorage();
             this.clearPasswordSaltAndErrors();
             this.router.navigate(['/home']);
-          } else
-            this.errorHandler.call(this);
-        } else
-        this.errorHandler.call(this);
+          } else this.errorHandler.call(this);
+        } else this.errorHandler.call(this);
       },
       this.errorHandler.bind(this));
   }

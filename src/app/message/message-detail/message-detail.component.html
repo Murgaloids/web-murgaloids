@@ -1,6 +1,6 @@
 <div
   class="chatroom"
-  *ngIf="messagingService.messages.length > 0; else nothing">
+  *ngIf="messagingService.messages.length > 0">
     <h1>{{ messagingService.conversationDetails.studentName }}</h1>
 
     <mat-divider></mat-divider>
@@ -25,7 +25,3 @@
       </mat-form-field>
     </form>
 </div>
-
-<ng-template #nothing>
-  <div>Select a conversation to the left...</div>
-</ng-template>

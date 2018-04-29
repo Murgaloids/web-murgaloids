@@ -18,7 +18,7 @@ export class AreYouSureDialog {
     private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<AreYouSureDialog>,
     @Inject(MAT_DIALOG_DATA) private data: any
-  ) { }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -29,7 +29,9 @@ export class AreYouSureDialog {
   }
 
   yes(): void {
-    if(this.data.isDelete === true) {
+    const { status } = this.data;
+
+    if (status === 'delete') {
       this.itemsService.deleteItem(this.data.item.id)
         .then(() => {
           this.router.navigate(['/profile', this.authenticationService.userId]);
@@ -37,15 +39,15 @@ export class AreYouSureDialog {
           this.snackBar.open('Item deleted!', null, { duration: 1500 });
         });
     } else {
-      this.data.item.itemSold = true;
-      if (this.data.item.itemSold) {
-        this.itemsService.updateItem.call(this.itemsService, this.data.item)
-          .then(() => {
-            this.router.navigate(['home']);
-            this.dialogRef.close();
-            this.snackBar.open('Item Closed!', null, { duration: 1500 });
-          });
-      }
+      this.data.item.itemSold = status === 'open' ? false : true;
+      const message = status === 'open' ? 'Item Opened!' : 'Item Closed';
+
+      this.itemsService.updateItem.call(this.itemsService, this.data.item)
+        .then(() => {
+          this.router.navigate(['home']);
+          this.dialogRef.close();
+          this.snackBar.open(message, null, { duration: 1500 });
+        });
     }
   }
 }

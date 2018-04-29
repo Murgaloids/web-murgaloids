@@ -20,6 +20,7 @@ export class StudentsService {
 
   getStudentObservable(userId: number): Observable<any> {
     const headers = {'Authorization': this.authenticationService.token};
+
     return this.http.get(`${SERVER_URL}/students/get?id=${userId}`, {headers});
   }
 

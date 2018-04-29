@@ -18,9 +18,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.itemsService.setSearchedItemsByQuery(params['query'])
-        .then(() => {
-          this.ready = true;
-        });
+        .then(() => this.ready = true);
     });
   }
 }
