@@ -49,6 +49,7 @@ export class EditItemComponent implements OnInit {
           this.itemCategory = ItemCategory[res.categoryTypeId];
           this.item.description = res.description;
           this.item.price = res.price;
+          this.item.itemSold = res.itemSold;
         })
     });
   }
@@ -118,5 +119,63 @@ export class EditItemComponent implements OnInit {
       width: '250px',
       data: { item: this.item, isDelete: toggle}
     });
+  }
+}
+
+@Component({
+  selector: 'are-you-sure-dialog',
+  templateUrl: 'are-you-sure.html',
+  providers: [ItemsService]
+})
+export class AreYouSureDialog {
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    public dialogRef: MatDialogRef<AreYouSureDialog>,
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private itemsService: ItemsService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  no(): void {
+    this.dialogRef.close();
+  }
+
+  yes(): void {
+    if(this.data.isDelete === true) {
+      this.itemsService.deleteItem(this.data.item.id)
+        .then(() => {
+          this.router.navigate(['/profile', this.authenticationService.userId]);
+          this.dialogRef.close();
+          this.snackBar.open('Item deleted!', null, { duration: 1500 });
+        });
+    } else {
+      this.data.item.itemSold = !this.data.item.itemSold;
+      const {
+        itemName,
+        sellerId,
+        conditionTypeId,
+        categoryTypeId,
+        description,
+        price,
+        itemSold,
+        itemRated,
+        rating,
+        imageSource
+      } = this.data.item;
+
+      this.itemsService.updateItem.call(this.itemsService, this.data.item)
+        .then(() => {
+          this.router.navigate(['home']);
+          this.dialogRef.close();
+          if(this.data.item.itemSold) this.snackBar.open('Item Closed!', null, { duration: 1500 });
+          else this.snackBar.open('Item Opened!', null, { duration: 1500 });
+        });
+    }
   }
 }
