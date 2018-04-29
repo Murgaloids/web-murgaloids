@@ -42,7 +42,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import { AreYouSureDialog } from './edit-item/edit-item.component';
+import { AreYouSureDialog } from './shared/are-you-sure-dialog/are-you-sure-dialog.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { MessageComponent } from './message/message.component';
 
@@ -51,6 +51,8 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { AuthRouteGuardService as AuthRouteGuard } from './shared/services/auth-route-guard.service';
 import { StudentsService } from './shared/services/students.service';
 import { MessagingService } from './shared/services/messaging.service';
+import { ItemsService } from './shared/services/items.service';
+import { FirebaseService } from './shared/services/firebase.service';
 
 // Environment
 import { environment } from '../environments/environment';
@@ -131,7 +133,9 @@ const appRoutes: Routes = [
     AuthenticationService,
     AuthRouteGuard,
     StudentsService,
-    MessagingService
+    MessagingService,
+    ItemsService,
+    FirebaseService
   ],
   entryComponents: [
     AreYouSureDialog,
