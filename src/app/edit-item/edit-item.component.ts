@@ -54,6 +54,7 @@ export class EditItemComponent implements OnInit {
           this.itemCategory = ItemCategory[res.categoryTypeId];
           this.item.description = res.description;
           this.item.price = res.price;
+          this.item.itemSold = res.itemSold;
         })
     });
   }
@@ -196,7 +197,7 @@ export class AreYouSureDialog {
           this.snackBar.open('Item deleted!', null, { duration: 1500 });
         });
     } else {
-      this.data.item.itemSold = true;
+      this.data.item.itemSold = !this.data.item.itemSold;
       const {
         itemName,
         sellerId,
@@ -210,14 +211,13 @@ export class AreYouSureDialog {
         imageSource
       } = this.data.item;
 
-      if (itemSold) {
-        this.itemsService.updateItem.call(this.itemsService, this.data.item)
-          .then(() => {
-            this.router.navigate(['home']);
-            this.dialogRef.close();
-            this.snackBar.open('Item Closed!', null, { duration: 1500 });
-          });
-      }
+      this.itemsService.updateItem.call(this.itemsService, this.data.item)
+        .then(() => {
+          this.router.navigate(['home']);
+          this.dialogRef.close();
+          if(this.data.item.itemSold) this.snackBar.open('Item Closed!', null, { duration: 1500 });
+          else this.snackBar.open('Item Opened!', null, { duration: 1500 });
+        });
     }
   }
 }

@@ -97,10 +97,10 @@ export class ItemsService {
         if (itemName) Object.assign(bodyObject, {itemName});
         if (description) Object.assign(bodyObject, {description});
         if (price) Object.assign(bodyObject, {price});
-        if (itemSold) Object.assign(bodyObject, {itemSold});
         if (itemRated) Object.assign(bodyObject, {itemRated});
         if (rating) Object.assign(bodyObject, {rating});
         if (imageSource) Object.assign(bodyObject, {imageSource});
+        Object.assign(bodyObject, {itemSold});
 
         this.http.post(`${SERVER_URL}/items/update`, bodyObject, {headers, observe: 'response'})
           .subscribe((res: any) => {

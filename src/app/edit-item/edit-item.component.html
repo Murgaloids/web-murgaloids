@@ -89,7 +89,15 @@
       type="submit"
       mat-button
       color="accent"
+      *ngIf="!item.itemSold"
       (click)="openDialog(false)">Close</button>
+
+      <button
+        type="submit"
+        mat-button
+        color="accent"
+        *ngIf="item.itemSold"
+        (click)="openDialog(false)">Open</button>
 
     <button
       type="submit"
