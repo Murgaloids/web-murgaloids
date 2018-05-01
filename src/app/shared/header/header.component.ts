@@ -54,8 +54,7 @@ export class HeaderComponent implements OnInit {
 
   signOutClickHandler() {
     localStorage.clear();
-    this.authenticationService.clearError();
-    this.authenticationService.clearEverythingExceptErrors();
+    this.authenticationService.clearEverything();
     this.itemsService.clearEverything();
     this.messagingService.clearEverything();
   }
