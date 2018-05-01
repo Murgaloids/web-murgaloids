@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { SERVER_URL } from '../global';
-import bcryptjs = require('bcryptjs');
-import SHA256 = require('crypto-js/hmac-sha256');
+import * as bcryptjs from 'bcryptjs';
+import * as SHA256 from 'crypto-js/hmac-sha256';
 
 const SALT_ROUNDS: number = 10;
 const LOCAL_STORAGE_KEY = 'beach-shop';
@@ -82,20 +82,6 @@ export class AuthenticationService {
         description: this.mDescription
       }
     }));
-  }
-
-  // Particularly used when there is an error or when the
-  // user signs out of the application.
-  public clearEverythingExceptErrors(): void {
-    this.mFirstName = '';
-    this.mLastName = '';
-    this.mEmail = '';
-    this.mPassword = '';
-    this.mDescription = '';
-    this.mSalt = '';
-    this.mToken = '';
-    this.mUserId = null;
-    this.mIsProcessing = false;
   }
 
   public clearError() {
@@ -275,5 +261,33 @@ export class AuthenticationService {
     this.mSalt = '';
     this.mHasError = false;
     this.mIsProcessing = false;
+  }
+
+  // Particularly used when there is an error or when the
+  // user signs out of the application.
+  public clearEverythingExceptErrors(): void {
+    this.mFirstName = '';
+    this.mLastName = '';
+    this.mEmail = '';
+    this.mPassword = '';
+    this.mDescription = '';
+    this.mSalt = '';
+    this.mToken = '';
+    this.mUserId = null;
+    this.mIsProcessing = false;
+  }
+
+  public clearEverything() {
+    this.mFirstName = '';
+    this.mLastName = '';
+    this.mEmail = '';
+    this.mPassword = '';
+    this.mDescription = '';
+    this.mSalt = '';
+    this.mUserId = null;
+    this.mToken = '';
+    this.mHasError = false;;
+    this.mErrorMessage = '';
+    this.mIsProcessing = false;;
   }
 }

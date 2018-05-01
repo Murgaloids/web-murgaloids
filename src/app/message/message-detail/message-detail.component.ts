@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessagingService } from '../../shared/services/messaging.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 
@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
   templateUrl: './message-detail.component.html',
   styleUrls: ['./message-detail.component.scss']
 })
-export class MessageDetailComponent implements OnInit {
+export class MessageDetailComponent implements OnInit, OnDestroy {
   private message: string;
 
   constructor(
@@ -15,7 +15,10 @@ export class MessageDetailComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.messagingService.disconnectWebSocket();
   }
 
   onSubmit() {
