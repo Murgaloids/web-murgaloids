@@ -39,6 +39,11 @@ export class MessagingService {
     this.mStompClient = null;
   }
 
+  clearMessageDisplay(): void {
+    this.mMessages = [];
+    this.mConversationDetails = {};
+  }
+
   doesConversationExists(conversationId: string) {
     return new Promise((resolve, reject) => {
       if (conversationId) {

@@ -4,6 +4,7 @@ import { ItemsService } from '../shared/services/items.service';
 import { Item } from '../shared/models/item.model';
 
 const NUM_OF_ITEMS_TO_FETCH = 100;
+const NUM_TO_EXPAND = 8;
 
 @Component({
   selector: 'app-homepage',
@@ -22,11 +23,11 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     this.itemsService.setRecentItems(NUM_OF_ITEMS_TO_FETCH)
-      .then(() => this.recentItemsForSale = this.itemsService.recentItems.slice(0, this.itemCount));
+      .then((recentItems: any) => this.recentItemsForSale = recentItems.slice(0, this.itemCount));
   }
 
   displayMoreItems() {
-    this.itemCount += 8;
+    this.itemCount += NUM_TO_EXPAND;
     this.recentItemsForSale = this.itemsService.recentItems.slice(0, this.itemCount);
   }
 }

@@ -1,20 +1,24 @@
 <mat-card
   class="item-card"
-  [ngClass]="{'center-text': windowService.width < mobileWidth}"
+  [ngClass]="{'mobile-center-text': windowService.width < mobileWidth}"
   [routerLink]="['/item', item.id]">
+
   <mat-card-header>
     <mat-card-title><b>{{ item.itemName }}</b></mat-card-title>
     <mat-card-subtitle *ngIf="!item.itemSold"><b>${{ item.price }}</b></mat-card-subtitle>
     <mat-card-subtitle *ngIf="item.itemSold"><b>Sold</b></mat-card-subtitle>
   </mat-card-header>
+
   <img
     mat-card-image
-    src="{{ item.imageSource }}">
+    src="{{ item.imageSource }}" />
+
   <mat-card-content>
-    <p *ngIf="item.description.length < 60; else limitedDescription">{{ item.description }}</p>
+    <p *ngIf="item.description.length < 50; else limitedDescription">{{ item.description }}</p>
   </mat-card-content>
+
 </mat-card>
 
 <ng-template #limitedDescription>
-  <p>{{ item.description.substring(0, 60)}}...</p>
+  <p>{{ item.description.substring(0, 50)}}...</p>
 </ng-template>

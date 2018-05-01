@@ -12,8 +12,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authenticationService.clearError();
-    this.authenticationService.clearEverythingExceptErrors();
+    this.authenticationService.clearEverything();
   }
 
   onEmailChange(email: string) {
@@ -27,8 +26,7 @@ export class LoginComponent implements OnInit {
   submitHandler() {
      const {email, password, attemptUserLogin} = this.authenticationService;
 
-     if (email && password) {
+     if (email && password)
        attemptUserLogin.call(this.authenticationService, {email, password});
-     }
   }
 }
