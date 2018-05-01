@@ -12,9 +12,6 @@ export class ItemCardComponent implements OnInit {
   @Input() item: Item;
 
   private mobileWidth: number;
-  private sellerName: string;
-  private ready: boolean;
-  private soldByThisStudent: boolean;
 
   constructor(
     private windowService: WindowService

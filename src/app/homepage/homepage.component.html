@@ -1,6 +1,8 @@
 <div class="container">
+
   <h1 class="header">Hi, {{ authenticationService.firstName }}!</h1>
   <h2>Recent Items Posted</h2>
+
   <div class="row">
     <div class="col-md-3" *ngFor="let item of recentItemsForSale">
       <app-item-card [item]="item"></app-item-card>
@@ -11,4 +13,5 @@
       <a (click)=displayMoreItems()><fa name="caret-down" size="2x"></fa></a>
     </div>
   </div>
+
 </div>

@@ -5,11 +5,11 @@
 
     <mat-divider></mat-divider>
 
-    <ul class="chats">
+    <ul #messages class="messages">
       <li *ngFor="let chat of messagingService.messages">
         <app-chat-item
-        [chat]="chat"
-        [position]="chat.senderId === authenticationService.userId ? 'right' : 'left'"></app-chat-item>
+          [chat]="chat"
+          [position]="chat.senderId === authenticationService.userId ? 'right' : 'left'"></app-chat-item>
       </li>
     </ul>
 

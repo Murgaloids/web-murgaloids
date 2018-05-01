@@ -1,5 +1,7 @@
 <div *ngIf="ready" class="container">
+
   <div class="row">
+
     <div class="col-xs-12 col-md-3">
       <h1>{{ student.name }}</h1>
       <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
@@ -10,25 +12,39 @@
       <button mat-raised-button color="primary" (click)="openMessageDialog()"
         *ngIf="id != authenticationService.userId" class="message-user-button">Message {{ student.name }}</button>
     </div>
+
     <div class="col-xs-12 col-md-9">
-      <h2>Selling Items</h2>
-      <div class="row">
-        <div *ngFor="let item of student.itemsForSale; let i = index">
-          <div class="clearfix" *ngIf="i % 3 == 0"></div>
-          <div class="col-md-4">
-            <app-item-card [item]="item"></app-item-card>
+
+      <div
+        class="selling-items-container"
+        *ngIf="student.itemsForSale.length > 0">
+        <h2>Selling Items</h2>
+        <div class="row">
+          <div *ngFor="let item of student.itemsForSale; let i = index">
+            <div class="clearfix" *ngIf="i % 3 == 0"></div>
+            <div class="col-md-4">
+              <app-item-card [item]="item"></app-item-card>
+            </div>
           </div>
         </div>
-      </div>
-      <h2>Sold Items</h2>
-      <div class="row">
-        <div *ngFor="let item of student.itemsSold; let i = index">
-          <div class="clearfix" *ngIf="i % 3 == 0"></div>
-          <div class="col-md-4">
-            <app-item-card [item]="item"></app-item-card>
+      </div> <!-- end of selling-items-container -->
+
+      <div
+        class="sold-items-container"
+        *ngIf="student.itemsSold.length > 0">
+        <h2>Sold Items</h2>
+        <div class="row">
+          <div *ngFor="let item of student.itemsSold; let i = index">
+            <div class="clearfix" *ngIf="i % 3 == 0"></div>
+            <div class="col-md-4">
+              <app-item-card [item]="item"></app-item-card>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </div> <!-- end of sold-items-container -->
+
+    </div> <!-- end of col-md-9 -->
+
+  </div> <!-- end of row -->
+
 </div>
