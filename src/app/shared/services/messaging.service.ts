@@ -1,12 +1,13 @@
 import * as _ from 'lodash';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client/dist/sockjs.min';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL } from '../global';
-import Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client/dist/sockjs.min';
 
-const SOCKET_URL = 'http://localhost:8080/conversation-websocket';
+const SOCKET_URL = 'http://localhost:8080/chat';
 
 @Injectable()
 export class MessagingService {
@@ -14,8 +15,6 @@ export class MessagingService {
   private mConversationArray;
   private mMessages;
   private mConversationDetails;
-
-  private mSocket;
   private mStompClient;
 
   constructor(
@@ -26,7 +25,6 @@ export class MessagingService {
     this.mConversationObj = {};
     this.mConversationArray = [];
     this.mConversationDetails = {};
-    // this.mSocket = new SockJS(SOCKET_URL);
   }
 
   get messages() { return this.mMessages; }
@@ -38,6 +36,7 @@ export class MessagingService {
     this.mConversationObj = {};
     this.mConversationArray = [];
     this.mConversationDetails = {};
+    this.mStompClient = null;
   }
 
   doesConversationExists(conversationId: string) {
@@ -139,38 +138,20 @@ export class MessagingService {
         message
       };
 
-      const headers = {'Authorization': this.authenticationService.token};
-
-      this.http.post(`${SERVER_URL}/messages/add`, bodyObject, {headers, observe: 'response'})
-        .subscribe(
-          (res: any) => {
-            if (res && res.body) {
-              if (this.mConversationObj[res.body.data.conversationId])
-                this.mConversationObj[res.body.data.conversationId].messages.push(res.body.data);
-              else
-                this.mConversationObj[res.body.data.conversationId].messages = [res.body.data];
-
-              this.mMessages = [...this.mConversationObj[this.mConversationDetails.id].messages];
-              this.mConversationArray = _.values(this.mConversationObj);
-            }
-          },
-          err => console.log(err)
-        );
+      this.mStompClient.send(`/app/chats/${this.mConversationDetails.id}`, {}, JSON.stringify(bodyObject));
     }
   }
 
   setDisplayConversation(studentName: string, conversationId: string) {
-    // if (this.mStompClient !== null) {
-    //   this.mStompClient.disconnect();
-    // }
+    this.disconnectWebSocket();
 
-    // this.mStompClient = Stomp.over(this.mSocket);
-    // this.mStompClient.connect({}, (frame) => {
-    //   console.log(frame);
-    //   this.mStompClient.subscribe('/socket/conversation/messages', (msg) => {
-    //     console.log(msg);
-    //   });
-    // });
+    let ws = new SockJS(SOCKET_URL);
+    this.mStompClient = Stomp.over(ws);
+    this.mStompClient.connect({}, (frame) => {
+      this.mStompClient.subscribe(`/topic/chat.${conversationId}`, ({body}) => {
+        this.mMessages.push(JSON.parse(body));
+      });
+    });
 
     if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
         this.mConversationObj[conversationId].messages.length) {
@@ -188,5 +169,10 @@ export class MessagingService {
 
     this.mConversationDetails.id = conversationId;
     this.mConversationDetails.studentName = studentName;
+  }
+
+  disconnectWebSocket() {
+    if (this.mStompClient)
+      this.mStompClient.disconnect();
   }
 }
