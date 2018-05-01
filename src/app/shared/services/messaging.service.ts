@@ -94,7 +94,6 @@ export class MessagingService {
                 },
                 messages: [messageRes.body.data]
               };
-
               resolve(messageRes.body.data);
           } else reject(null);
         },
