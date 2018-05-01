@@ -86,7 +86,6 @@ export class MessagingService {
       };
 
       const headers = {'Authorization': this.authenticationService.token};
-
       this.http.post(`${SERVER_URL}/messages/add`, bodyObject, {headers, observe: 'response'})
         .subscribe(
           (messageRes: any) => {
@@ -101,7 +100,6 @@ export class MessagingService {
 
   public getConversations(): void {
     const headers = {'Authorization': this.authenticationService.token};
-
     this.http.get(`${SERVER_URL}/conversations/get-conversations?id=${this.authenticationService.userId}`, {headers})
       .subscribe((res: any) => {
         if (res && res.data) this.mConversations = res.data;
