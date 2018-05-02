@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '../shared/services/authentication.service';
-import { StudentsService } from '../shared/services/students.service';
 import { FileUpload } from '../shared/models/file-upload.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
@@ -13,32 +12,31 @@ import * as firebase from 'firebase';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
-  private firstName: string;
-  private lastName: string;
-  private aboutMe: string;
   private imageSource: string;
+  public firstName: string;
+  public lastName: string;
+  public aboutMe: string;
 
   // Firebase attributes
   private selectedFiles: FileList;
-  private currentFileUpload: FileUpload;
-  private progress: { percentage: number } = { percentage: 0 };
   private basePath: string = '/uploads';
+  public currentFileUpload: FileUpload;
+  public progress: { percentage: number } = { percentage: 0 };
 
   constructor(
     private authenticationService: AuthenticationService,
-    private studentsService: StudentsService,
     private angularFireDatabase: AngularFireDatabase,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.firstName = this.authenticationService.firstName;
     this.lastName = this.authenticationService.lastName;
     this.aboutMe = this.authenticationService.description;
   }
 
-  private submitHandler() {
+  public submitHandler(): void {
     if (this.selectedFiles) {
       const file = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
@@ -50,7 +48,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   // Handles uploading image to Firebase
-  private pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number}): any {
+  private pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number}): void {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
@@ -74,7 +72,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   // Handles saving user image and adding the user to database
-  private saveFileData(fileUpload: FileUpload) {
+  private saveFileData(fileUpload: FileUpload): void {
     this.angularFireDatabase.list(`${this.basePath}`).push(fileUpload).then(
       data => {
         const userImageId = this.parseUserImageId(data);
@@ -100,7 +98,7 @@ export class EditProfileComponent implements OnInit {
     return snapshot.node_.children_.root_.value.value_;
   }
 
-  private selectFile(event) {
+  public selectFile(event): void {
     const file = event.target.files.item(0);
 
     if(file.type.match('image.*'))

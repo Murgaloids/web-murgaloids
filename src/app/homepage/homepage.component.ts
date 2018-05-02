@@ -13,20 +13,20 @@ const NUM_TO_EXPAND = 8;
 })
 
 export class HomepageComponent implements OnInit {
-  private recentItemsForSale: Item[];
-  private itemCount = 8;
+  public recentItemsForSale: Item[];
+  public itemCount = 8;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private itemsService: ItemsService,
+    public authenticationService: AuthenticationService,
+    public itemsService: ItemsService,
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.itemsService.setRecentItems(NUM_OF_ITEMS_TO_FETCH)
       .then((recentItems: any) => this.recentItemsForSale = recentItems.slice(0, this.itemCount));
   }
 
-  displayMoreItems() {
+  public displayMoreItems(): void {
     this.itemCount += NUM_TO_EXPAND;
     this.recentItemsForSale = this.itemsService.recentItems.slice(0, this.itemCount);
   }

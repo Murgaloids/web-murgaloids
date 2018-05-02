@@ -16,34 +16,35 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 })
 export class MessageDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('messages') private messageContainer: ElementRef;
-  private message: string;
+  public message: string;
 
   constructor(
-    private messagingService: MessagingService,
-    private authenticationService: AuthenticationService
+    public messagingService: MessagingService,
+    public authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.scrollToBottom();
   }
 
-  ngAfterViewChecked() {        
+  public ngAfterViewChecked(): void {
     this.scrollToBottom();        
   } 
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.messagingService.disconnectWebSocket();
     this.messagingService.clearMessageDisplay();
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.messagingService.addMessage(this.message);
     this.message = '';
   }
 
-  scrollToBottom(): void {
+  private scrollToBottom(): void {
     try {
-      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+      if (this.messageContainer)
+        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
     } catch(err) {
       console.log(err);
     }

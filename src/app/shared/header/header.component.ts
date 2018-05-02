@@ -12,28 +12,28 @@ import { WindowService } from '../services/window.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private mobileWidth: number;
-  private isInputVisible: boolean;
-  private inputValue: string;
+  public mobileWidth: number;
+  public isInputVisible: boolean;
+  public inputValue: string;
 
   constructor(
-     private authenticationService: AuthenticationService,
-     private windowService: WindowService,
-     private itemsService: ItemsService,
-     private messagingService: MessagingService,
-     private router: Router
+    private itemsService: ItemsService,
+    private messagingService: MessagingService,
+    private router: Router,
+    public authenticationService: AuthenticationService,
+    public windowService: WindowService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.mobileWidth = MOBILE_WIDTH;
     this.isInputVisible = false;
   }
 
-  onSearchIconToggle() {
+  public onSearchIconToggle(): void {
     this.isInputVisible = !this.isInputVisible;
   }
 
-  submitHandler(event: any) {
+  public submitHandler(event: any): void {
     if (event.keyCode == 13) {
       if (this.inputValue) {
         this.itemsService.setSearchedItemsByQuery(this.inputValue)
@@ -45,15 +45,16 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  titleClickHandler() {
+  public titleClickHandler(): void {
     if (this.authenticationService.token)
       this.router.navigate(['/home'])
     else
       this.router.navigate(['/welcome']);
   }
 
-  signOutClickHandler() {
+  public signOutClickHandler(): void {
     localStorage.clear();
+    this.messagingService.disconnectWebSocket();
     this.authenticationService.clearEverything();
     this.itemsService.clearEverything();
     this.messagingService.clearEverything();

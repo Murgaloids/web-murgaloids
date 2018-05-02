@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { StudentsService } from '../../shared/services/students.service';
 import { MessagingService } from '../../shared/services/messaging.service';
 import { Student } from '../../shared/models/student.model';
+import { Conversation } from '../../shared/models/conversation.model';
 
 @Component({
   selector: 'app-message-item',
@@ -10,8 +11,8 @@ import { Student } from '../../shared/models/student.model';
   styleUrls: ['./message-item.component.scss']
 })
 export class MessageItemComponent implements OnInit {
-  @Input() conversation;
-  private otherStudent: Student;
+  @Input() public conversation: Conversation;
+  public otherStudent: Student;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,15 +22,15 @@ export class MessageItemComponent implements OnInit {
     this.otherStudent = new Student();
   }
  
-  ngOnInit() {
-    const {student1Id, student2Id} = this.conversation.details;
+  public ngOnInit(): void {
+    const {student1Id, student2Id} = this.conversation;
     this.otherStudent.id = this.authenticationService.userId !== student1Id ? student1Id : student2Id;
 
     this.studentsService.getStudentObservable(this.otherStudent.id)
       .subscribe(res => this.otherStudent = this.studentsService.buildStudent(res, null, null));
   }
 
-  clickHandler() {
-    this.messagingService.setDisplayConversation(this.otherStudent.name, this.conversation.details.id);
+  public clickHandler(): void {
+    this.messagingService.setDisplayConversation(this.otherStudent.name, this.conversation.id);
   }
 }

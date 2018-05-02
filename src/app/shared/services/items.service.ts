@@ -26,7 +26,7 @@ export class ItemsService {
   get displayedItem(): Item { return this.mDisplayedItem; }
   get isDataSet(): boolean { return this.mIsDataSet; }
 
-  clearEverything(): void {
+  public clearEverything(): void {
     this.mRecentItems = null;
     this.mSearchedItems = null;
     this.mUserItems = null;
@@ -34,7 +34,7 @@ export class ItemsService {
     this.mIsDataSet = false;
   }
 
-  addItemToServer(item: Item) {
+  public addItemToServer(item: Item): Promise<any> {
     return new Promise((resolve, reject) => {
       const {
         sellerId,
@@ -58,7 +58,7 @@ export class ItemsService {
     });
   }
 
-  getItem(itemId: number) {
+  public getItem(itemId: number): Promise<any> {
     return new Promise((resolve, reject) => {
       if (itemId) {
         const headers = {'Authorization': this.authenticationService.token};
@@ -72,7 +72,7 @@ export class ItemsService {
     });
   }
 
-  updateItem({
+  public updateItem({
     id,
     itemName,
     sellerId,
@@ -83,7 +83,7 @@ export class ItemsService {
     itemSold,
     itemRated,
     rating,
-    imageSource}) {
+    imageSource}): Promise<any> {
     return new Promise((resolve, reject) => {
       const bodyObject: object = {id, sellerId};
 
@@ -111,7 +111,7 @@ export class ItemsService {
     });
   }
 
-  deleteItem(id: number) {
+  public deleteItem(id: number): Promise<any> {
     return new Promise((resolve, reject) => {
       const headers = {'Authorization': this.authenticationService.token};
 
@@ -124,7 +124,7 @@ export class ItemsService {
     });
   }
 
-  setRecentItems(numOfItems: number) {
+  public setRecentItems(numOfItems: number): Promise<any> {
     return new Promise((resolve, reject) => {
       const headers = {'Authorization': this.authenticationService.token};
 
@@ -143,7 +143,7 @@ export class ItemsService {
     });
   }
 
-  setDisplayItemById(id: number) {
+  public setDisplayItemById(id: number): Promise<any> {
     return new Promise((resolve, reject) => {
       const headers = {'Authorization': this.authenticationService.token};
 
@@ -160,13 +160,13 @@ export class ItemsService {
     });
   }
 
-  getUserItemsObservable(userId: number): Observable<any>  {
+  public getUserItemsObservable(userId: number): Observable<any>  {
     const headers = {'Authorization': this.authenticationService.token};
 
     return this.http.get(`${SERVER_URL}/items/all?userId=${userId}`, {headers});
   }
 
-  buildItemsForSale(itemsObservable: any[]): Item[] {
+  public buildItemsForSale(itemsObservable: any[]): Item[] {
     var items: Item[] = [];
 
     itemsObservable.forEach(item => {
@@ -177,7 +177,7 @@ export class ItemsService {
     return items;
   }
 
-  buildItemsSold(itemsObservable: any[]): Item[] {
+  public buildItemsSold(itemsObservable: any[]): Item[] {
     var items: Item[] = [];
 
     itemsObservable.forEach(item => {
@@ -188,7 +188,7 @@ export class ItemsService {
     return items;
   }
 
-  buildItem(itemsObservable: any): Item {
+  public buildItem(itemsObservable: any): Item {
     return new Item({
       id: itemsObservable.id,
       itemName: itemsObservable.itemName,
@@ -203,7 +203,7 @@ export class ItemsService {
     })
   }
 
-  setSearchedItemsByQuery(query: string) {
+  public setSearchedItemsByQuery(query: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (query) {
         const headers = {'Authorization': this.authenticationService.token};

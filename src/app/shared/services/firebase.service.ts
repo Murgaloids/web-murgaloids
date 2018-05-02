@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { FileUpload } from '../models/file-upload.model';
 import * as firebase from 'firebase';
 
@@ -11,7 +11,7 @@ export class FirebaseService {
 
   constructor(private angularFireDatabase: AngularFireDatabase) { }
 
-  getUploadTask(data: any): any {
+  public getUploadTask(data: any): firebase.storage.UploadTask {
     const file = data.item(0);
     this.selectedFile = undefined;
     this.currentFileUpload = new FileUpload(file);
@@ -19,26 +19,26 @@ export class FirebaseService {
     return storageRef.child(`${this.basePath}/${this.currentFileUpload.file.name}`).put(this.currentFileUpload.file);
   }
 
-  getStateChanged(): any {
+  public getStateChanged(): firebase.storage.TaskEvent {
     return firebase.storage.TaskEvent.STATE_CHANGED;
   }
 
-  addToFirebase(uploadTask: any): any {
+  public addToFirebase(uploadTask: any): any {
     this.currentFileUpload.url = uploadTask.snapshot.downloadURL;
     this.currentFileUpload.name = this.currentFileUpload.file.name;
     return this.angularFireDatabase.list(`${this.basePath}`).push(this.currentFileUpload);
   }
 
-  saveFileData(data: any): any {
+  public saveFileData(data: any): any {
     const itemImageId = this.parseItemImageId(data);
     return firebase.database().ref(`${this.basePath}/${itemImageId}`);
   }
 
-  getItemImageSrcFromId(snapshot: any): string {
+  public getItemImageSrcFromId(snapshot: any): string {
     return snapshot.node_.children_.root_.value.value_;
   }
 
-  setFile(event: any): void {
+  public setFile(event: any): void {
     const file = event.target.files.item(0);
     if(file.type.match('image.*')) {
       this.selectedFile = event.target.files;
@@ -47,7 +47,7 @@ export class FirebaseService {
     }
   }
 
-  getFile(): any {
+  public getFile(): FileList {
     return this.selectedFile;
   }
 
@@ -55,7 +55,7 @@ export class FirebaseService {
     return String(data.path).split(this.basePath + "/")[1];
   }
 
-  private setItemImageSrc(itemImageId: string): any {
+  private setItemImageSrc(itemImageId: string): firebase.database.Reference {
     return firebase.database().ref(`${this.basePath}/${itemImageId}`);
   }
 }

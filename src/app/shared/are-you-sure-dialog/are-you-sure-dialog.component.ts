@@ -16,19 +16,19 @@ export class AreYouSureDialog {
     private itemsService: ItemsService,
     private router: Router,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<AreYouSureDialog>,
+    private dialogRef: MatDialogRef<AreYouSureDialog>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {}
 
-  onNoClick(): void {
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 
-  no(): void {
+  public no(): void {
     this.dialogRef.close();
   }
 
-  yes(): void {
+  public yes(): void {
     const { status } = this.data;
 
     if (status === 'delete') {

@@ -21,7 +21,7 @@
         <mat-tab label="Description">{{ itemsService.displayedItem.description }}</mat-tab>
         <mat-tab label="Seller">
           <a class="user-profile-link" [routerLink]="['/profile', seller.id]"><h2>{{ seller.name }}</h2></a>
-          <p *ngIf="seller.aboutDesc.length && seller.aboutDesc.length < 150; else limitedSellerDescription">{{ seller.aboutDesc }}</p>
+          <p *ngIf="seller.description.length && seller.description.length < 150; else limitedSellerDescription">{{ seller.description }}</p>
         </mat-tab>
       </mat-tab-group>
     </div>
@@ -29,5 +29,5 @@
 </div>
 
 <ng-template #limitedSellerDescription>
-  <p>{{ seller.aboutDesc.substring(0, 150)}}...</p>
+  <p>{{ seller.description.substring(0, 150)}}...</p>
 </ng-template>

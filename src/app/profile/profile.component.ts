@@ -17,21 +17,21 @@ import { Item } from '../shared/models/item.model';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  id: number;
-  student: Student;
-  ready: boolean = false;
+  public id: number;
+  public student: Student;
+  public ready: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
     private studentsService: StudentsService,
     private messagingService: MessagingService,
     private itemsService: ItemsService,
     private dialog: MatDialog,
+    public authenticationService: AuthenticationService,
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.studentsService.getStudentObservable(this.id).subscribe(student => {
@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  openMessageDialog(): void {
+  public openMessageDialog(): void {
     const conversationId = [this.student.id, this.authenticationService.userId].sort().join(':');
 
     this.messagingService.doesConversationExists(conversationId)
@@ -68,24 +68,24 @@ export class ProfileComponent implements OnInit {
   styleUrls: ['./profile.component.scss']
 })
 export class MessageDialog {
-  private message: string;
+  public message: string;
 
   constructor(
-    public dialogRef: MatDialogRef<MessageDialog>,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialogRef: MatDialogRef<MessageDialog>,
+    private router: Router,
     private messagingService: MessagingService,
   ) {}
 
-  onNoClick(): void {
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 
-  cancel(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 
-  send(): void {
+public send(): void {
     this.messagingService.addConversationWithInitialMessage(this.data.id, this.message)
       .then(res => {
         if (res) {

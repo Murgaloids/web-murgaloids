@@ -18,21 +18,22 @@ export class StudentsService {
     private router: Router
   ) {}
 
-  getStudentObservable(userId: number): Observable<any> {
+  public getStudentObservable(userId: number): Observable<any> {
     const headers = {'Authorization': this.authenticationService.token};
 
     return this.http.get(`${SERVER_URL}/students/get?id=${userId}`, {headers});
   }
 
-  buildStudent(studentObservable: any, itemsForSale: Item[], itemsSold: Item[]): Student {
+  public buildStudent(studentObservable: any, itemsForSale: Item[], itemsSold: Item[]): Student {
     return new Student({
       id: studentObservable.data.id,
       name: `${studentObservable.data.firstName} ${studentObservable.data.lastName}`,
-      aboutDesc: studentObservable.data.description,
+      description: studentObservable.data.description,
       imageSource: studentObservable.data.imageSource,
       itemsForSale: itemsForSale,
       itemsSold: itemsSold,
       itemsViewed: []
     });
   }
+
 }

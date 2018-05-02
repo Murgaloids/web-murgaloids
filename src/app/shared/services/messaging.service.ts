@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client/dist/sockjs.min';
 
@@ -7,14 +6,17 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { SERVER_URL } from '../global';
 
-const SOCKET_URL = 'http://localhost:8080/chat';
+import { Conversation } from '../models/conversation.model';
+import { ConversationDetails } from '../models/conversation-details.model';
+import { Message } from '../models/message.model';
+
+const SOCKET_URL = `${SERVER_URL}/chat`;
 
 @Injectable()
 export class MessagingService {
-  private mConversationObj;
-  private mConversationArray;
-  private mMessages;
-  private mConversationDetails;
+  private mConversations: Conversation[];
+  private mMessages: Message[];
+  private mConversationDetails: ConversationDetails;
   private mStompClient;
 
   constructor(
@@ -22,29 +24,27 @@ export class MessagingService {
     private authenticationService: AuthenticationService
   ) {
     this.mMessages = [];
-    this.mConversationObj = {};
-    this.mConversationArray = [];
-    this.mConversationDetails = {};
+    this.mConversations = [];
+    this.mConversationDetails = {id: null, studentName: null};
   }
 
   get messages() { return this.mMessages; }
   get conversationDetails() { return this.mConversationDetails; }
-  get conversations() { return this.mConversationArray; }
+  get conversations() { return this.mConversations; }
 
-  clearEverything(): void {
+  public clearEverything(): void {
     this.mMessages = [];
-    this.mConversationObj = {};
-    this.mConversationArray = [];
-    this.mConversationDetails = {};
+    this.mConversations = [];
+    this.mConversationDetails = {id: null, studentName: null};
     this.mStompClient = null;
   }
 
-  clearMessageDisplay(): void {
+  public clearMessageDisplay(): void {
     this.mMessages = [];
-    this.mConversationDetails = {};
+    this.mConversationDetails = {id: null, studentName: null};
   }
 
-  doesConversationExists(conversationId: string) {
+  public doesConversationExists(conversationId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (conversationId) {
         const headers = {'Authorization': this.authenticationService.token};
@@ -58,7 +58,7 @@ export class MessagingService {
     });
   }
 
-  addConversationWithInitialMessage(studentId: number, message: string) {
+  public addConversationWithInitialMessage(studentId: number, message: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (studentId >= 0 && message) {
         const bodyObject: object = {
@@ -78,7 +78,7 @@ export class MessagingService {
     });
   }
 
-  addInitialMessage(message, resolve, reject, conversationRes: any) {
+  private addInitialMessage(message, resolve, reject, conversationRes: any): void {
     if (conversationRes && conversationRes.body) {
       const bodyObject: object = {
         conversationId: conversationRes.body.data.id,
@@ -91,51 +91,26 @@ export class MessagingService {
       this.http.post(`${SERVER_URL}/messages/add`, bodyObject, {headers, observe: 'response'})
         .subscribe(
           (messageRes: any) => {
-            if (messageRes && messageRes.body) {
-              this.mConversationObj[messageRes.body.data.conversationId] = {
-                details: {
-                  id: conversationRes.body.data.id,
-                  student1Id: conversationRes.body.data.student1Id,
-                  student2Id: conversationRes.body.data.student2Id
-                },
-                messages: [messageRes.body.data]
-              };
-
+            if (messageRes && messageRes.body)
               resolve(messageRes.body.data);
-          } else reject(null);
+            else reject(null);
         },
           err => reject(err)
         );
     }
   }
 
-
-  getConversations() {
+  public getConversations(): void {
     const headers = {'Authorization': this.authenticationService.token};
 
     this.http.get(`${SERVER_URL}/conversations/get-conversations?id=${this.authenticationService.userId}`, {headers})
       .subscribe((res: any) => {
-        if (res && res.data) {
-          res.data.forEach(data => {
-            if (!this.mConversationObj[data.id]) {
-              this.mConversationObj[data.id] = {
-                details: {
-                  id: data.id,
-                  student1Id: data.student1Id,
-                  student2Id: data.student2Id
-                },
-                messages: []
-              };
-            }
-          });
-
-          this.mConversationArray = _.values(this.mConversationObj);
-        }
+        if (res && res.data) this.mConversations = res.data;
       },
       err => console.log(err));
   }
 
-  addMessage(message: string) {
+  public addMessage(message: string): void {
     if (message) {
       const bodyObject: object = {
         conversationId: this.mConversationDetails.id,
@@ -147,27 +122,24 @@ export class MessagingService {
     }
   }
 
-  setDisplayConversation(studentName: string, conversationId: string) {
+  public setDisplayConversation(studentName: string, conversationId: string): void {
     this.disconnectWebSocket();
 
     let ws = new SockJS(SOCKET_URL);
     this.mStompClient = Stomp.over(ws);
+
     this.mStompClient.connect({}, (frame) => {
       this.mStompClient.subscribe(`/topic/chat.${conversationId}`, ({body}) => {
         this.mMessages.push(JSON.parse(body));
       });
     });
 
-    if (this.mConversationObj[conversationId] && this.mConversationObj[conversationId].messages &&
-        this.mConversationObj[conversationId].messages.length) {
-      this.mMessages = [...this.mConversationObj[conversationId].messages];
-    } else if (conversationId.length) {
+    if (conversationId.length) {
       const headers = {'Authorization': this.authenticationService.token};
 
       this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
         .subscribe((res: any) => {
-          this.mConversationObj[conversationId].messages = res.data;
-          this.mMessages = res.data;
+          if (res && res.data) this.mMessages = res.data;
         },
         err => console.log(err));
     }
@@ -176,8 +148,7 @@ export class MessagingService {
     this.mConversationDetails.studentName = studentName;
   }
 
-  disconnectWebSocket() {
-    if (this.mStompClient)
-      this.mStompClient.disconnect();
+  public disconnectWebSocket(): void {
+    if (this.mStompClient) this.mStompClient.disconnect();
   }
 }

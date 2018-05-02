@@ -12,18 +12,18 @@ import { Student } from '../shared/models/student.model';
   styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements OnInit {
-  private seller: Student;
-  private ready: boolean;
-  private soldByThisStudent: boolean;
+  public seller: Student;
+  public ready: boolean;
+  public soldByThisStudent: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private itemsService: ItemsService,
     private studentsService: StudentsService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public itemsService: ItemsService
   ) {}
 
-  ngOnInit() {    
+  public ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.itemsService.setDisplayItemById(+params['id'])
         .then((sellerId: number) => {
@@ -33,7 +33,7 @@ export class ItemDetailsComponent implements OnInit {
                 this.seller = new Student({
                   name: `${res.data.firstName} ${res.data.lastName}`,
                   imageSource: res.data.imageSource,
-                  aboutDesc: res.data.description || '',
+                  description: res.data.description || '',
                   id: res.data.id
                 });
 
