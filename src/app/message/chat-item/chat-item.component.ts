@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Message } from '../../shared/models/message.model';
 
 @Component({
   selector: 'app-chat-item',
@@ -6,6 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./chat-item.component.scss']
 })
 export class ChatItemComponent {
-  @Input() chat;
-  @Input() position;
+  @Input() public chat: Message;
+  @Input() public position :string;
 }

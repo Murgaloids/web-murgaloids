@@ -44,7 +44,7 @@ export class AreYouSureDialog {
 
       this.itemsService.updateItem.call(this.itemsService, this.data.item)
         .then(() => {
-          this.router.navigate(['home']);
+          this.router.navigate(['/profile', this.authenticationService.userId]);
           this.dialogRef.close();
           this.snackBar.open(message, null, { duration: 1500 });
         });

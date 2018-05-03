@@ -15,7 +15,8 @@
         <rating class="star-icon" [(ngModel)]="itemsService.displayedItem.rating" [readonly]="true"></rating>
       </div>
 
-      <h2>${{ itemsService.displayedItem.price }}</h2>
+      <h2 *ngIf="!itemsService.displayedItem.itemSold">${{ itemsService.displayedItem.price }}</h2>
+      <h2 *ngIf="itemsService.displayedItem.itemSold"><b>Sold</b></h2>
 
       <mat-tab-group>
         <mat-tab label="Description">{{ itemsService.displayedItem.description }}</mat-tab>
