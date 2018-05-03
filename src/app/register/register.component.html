@@ -2,7 +2,9 @@
 *ngIf="!authenticationService.isProcessing; else loading"
 class="container app-register">
   <h1 class="header">Register for BeachShop</h1>
-  <form autocomplete="off">
+  <form
+    autocomplete="off"
+    (submit)="submitHandler($event)">
     <div>
       <mat-form-field>
         <input
@@ -51,7 +53,7 @@ class="container app-register">
         type="submit"
         mat-button
         color="primary"
-        (click)="submitHandler()">Register</button>
+        (click)="submitHandler($event)">Register</button>
     </div>
   </form>
 </div>

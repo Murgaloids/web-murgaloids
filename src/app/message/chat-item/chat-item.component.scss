@@ -1,10 +1,12 @@
 .chat-item {
   margin-top: 20px;
   max-width: 500px;
-  color: white;
-  background-color: grey;
+  color: black;
+  background-color: #f1f1f1;
   border-radius: 25px;
-  padding: 12px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 15px;
   clear: both;
   float: left;
@@ -14,16 +16,5 @@
   float: right;
   clear: both;
   background-color: #FFD700;
-}
-
-.date-right {
-  text-align: right;
   color: white;
-  font-size: 12px;
-}
-
-.date-left {
-  text-align: right;
-  color: #d3d3d3;
-  font-size: 12px;
 }

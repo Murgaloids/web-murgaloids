@@ -1,6 +1,8 @@
 <div
   class="chatroom"
-  *ngIf="messagingService.messages.length > 0">
+  *ngIf="messagingService.conversationDetails.id &&
+    messagingService.conversationDetails.studentName;
+    else selectConversationTemplate">
     <h1>{{ messagingService.conversationDetails.studentName }}</h1>
 
     <mat-divider></mat-divider>
@@ -25,3 +27,17 @@
       </mat-form-field>
     </form>
 </div>
+
+<ng-template #selectConversationTemplate>
+  <div
+    class="chatroom"
+    *ngIf="messagingService.conversations.length > 0">
+    <h1>Select a conversation to chat!</h1>
+  </div>
+
+  <div
+    class="chatroom"
+    *ngIf="messagingService.conversations.length === 0">
+    <h1>You currently do not have any conversations. Start searching for items!</h1>
+  </div>
+</ng-template>
