@@ -1,8 +1,10 @@
 <div
-*ngIf="!authenticationService.isProcessing; else loading"
-class="container app-login">
+  *ngIf="!authenticationService.isProcessing; else loading"
+  class="container app-login">
   <h1 class="header">Sign in to BeachShop</h1>
-  <form autocomplete="off">
+  <form
+    autocomplete="off"
+    (submit)="submitHandler($event)">
     <div>
       <mat-form-field>
         <input
@@ -31,7 +33,7 @@ class="container app-login">
         type="submit"
         mat-button
         color="primary"
-        (click)="submitHandler()">Sign In</button>
+        (click)="submitHandler($event)">Sign In</button>
     </div>
   </form>
 </div>

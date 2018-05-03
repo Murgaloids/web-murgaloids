@@ -31,7 +31,10 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.changePassword(password);
   }
 
-  public submitHandler(): void {
+  public submitHandler(event: any): void {
+    if (event)
+      event.preventDefault();
+
     const {
       firstName,
       lastName,

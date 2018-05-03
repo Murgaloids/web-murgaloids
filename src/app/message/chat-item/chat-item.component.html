@@ -1,12 +1,7 @@
 <div
   class="chat-item"
-  [ngClass]="{
-    'float-right': position === 'right'
-  }">
+  [matTooltip]="chat.messageDate"
+  [matTooltipPosition]="toolTipPosition"
+  [ngClass]="{'float-right': position === 'right'}">
     <p>{{ chat.message }}</p>
-    <p
-      [ngClass]="{
-        'date-right': position === 'right',
-        'date-left': position === 'left'
-      }">Sent on {{ chat.messageDate }}</p>
   </div>

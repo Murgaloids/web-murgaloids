@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
     this.authenticationService.changePassword(password);
   }
 
-  public submitHandler(): void {
-     const {email, password, attemptUserLogin} = this.authenticationService;
+  public submitHandler(event: any): void {
+    if (event)
+      event.preventDefault();
 
-     if (email && password)
-       attemptUserLogin.call(this.authenticationService, {email, password});
+    const {email, password, attemptUserLogin} = this.authenticationService;
+
+    if (email && password)
+      attemptUserLogin.call(this.authenticationService, {email, password});
   }
 }

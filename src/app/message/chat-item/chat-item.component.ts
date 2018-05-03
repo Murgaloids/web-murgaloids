@@ -8,5 +8,6 @@ import { Message } from '../../shared/models/message.model';
 })
 export class ChatItemComponent {
   @Input() public chat: Message;
-  @Input() public position :string;
+  @Input() public position: string;
+  public toolTipPosition: string = 'after';
 }
