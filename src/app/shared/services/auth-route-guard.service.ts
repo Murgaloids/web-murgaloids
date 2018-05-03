@@ -13,7 +13,7 @@ export class AuthRouteGuardService implements CanActivate {
   // This method makes sure the user is authenticated first before
   // continuing on to the desired route. If the user is not
   // authenticated, they will be re-directed to the login page.
-  canActivate(): boolean {
+  public canActivate(): boolean {
     if (!this.authenticationService.token) {
       this.router.navigate(['login']);
       return false;

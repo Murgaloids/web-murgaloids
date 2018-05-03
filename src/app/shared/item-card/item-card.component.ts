@@ -9,15 +9,14 @@ import { Item } from '../models/item.model';
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
-  @Input() item: Item;
-
-  private mobileWidth: number;
+  @Input() public item: Item;
+  public mobileWidth: number;
 
   constructor(
-    private windowService: WindowService
+    public windowService: WindowService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.mobileWidth = MOBILE_WIDTH;
   }
 }

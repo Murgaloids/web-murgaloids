@@ -4,21 +4,16 @@ import { Router } from "@angular/router";
 import { SERVER_URL } from '../global';
 import * as bcryptjs from 'bcryptjs';
 import * as SHA256 from 'crypto-js/hmac-sha256';
+import { AuthenticatedUser} from '../models/authenticated-user.model';
 
 const SALT_ROUNDS: number = 10;
 const LOCAL_STORAGE_KEY = 'beach-shop';
 
 @Injectable()
 export class AuthenticationService {
+
   // All the member variables.
-  private mFirstName: string;
-  private mLastName: string;
-  private mEmail: string;
-  private mPassword: string;
-  private mDescription: string;
-  private mSalt: string;
-  private mUserId: number;
-  private mToken: string;
+  private user: AuthenticatedUser;
   private mHasError: boolean;
   private mErrorMessage: string;
   private mIsProcessing: boolean;
@@ -26,7 +21,18 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+    this.user = {
+      id: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      password: null,
+      description: null,
+      salt: null,
+      token: null
+    }
+  }
 
   // All the getter methods.
   //
@@ -34,36 +40,39 @@ export class AuthenticationService {
   // this file should not be able to set member variables.
   // Only methods inside this file should be able to set
   // member variables.
-  get firstName(): string { return this.mFirstName; }
-  get lastName(): string { return this.mLastName; }
-  get email(): string { return this.mEmail; }
-  get password(): string { return this.mPassword; }
-  get description(): string { return this.mDescription; }
-  get salt(): string { return this.mSalt; }
-  get userId(): number { return this.mUserId; }
-  get token(): string { return this.mToken; }
+  get firstName(): string { return this.user.firstName; }
+  get lastName(): string { return this.user.lastName; }
+  get email(): string { return this.user.email; }
+  get password(): string { return this.user.password; }
+  get description(): string { return this.user.description; }
+  get userId(): number { return this.user.id; }
+  get token(): string { return this.user.token; }
   get hasError(): boolean { return this.mHasError; }
   get errorMessage(): string { return this.mErrorMessage; }
   get isProcessing(): boolean { return this.mIsProcessing; }
 
   // These methods are used to capture immediate user input
   // to set the member variables.
-  changeFirstName(firstname: string): void { this.mFirstName = firstname; }
-  changeLastName(lastname: string): void { this.mLastName = lastname; }
-  changeEmail(email: string): void { this.mEmail = email; }
-  changePassword(password: string): void { this.mPassword = password; }
+  changeFirstName(firstname: string): void { this.user.firstName = firstname; }
+  changeLastName(lastname: string): void { this.user.lastName = lastname; }
+  changeEmail(email: string): void { this.user.email = email; }
+  changePassword(password: string): void { this.user.password = password; }
 
   public getAuthenticationFromLocalStorage(): void {
     if (localStorage) {
       const localStorageData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
       if (localStorageData) {
-        this.mFirstName = localStorageData.auth.firstName;
-        this.mLastName = localStorageData.auth.lastName;
-        this.mEmail = localStorageData.auth.email;
-        this.mUserId = localStorageData.auth.userId;
-        this.mToken = localStorageData.auth.token;
-        this.mDescription = localStorageData.auth.description;
+        this.user = {
+          id: localStorageData.auth.userId,
+          firstName: localStorageData.auth.firstName,
+          lastName: localStorageData.auth.lastName,
+          email :localStorageData.auth.email,
+          description: localStorageData.auth.description,
+          token: localStorageData.auth.token,
+          salt: null,
+          password: null
+        }
       }
     }
   }
@@ -74,22 +83,17 @@ export class AuthenticationService {
 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({
       auth: {
-        firstName: this.mFirstName,
-        lastName: this.mLastName,
-        email: this.mEmail,
-        userId: this.mUserId,
-        token: this.mToken,
-        description: this.mDescription
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        userId: this.user.id,
+        token: this.user.token,
+        description: this.user.description
       }
     }));
   }
 
-  public clearError() {
-    this.mHasError = false;
-    this.mErrorMessage = '';
-  }
-
-  public editUserInformation({email, firstName, lastName, description, imageSource}) {
+  public editUserInformation({email, firstName, lastName, description, imageSource}): Promise<any> {
     return new Promise((resolve, reject) => {
       if (email && (firstName || lastName || description || imageSource)) {
         const bodyObject: object = {email};
@@ -104,11 +108,11 @@ export class AuthenticationService {
           .subscribe(
             (res: any) => {
               if (res && res.data) {
-                this.mFirstName = res.data.firstName;
-                this.mLastName = res.data.lastName;
-                this.mDescription = res.data.description;
-                this.mUserId = res.data.id;
-                this.mEmail = res.data.email;
+                this.user.firstName = res.data.firstName;
+                this.user.lastName = res.data.lastName;
+                this.user.description = res.data.description;
+                this.user.id = res.data.id;
+                this.user.email = res.data.email;
                 resolve();
               }
             },
@@ -122,7 +126,7 @@ export class AuthenticationService {
   //
   // Hashes the user's password before sending to the server
   // to prevent man-in-the-middle attacks.
-  public attemptUserRegistration({firstName, lastName, email, password}) {
+  public attemptUserRegistration({firstName, lastName, email, password}): void {
     if (firstName && lastName && email && password) {
       this.mIsProcessing = true;
 
@@ -143,7 +147,7 @@ export class AuthenticationService {
   // Notice that at no point in this method does the user's password
   // ever get sent to the server. This is known as the
   // challenge-response authentication technique.
-  public attemptUserLogin({email, password}) {
+  public attemptUserLogin({email, password}): void {
     if (email && password) {
       this.mIsProcessing = true;
       const bodyObject: object = {email};
@@ -159,9 +163,9 @@ export class AuthenticationService {
   // Hashese the user's password.
   //
   // This is a helper method to register a user.
-  private hashUserPassword(password: string, salt: string) {
+  private hashUserPassword(password: string, salt: string): Promise<any> {
     if (password && salt) {
-      this.mSalt = salt;
+      this.user.salt = salt;
 
       return bcryptjs.hash(password, salt);
     }
@@ -172,30 +176,30 @@ export class AuthenticationService {
   // Registers the user to the server.
   //
   // This is a helper method to register a user.
-  private registerUserToServer(hashedPassword: string) {
+  private registerUserToServer(hashedPassword: string): void {
     if (hashedPassword) {
       this.changePassword(hashedPassword);
 
       const body: object = {
-        firstName: this.mFirstName,
-        lastName: this.mLastName,
-        email: this.mEmail,
-        password: this.mPassword,
-        salt: this.mSalt
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        password: this.user.password,
+        salt: this.user.salt
       };
 
       this.http.post(`${SERVER_URL}/students/add`, body, {observe: 'response'})
         .subscribe((res: any) => {
           if (res && res.headers && res.body && res.body.data && res.status) {
-            this.mToken = res.headers.get('authorization');
-            this.mUserId = res.body.data.id;
+            this.user.token = res.headers.get('authorization');
+            this.user.id = res.body.data.id;
             const httpStatus = res.status;
 
-            if (this.mToken && this.mUserId && (httpStatus === 200)) {
-              this.mEmail = res.body.data.email;
-              this.mFirstName = res.body.data.firstName;
-              this.mLastName = res.body.data.lastName;
-              this.mDescription = res.body.data.description;
+            if (this.user.token && this.user.id && (httpStatus === 200)) {
+              this.user.email = res.body.data.email;
+              this.user.firstName = res.body.data.firstName;
+              this.user.lastName = res.body.data.lastName;
+              this.user.description = res.body.data.description;
 
               this.setAuthenticationToLocalStorage();
               this.clearPasswordSaltAndErrors();
@@ -210,7 +214,7 @@ export class AuthenticationService {
   // Hashes the user's password and generates a tag.
   //
   // This is a helper method to validate a user during login.
-  private hashPasswordAndGenerateTag(email: string, password: string, res: any) {
+  private hashPasswordAndGenerateTag(email: string, password: string, res: any): void {
     if (res && res.body && res.status) {
       const {salt, challenge} = res.body;
       const httpStatus = res.status;
@@ -226,21 +230,21 @@ export class AuthenticationService {
   // Generates a tag to send back to the server to validate.
   //
   // This is a helper method to validate a user during login.
-  private generateTag(email: string, challenge: string, hashedPassword: string) {
+  private generateTag(email: string, challenge: string, hashedPassword: string): void {
     const tag = SHA256(challenge, hashedPassword).toString();
 
     this.http.post(`${SERVER_URL}/students/validate-tag`, {email, challenge, tag}, {observe: 'response'})
       .subscribe((res: any) => {
         if (res && res.headers && res.body && res.body.data && res.status) {
-          this.mToken = res.headers.get('authorization');
-          this.mUserId = res.body.data.id;
+          this.user.token = res.headers.get('authorization');
+          this.user.id = res.body.data.id;
           const httpStatus = res.status;
 
-          if (this.mToken && this.mUserId && (httpStatus === 200)) {
-            this.mEmail = res.body.data.email;
-            this.mFirstName = res.body.data.firstName;
-            this.mLastName = res.body.data.lastName;
-            this.mDescription = res.body.data.description;
+          if (this.user.token && this.user.id && (httpStatus === 200)) {
+            this.user.email = res.body.data.email;
+            this.user.firstName = res.body.data.firstName;
+            this.user.lastName = res.body.data.lastName;
+            this.user.description = res.body.data.description;
 
             this.setAuthenticationToLocalStorage();
             this.clearPasswordSaltAndErrors();
@@ -251,41 +255,41 @@ export class AuthenticationService {
       this.errorHandler.bind(this));
   }
 
-  private errorHandler(err: any) {
+  private errorHandler(err: any): void {
     this.mHasError = true;
     this.clearEverythingExceptErrors();
   }
 
-  private clearPasswordSaltAndErrors() {
-    this.mPassword = '';
-    this.mSalt = '';
+  private clearPasswordSaltAndErrors(): void {
+    this.user.password = '';
+    this.user.salt = '';
     this.mHasError = false;
     this.mIsProcessing = false;
   }
 
   // Particularly used when there is an error or when the
   // user signs out of the application.
-  public clearEverythingExceptErrors(): void {
-    this.mFirstName = '';
-    this.mLastName = '';
-    this.mEmail = '';
-    this.mPassword = '';
-    this.mDescription = '';
-    this.mSalt = '';
-    this.mToken = '';
-    this.mUserId = null;
+  private clearEverythingExceptErrors(): void {
+    this.user.firstName = '';
+    this.user.lastName = '';
+    this.user.email = '';
+    this.user.password = '';
+    this.user.description = '';
+    this.user.salt = '';
+    this.user.token = '';
+    this.user.id = null;
     this.mIsProcessing = false;
   }
 
-  public clearEverything() {
-    this.mFirstName = '';
-    this.mLastName = '';
-    this.mEmail = '';
-    this.mPassword = '';
-    this.mDescription = '';
-    this.mSalt = '';
-    this.mUserId = null;
-    this.mToken = '';
+  public clearEverything(): void {
+    this.user.firstName = '';
+    this.user.lastName = '';
+    this.user.email = '';
+    this.user.password = '';
+    this.user.description = '';
+    this.user.salt = '';
+    this.user.id = null;
+    this.user.token = '';
     this.mHasError = false;;
     this.mErrorMessage = '';
     this.mIsProcessing = false;;

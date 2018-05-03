@@ -3,8 +3,7 @@ import { Item } from './item.model';
 export class Student {
   id: number;
   name: string;
-  aboutDesc: string;
-  profilePicture: string;
+  description: string;
   itemsForSale: Item[];
   itemsSold: Item[];
   itemsViewed: Item[];

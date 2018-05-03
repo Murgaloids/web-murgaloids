@@ -8,14 +8,14 @@ import { ItemsService } from '../shared/services/items.service';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
-  private ready: boolean;
+  public ready: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private itemsService: ItemsService
+    public itemsService: ItemsService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.itemsService.setSearchedItemsByQuery(params['query'])
         .then(() => this.ready = true);

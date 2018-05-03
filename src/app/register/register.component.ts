@@ -7,30 +7,31 @@ import { AuthenticationService } from '../shared/services/authentication.service
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    public authenticationService: AuthenticationService
+  ) {}
 
-  ngOnInit() {
-    this.authenticationService.clearError();
-    this.authenticationService.clearEverythingExceptErrors();
+  public ngOnInit(): void {
+    this.authenticationService.clearEverything();
   }
 
-  onFirstNameChange(firstname: string) {
+  public onFirstNameChange(firstname: string): void {
     this.authenticationService.changeFirstName(firstname);
   }
 
-  onLastNameChange(lastname: string) {
+  public onLastNameChange(lastname: string): void {
     this.authenticationService.changeLastName(lastname);
   }
 
-  onEmailChange(email: string) {
+  public onEmailChange(email: string): void {
     this.authenticationService.changeEmail(email);
   }
 
-  onPasswordChange(password: string) {
+  public onPasswordChange(password: string): void {
     this.authenticationService.changePassword(password);
   }
 
-  submitHandler() {
+  public submitHandler(): void {
     const {
       firstName,
       lastName,
@@ -39,8 +40,7 @@ export class RegisterComponent implements OnInit {
       attemptUserRegistration
     } = this.authenticationService;
 
-    if (firstName && lastName && email && password) {
+    if (firstName && lastName && email && password)
       attemptUserRegistration.call(this.authenticationService, {firstName, lastName, email, password});
-    }
   }
 }

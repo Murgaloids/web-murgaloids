@@ -8,22 +8,22 @@ import { AuthenticationService } from '../shared/services/authentication.service
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.authenticationService.clearEverything();
   }
 
-  onEmailChange(email: string) {
+  public onEmailChange(email: string): void {
     this.authenticationService.changeEmail(email);
   }
 
-  onPasswordChange(password: string) {
+  public onPasswordChange(password: string): void {
     this.authenticationService.changePassword(password);
   }
 
-  submitHandler() {
+  public submitHandler(): void {
      const {email, password, attemptUserLogin} = this.authenticationService;
 
      if (email && password)

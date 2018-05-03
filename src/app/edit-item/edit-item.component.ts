@@ -4,12 +4,15 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AreYouSureDialog } from '../shared/are-you-sure-dialog/are-you-sure-dialog.component';
+
 // Services
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { ItemsService } from '../shared/services/items.service';
 import { FirebaseService } from '../shared/services/firebase.service';
+
 // Models
 import { Item } from '../shared/models/item.model';
+
 // Enums
 import { ItemCondition } from '../shared/global';
 import { ItemCategory } from '../shared/global';
@@ -20,11 +23,11 @@ import { ItemCategory } from '../shared/global';
   styleUrls: ['./edit-item.component.scss']
 })
 export class EditItemComponent implements OnInit {
-  private item: Item = new Item();
-  private itemCondition: string;
-  private itemCategory: string;
-  private progress: { percentage: number } = { percentage: 0 };
-  private isLoading: boolean;
+  public item: Item = new Item();
+  public itemCondition: string;
+  public itemCategory: string;
+  public progress: { percentage: number } = { percentage: 0 };
+  public isLoading: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -39,7 +42,7 @@ export class EditItemComponent implements OnInit {
     this.item.itemRated = false;
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.item.id = +params['id'];
       this.itemsService.getItem(this.item.id)
@@ -54,38 +57,32 @@ export class EditItemComponent implements OnInit {
     });
   }
 
-  submitHandler() {
+  public submitHandler(): void {
     this.item.sellerId = this.authenticationService.userId;
     this.item.conditionTypeId = ItemCondition[this.itemCondition];
     this.item.categoryTypeId = ItemCategory[this.itemCategory];
-    if(this.firebaseService.getFile() != null) {
-      this.updateItemWithPhoto();
-    } else {
-      this.updateItem();
-    }
-
+    if(this.firebaseService.getFile() != null) this.updateItemWithPhoto();
+    else this.updateItem();
   }
 
-  selectFile(event) {
+  public selectFile(event): void {
     this.firebaseService.setFile(event);
   }
 
   private updateItemWithPhoto(): void {
     this.isLoading = true;
     const uploadTask = this.firebaseService.getUploadTask(this.firebaseService.getFile());
-    uploadTask.on(this.firebaseService.getStateChanged(),
-    (snapshot) => {
+    uploadTask.on(this.firebaseService.getStateChanged(), (snapshot: any) => {
       this.progress.percentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
     },
-    (error) => {
-      console.log("ERROR UPLOADING PHOTO TO FIREBASE ", error);
-    },
+    (error) => console.log("ERROR UPLOADING PHOTO TO FIREBASE ", error),
     () => {
-      this.firebaseService.addToFirebase(uploadTask).then(
-        data => {
-          this.firebaseService.saveFileData(data)
-          .once('value').then(
-            snapshot => {
+      this.firebaseService
+        .addToFirebase(uploadTask)
+        .then(data => {
+          this.firebaseService
+            .saveFileData(data)
+            .once('value').then(snapshot => {
               this.item.imageSource = this.firebaseService.getItemImageSrcFromId(snapshot);
               this.updateItem();
             });
@@ -113,7 +110,7 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  openDialog({status}): void {
+  public openDialog({status}): void {
     let dialogRef = this.dialog.open(AreYouSureDialog, {
       width: '250px',
       data: {item: this.item, status}

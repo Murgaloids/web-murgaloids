@@ -11,7 +11,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.authenticationService.token)

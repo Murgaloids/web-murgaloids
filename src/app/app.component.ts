@@ -18,12 +18,12 @@ export class AppComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.authenticationService.getAuthenticationFromLocalStorage();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  public onResize(event): void {
     this.windowService.width = event.target.innerWidth;
   }
 }

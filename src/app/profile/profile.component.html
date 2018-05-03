@@ -6,7 +6,7 @@
       <h1>{{ student.name }}</h1>
       <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
       <h2>About</h2>
-      <p>{{ student.aboutDesc }}</p>
+      <p>{{ student.description }}</p>
       <button mat-raised-button color="primary" [routerLink]="['/edit-profile']"
         *ngIf="id === authenticationService.userId" class="edit-profile-button">Edit Your Profile</button>
       <button mat-raised-button color="primary" (click)="openMessageDialog()"
