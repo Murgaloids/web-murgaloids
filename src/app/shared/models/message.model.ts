@@ -3,5 +3,6 @@ export interface Message {
   conversationId: number;
   senderId: number;
   message: string;
-  messageDate: Date;
+  messageDate: string;
+  isRead: boolean;
 }
