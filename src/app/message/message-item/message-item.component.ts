@@ -31,6 +31,6 @@ export class MessageItemComponent implements OnInit {
   }
 
   public clickHandler(): void {
-    this.messagingService.setDisplayConversation(this.otherStudent.name, this.conversation.id);
+    this.messagingService.setDisplayConversation(this.otherStudent, this.conversation.id);
   }
 }
