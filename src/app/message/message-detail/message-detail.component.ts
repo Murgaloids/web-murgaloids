@@ -33,7 +33,6 @@ export class MessageDetailComponent implements OnInit, OnDestroy, AfterViewCheck
 
   public ngOnDestroy(): void {
     this.messagingService.disconnectWebSocket();
-    this.messagingService.clearMessageDisplay();
   }
 
   public onSubmit(): void {

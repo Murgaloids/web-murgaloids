@@ -1,9 +1,13 @@
 <div
   class="chatroom"
   *ngIf="messagingService.conversationDetails.id &&
-    messagingService.conversationDetails.studentName;
+    messagingService.conversationDetails.student;
     else selectConversationTemplate">
-    <h1>{{ messagingService.conversationDetails.studentName }}</h1>
+    <a
+      class="student-link-container"
+      [routerLink]="['/profile', messagingService.conversationDetails.student.id]">
+      <h1>{{ messagingService.conversationDetails.student.name }}</h1>
+    </a>
 
     <mat-divider></mat-divider>
 
