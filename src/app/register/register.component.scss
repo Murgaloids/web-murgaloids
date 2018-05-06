@@ -1,12 +1,11 @@
-.error { color: red; }
-.app-register {
+.register {
   margin-top: 100px;
   text-align: center;
 }
 
-button { font-size: 18px; }
-mat-form-field { width: 50%; }
+.register__button { font-size: 18px; }
+.register__form { width: 50%; }
 
 @media only screen and (max-width: 768px) {
-  mat-form-field { width: 85%; }
+  .register__form { width: 85%; }
 }

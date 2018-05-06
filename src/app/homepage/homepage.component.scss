@@ -1,9 +1,9 @@
-.load-more-container {
+.homepage__load_more {
   margin: 0 auto;
   text-align: center;
 }
 
-.load-more-container a:hover {
+.homepage__load_more .homepage__caret_down_link:hover {
   opacity: 0.7;
   cursor: pointer;
 }

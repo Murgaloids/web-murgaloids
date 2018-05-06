@@ -1,6 +1,8 @@
-<h1>Conversations</h1>
-<ul class="list-group">
-  <app-message-item
-    *ngFor="let convo of conversations"
-    [conversation]="convo"></app-message-item>
-</ul>
+<div class="message-list">
+  <h1 class="message-list__header">Conversations</h1>
+  <ul class="message-list__list list-group">
+    <app-message-item
+      *ngFor="let conversation of conversations"
+      [conversation]="conversation"></app-message-item>
+  </ul>
+</div>

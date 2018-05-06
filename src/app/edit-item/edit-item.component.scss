@@ -1,5 +1,7 @@
-.app-edit-item-page { text-align: center; }
+.edit-item { text-align: center; }
+
 mat-form-field { width: 50%; }
+
 @media only screen and (max-width: 768px) {
   mat-form-field { width: 85%; }
 }
