@@ -1,20 +1,25 @@
 <div *ngIf="ready" class="container">
-
   <div class="row">
-
     <div class="col-xs-12 col-md-3">
-      <h1>{{ student.name }}</h1>
-      <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
-      <h2>About</h2>
-      <p>{{ student.description }}</p>
-      <button mat-raised-button color="primary" [routerLink]="['/edit-profile']"
-        *ngIf="id === authenticationService.userId" class="edit-profile-button">Edit Your Profile</button>
-      <button mat-raised-button color="primary" (click)="openMessageDialog()"
-        *ngIf="id != authenticationService.userId" class="message-user-button">Message {{ student.name }}</button>
+      <div class="profile-picture-container">
+        <h1>{{ student.name }}</h1>
+        <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
+      </div>
+
+      <div class="about-container">
+        <h2>About</h2>
+        <p>{{ student.description }}</p>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" [routerLink]="['/edit-profile']"
+          *ngIf="id === authenticationService.userId" class="edit-profile-button">Edit Your Profile</button>
+        <button mat-raised-button color="primary" (click)="openMessageDialog()"
+          *ngIf="id != authenticationService.userId" class="message-user-button">Message {{ student.name }}</button>
+      </div>
     </div>
 
     <div class="col-xs-12 col-md-9">
-
       <div
         class="selling-items-container"
         *ngIf="student.itemsForSale.length > 0">
@@ -42,9 +47,6 @@
           </div>
         </div>
       </div> <!-- end of sold-items-container -->
-
     </div> <!-- end of col-md-9 -->
-
   </div> <!-- end of row -->
-
 </div>

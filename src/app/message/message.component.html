@@ -1,9 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div
+      class="col-md-4 message-list-container"
+      *ngIf="messagingService.conversations.length > 0">
       <app-message-list [conversations]="messagingService.conversations"></app-message-list>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 message-detail-container">
       <app-message-detail></app-message-detail>
     </div>
   </div>

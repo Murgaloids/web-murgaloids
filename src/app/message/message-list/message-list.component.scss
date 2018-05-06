@@ -5,3 +5,7 @@ h1 { font-size: 22px; }
   overflow: hidden;
   overflow-y: scroll;
 }
+
+.list-group::-webkit-scrollbar {
+  display: none;
+}

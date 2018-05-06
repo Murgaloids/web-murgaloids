@@ -1,9 +1,11 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client/dist/sockjs.min';
+import * as moment from 'moment';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
+
 import { SERVER_URL } from '../global';
 
 import { Conversation } from '../models/conversation.model';
@@ -83,6 +85,7 @@ export class MessagingService {
       const bodyObject: object = {
         conversationId: conversationRes.body.data.id,
         senderId: this.authenticationService.userId,
+        isRead: false,
         message: message
       };
 
@@ -115,7 +118,8 @@ export class MessagingService {
       const bodyObject: object = {
         conversationId: this.mConversationDetails.id,
         senderId: this.authenticationService.userId,
-        message
+        isRead: false,
+        message,
       };
 
       this.mStompClient.send(`/app/chats/${this.mConversationDetails.id}`, {}, JSON.stringify(bodyObject));
@@ -131,6 +135,10 @@ export class MessagingService {
     this.mStompClient.connect({}, (frame) => {
       this.mStompClient.subscribe(`/topic/chat.${conversationId}`, ({body}) => {
         this.mMessages.push(JSON.parse(body));
+        this.mMessages.forEach(m => {
+          const date: string = moment(m.messageDate).format('MMMM Do YYYY, h:mm:ss a');
+          if (!date.includes('Invalid')) m.messageDate = date;
+        });
       });
     });
 
@@ -139,7 +147,13 @@ export class MessagingService {
 
       this.http.get(`${SERVER_URL}/messages/get-messages?id=${conversationId}`, {headers})
         .subscribe((res: any) => {
-          if (res && res.data) this.mMessages = res.data;
+          if (res && res.data) {
+            this.mMessages = res.data;
+            this.mMessages.forEach(m => {
+              const date: string = moment(m.messageDate).format('MMMM Do YYYY, h:mm:ss a');
+              if (!date.includes('Invalid')) m.messageDate = date;
+            });
+          }
         },
         err => console.log(err));
     }

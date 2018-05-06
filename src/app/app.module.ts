@@ -15,9 +15,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RatingModule } from 'ngx-rating';
 import { HttpClientModule } from '@angular/common/http';
@@ -119,9 +119,9 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatButtonModule,
     MatDividerModule,
-    MatGridListModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatTooltipModule,
 
     RatingModule,
     RouterModule.forRoot(appRoutes),
