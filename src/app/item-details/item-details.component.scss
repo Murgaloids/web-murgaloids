@@ -1,38 +1,38 @@
-h1 {
+.application__header {
   margin-top: 30px;
   margin-bottom: 20px;
   font-size: 40px;
 }
 
-h2 {
+.item_details__subheader {
   margin-top: 35px;
   margin-bottom: 5px;
   font-size: 30px;
 }
 
-.header,
-.edit-item {
+.application__header,
+.item-details__edit-item-button {
   display: inline;
 }
 
-.edit-item {
+.item-details__edit-item-button {
   bottom: 10px;
 }
 
-.edit-item:hover {
+.item-details__edit-item-button:hover {
   opacity: 0.7;
   cursor: pointer;
 }
 
-.image-container {
+.item_details__image-container {
   margin-top: 25px;
 }
 
-.user-profile-link {
+.item_details__user-profile-link {
   color: black;
 }
 
-.user-profile-link:hover {
+.item_details__user-profile-link:hover {
   color: gray;
   text-decoration: none;
 }

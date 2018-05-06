@@ -1,12 +1,12 @@
 <div
 *ngIf="!authenticationService.isProcessing; else loading"
-class="container app-register">
-  <h1 class="header">Register for BeachShop</h1>
+class="register">
+  <h1 class="application__header">Register for BeachShop</h1>
   <form
     autocomplete="off"
     (submit)="submitHandler($event)">
     <div>
-      <mat-form-field>
+      <mat-form-field class="register__form">
         <input
           matInput
           placeholder="First Name"
@@ -16,7 +16,7 @@ class="container app-register">
     </div>
 
     <div>
-      <mat-form-field>
+      <mat-form-field class="register__form">
         <input
           matInput
           placeholder="Last Name"
@@ -26,7 +26,7 @@ class="container app-register">
     </div>
 
     <div>
-      <mat-form-field>
+      <mat-form-field class="register__form">
         <input
           matInput
           placeholder="Email Address"
@@ -36,7 +36,7 @@ class="container app-register">
     </div>
 
     <div>
-      <mat-form-field>
+      <mat-form-field class="register__form">
         <input
           matInput
           placeholder="Password"
@@ -46,10 +46,11 @@ class="container app-register">
       </mat-form-field>
     </div>
 
-    <div *ngIf="authenticationService.hasError" class="error">Unable to signup user</div>
+    <div *ngIf="authenticationService.hasError" class="application__error">Unable to signup user</div>
 
     <div>
       <button
+        class="register__button"
         type="submit"
         mat-button
         color="primary"

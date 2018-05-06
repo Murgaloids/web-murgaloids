@@ -16,12 +16,12 @@
       type="text"
       placeholder="Search for anything...">
   </form>
-  <span class="spacer"></span>
+  <span class="application__spacer"></span>
   <ul>
     <span *ngIf="authenticationService.userId; else signUpOption">
       <li><a
           routerLink="/message"
-          routerLinkActive="active"><fa class="message-icon" name="envelope" size="2x"></fa></a></li>
+          routerLinkActive="active"><fa name="envelope" size="2x"></fa></a></li>
       <li><a
           routerLink="/sell"
           routerLinkActive="active"><fa name="plus-circle" size="2x"></fa></a></li>
@@ -45,13 +45,13 @@
     (click)="titleClickHandler()"
     routerLinkActive="active"><span id="navbar-title">Beach Shop</span></a>
     <div
-      class="mobile-search-container"
+      class="header__mobile-search"
       *ngIf="authenticationService.token">
       <mat-icon
       (click)="onSearchIconToggle()"
       *ngIf="!isInputVisible; else mobileInputForm">search</mat-icon>
     </div>
-    <span class="spacer"></span>
+    <span class="application__spacer"></span>
     <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
     <mat-menu #menu="matMenu">
       <div *ngIf="authenticationService.userId; else mobileSignUpOption">

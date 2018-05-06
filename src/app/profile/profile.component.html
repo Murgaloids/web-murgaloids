@@ -1,17 +1,17 @@
-<div *ngIf="ready" class="container">
+<div *ngIf="ready" class="profile">
   <div class="row">
     <div class="col-xs-12 col-md-3">
-      <div class="profile-picture-container">
-        <h1>{{ student.name }}</h1>
-        <img class="profile img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
+      <div class="profile__image-container">
+        <h1 class="profile__header">{{ student.name }}</h1>
+        <img class="profile__image img-fluid" src="{{ student.imageSource !== null ? student.imageSource : 'assets/images/default-profile-image.png' }}">
       </div>
 
-      <div class="about-container">
-        <h2>About</h2>
+      <div class="profile__about-container">
+        <h2 class="profile__subheader">About</h2>
         <p>{{ student.description }}</p>
       </div>
 
-      <div class="button-container">
+      <div class="profile__button-container">
         <button mat-raised-button color="primary" [routerLink]="['/edit-profile']"
           *ngIf="id === authenticationService.userId" class="edit-profile-button">Edit Your Profile</button>
         <button mat-raised-button color="primary" (click)="openMessageDialog()"
@@ -21,7 +21,7 @@
 
     <div class="col-xs-12 col-md-9">
       <div
-        class="selling-items-container"
+        class="profile__selling-items-container"
         *ngIf="student.itemsForSale.length > 0">
         <h2>Selling Items</h2>
         <div class="row">
@@ -35,7 +35,7 @@
       </div> <!-- end of selling-items-container -->
 
       <div
-        class="sold-items-container"
+        class="profile__sold-items-container"
         *ngIf="student.itemsSold.length > 0">
         <h2>Sold Items</h2>
         <div class="row">

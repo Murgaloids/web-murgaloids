@@ -19,7 +19,11 @@ body {
 
 body { font-family: 'Roboto', sans-serif; }
 
-.header {
+.application__header {
   margin-top: 50px;
   margin-bottom: 40px;
 }
+
+.application__error { color: red; }
+
+.application__spacer { flex: 1 1 auto; }
