@@ -5,7 +5,7 @@
   *ngIf="windowService.width > mobileWidth; else mobileView">
   <a
     (click)="titleClickHandler()"
-    routerLinkActive="active"><span id="navbar-title">Beach Shop</span></a>
+    routerLinkActive="active"><span id="navbar-title">beach<span class="gold">shop</span></span></a>
   <form
     color="accent"
     (keydown)="submitHandler($event)"
@@ -21,7 +21,7 @@
     <span *ngIf="authenticationService.userId; else signUpOption">
       <li><a
           routerLink="/message"
-          routerLinkActive="active"><fa class="message-icon" name="envelope" size="2x"></fa></a></li>
+          routerLinkActive="active"><fa name="envelope" size="2x"></fa></a></li>
       <li><a
           routerLink="/sell"
           routerLinkActive="active"><fa name="plus-circle" size="2x"></fa></a></li>
@@ -43,7 +43,7 @@
   <mat-toolbar color="primary">
     <a
     (click)="titleClickHandler()"
-    routerLinkActive="active"><span id="navbar-title">Beach Shop</span></a>
+    routerLinkActive="active"><span id="navbar-title">beach<span class="gold">shop</span></span></a>
     <div
       class="header__mobile-search"
       *ngIf="authenticationService.token">

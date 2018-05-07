@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AreYouSureDialog } from '../shared/are-you-sure-dialog/are-you-sure-dialog.component';
+import { Title } from '@angular/platform-browser';
 
 // Services
 import { AuthenticationService } from '../shared/services/authentication.service';
@@ -36,7 +37,8 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private titleService: Title
   ) {
     this.item.itemSold = false;
     this.item.itemRated = false;
@@ -55,6 +57,8 @@ export class EditItemComponent implements OnInit {
           this.item.itemSold = res.itemSold;
         })
     });
+
+    this.titleService.setTitle('beachshop | Edit Item');
   }
 
   public submitHandler(): void {

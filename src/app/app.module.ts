@@ -63,18 +63,18 @@ import { MessageItemComponent } from './message/message-item/message-item.compon
 import { ChatItemComponent } from './message/chat-item/chat-item.component';
 
 const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard] },
-  { path: 'search-results', component: SearchResultComponent, canActivate: [AuthRouteGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthRouteGuard] },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard] },
-  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard] },
-  { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard]},
-  { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard]},
-  { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard] },
-  { path: 'message', component: MessageComponent, canActivate: [AuthRouteGuard] },
+  { path: 'welcome', component: WelcomeComponent, data: {title: 'beachshop | Welcome'} },
+  { path: 'home', component: HomepageComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Home'} },
+  { path: 'search-results', component: SearchResultComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Search Result'} },
+  { path: 'login', component: LoginComponent, data: {title: 'beachshop | Login'} },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Edit Profile'} },
+  { path: 'register', component: RegisterComponent, data: {title: 'beachshop | Register'} },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Profile'} },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Profile'} },
+  { path: 'item/:id', component: ItemDetailsComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Item'} },
+  { path: 'sell', component: SellItemPageComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Sell'} },
+  { path: 'edit-item/:id', component: EditItemComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Edit Item'} },
+  { path: 'message', component: MessageComponent, canActivate: [AuthRouteGuard], data: {title: 'beachshop | Message'} },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 

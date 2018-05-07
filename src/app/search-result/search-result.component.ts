@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../shared/services/items.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search-result',
@@ -12,7 +13,8 @@ export class SearchResultComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public itemsService: ItemsService
+    public itemsService: ItemsService,
+    private titleService: Title
   ) {}
 
   public ngOnInit(): void {
@@ -20,5 +22,7 @@ export class SearchResultComponent implements OnInit {
       this.itemsService.setSearchedItemsByQuery(params['query'])
         .then(() => this.ready = true);
     });
+
+    this.titleService.setTitle('beachshop | Search Results');
   }
 }

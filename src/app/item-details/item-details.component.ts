@@ -5,6 +5,7 @@ import { ItemsService } from '../shared/services/items.service';
 import { StudentsService } from '../shared/services/students.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { Student } from '../shared/models/student.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-item-details',
@@ -20,6 +21,7 @@ export class ItemDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private studentsService: StudentsService,
     private authenticationService: AuthenticationService,
+    private titleService: Title,
     public itemsService: ItemsService
   ) {}
 
@@ -45,5 +47,7 @@ export class ItemDetailsComponent implements OnInit {
             });
         });
     });
+
+    this.titleService.setTitle('beachshop | Item Details');
   }
 }

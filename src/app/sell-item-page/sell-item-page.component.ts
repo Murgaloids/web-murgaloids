@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemsService } from '../shared/services/items.service';
 import { MatSnackBar } from '@angular/material';
+import { Title } from '@angular/platform-browser';
 
 // Services
 import { AuthenticationService } from '../shared/services/authentication.service';
@@ -23,7 +24,7 @@ import * as firebase from 'firebase';
   templateUrl: './sell-item-page.component.html',
   styleUrls: ['./sell-item-page.component.scss']
 })
-export class SellItemPageComponent {
+export class SellItemPageComponent implements OnInit {
   public item: Item;
   public itemCondition: string;
   public itemCategory: string;
@@ -36,11 +37,16 @@ export class SellItemPageComponent {
     private firebaseService: FirebaseService,
     private angularFireDatabase: AngularFireDatabase,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private titleService: Title
   ) {
     this.item = new Item();
     this.item.itemSold = false;
     this.item.itemRated = false;
+  }
+
+  public ngOnInit(): void {
+    this.titleService.setTitle('beachshop | Sell Item');
   }
 
   public submitHandler(): void {
