@@ -1,5 +1,5 @@
 export const MOBILE_WIDTH = 768;
-export const SERVER_URL = 'http://localhost:8080';
+export const SERVER_URL = 'https://beachshop.store/server';
 export const DEFAULT_ITEM_IMAGE_PATH = '/assets/images/default-image.jpg';
 
 export enum ItemCategory {
