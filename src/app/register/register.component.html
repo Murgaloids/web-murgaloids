@@ -2,6 +2,7 @@
 *ngIf="!authenticationService.isProcessing; else loading"
 class="register">
   <h1 class="application__header">Register for BeachShop</h1>
+
   <form
     autocomplete="off"
     (submit)="submitHandler($event)">
