@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
 
-const SERVER_URL: string = 'http://localhost:8080';
+import { SERVER_URL } from '../global';
 
 @Injectable()
 export class StudentsService {
