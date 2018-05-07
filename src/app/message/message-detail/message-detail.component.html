@@ -1,13 +1,17 @@
 <div
-  class="chatroom"
+  class="message-detail"
   *ngIf="messagingService.conversationDetails.id &&
-    messagingService.conversationDetails.studentName;
+    messagingService.conversationDetails.student;
     else selectConversationTemplate">
-    <h1>{{ messagingService.conversationDetails.studentName }}</h1>
+    <a
+      class="message-detail__student-link"
+      [routerLink]="['/profile', messagingService.conversationDetails.student.id]">
+      <h1 class="message-detail__header">{{ messagingService.conversationDetails.student.name }}</h1>
+    </a>
 
     <mat-divider></mat-divider>
 
-    <ul #messages class="messages">
+    <ul #messages class="message-details__messages">
       <li *ngFor="let chat of messagingService.messages">
         <app-chat-item
           [chat]="chat"
@@ -16,10 +20,12 @@
     </ul>
 
     <form
+      class="message-detail__form"
       autocomplete="off"
       (submit)="onSubmit()">
       <mat-form-field>
         <input
+          class="message-detail__form-input"
           matInput
           placeholder="Send a message"
           name="message"

@@ -1,11 +1,16 @@
-h1 { font-size: 24px; }
+.message-detail__header { font-size: 24px; }
 
-.chatroom {
+.message-detail__student-link {
+  text-decoration: none;
+  color: black;
+}
+
+.message-detail {
   height: 100%;
   width: 100%;
 }
 
-.messages {
+.message-details__messages {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -14,15 +19,16 @@ h1 { font-size: 24px; }
   overflow-y: scroll;
 }
 
-.messages::-webkit-scrollbar {
+.message-details__messages::-webkit-scrollbar {
   display: none;
 }
 
-mat-form-field,
-input {
+.message-detail__form,
+.message-detail__form-input {
+
   width: 100%;
 }
 
-form {
+.message-detail__form {
   margin-top: 25px;
 }

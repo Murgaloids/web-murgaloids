@@ -11,6 +11,7 @@ import { SERVER_URL } from '../global';
 import { Conversation } from '../models/conversation.model';
 import { ConversationDetails } from '../models/conversation-details.model';
 import { Message } from '../models/message.model';
+import { Student } from '../models/student.model';
 
 const SOCKET_URL = `${SERVER_URL}/chat`;
 
@@ -27,7 +28,7 @@ export class MessagingService {
   ) {
     this.mMessages = [];
     this.mConversations = [];
-    this.mConversationDetails = {id: null, studentName: null};
+    this.mConversationDetails = {id: null, student: null};
   }
 
   get messages() { return this.mMessages; }
@@ -37,13 +38,8 @@ export class MessagingService {
   public clearEverything(): void {
     this.mMessages = [];
     this.mConversations = [];
-    this.mConversationDetails = {id: null, studentName: null};
+    this.mConversationDetails = {id: null, student: null};
     this.mStompClient = null;
-  }
-
-  public clearMessageDisplay(): void {
-    this.mMessages = [];
-    this.mConversationDetails = {id: null, studentName: null};
   }
 
   public doesConversationExists(conversationId: string): Promise<any> {
@@ -126,11 +122,12 @@ export class MessagingService {
     }
   }
 
-  public setDisplayConversation(studentName: string, conversationId: string): void {
+  public setDisplayConversation(student: Student, conversationId: string): void {
     this.disconnectWebSocket();
 
     let ws = new SockJS(SOCKET_URL);
     this.mStompClient = Stomp.over(ws);
+    this.mStompClient.debug = null;
 
     this.mStompClient.connect({}, (frame) => {
       this.mStompClient.subscribe(`/topic/chat.${conversationId}`, ({body}) => {
@@ -159,7 +156,7 @@ export class MessagingService {
     }
 
     this.mConversationDetails.id = conversationId;
-    this.mConversationDetails.studentName = studentName;
+    this.mConversationDetails.student = student;
   }
 
   public disconnectWebSocket(): void {

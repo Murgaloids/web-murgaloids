@@ -1,7 +1,7 @@
 <div
   *ngIf="!authenticationService.isProcessing; else loading"
-  class="container app-login">
-  <h1 class="header">Sign in to BeachShop</h1>
+  class="login">
+  <h1 class="application__header">Sign in to BeachShop</h1>
   <form
     autocomplete="off"
     (submit)="submitHandler($event)">
@@ -26,7 +26,7 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="authenticationService.hasError" class="error">Unable to login user</div>
+    <div *ngIf="authenticationService.hasError" class="application__error">Unable to login user</div>
 
     <div>
       <button
