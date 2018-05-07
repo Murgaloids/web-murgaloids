@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/services/authentication.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,12 @@ import { AuthenticationService } from '../shared/services/authentication.service
 export class LoginComponent implements OnInit {
   constructor(
     public authenticationService: AuthenticationService,
+    private titleService: Title
   ) {}
 
   public ngOnInit(): void {
     this.authenticationService.clearEverything();
+    this.titleService.setTitle('beachshop | Login');
   }
 
   public onEmailChange(email: string): void {

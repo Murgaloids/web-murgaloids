@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Title } from '@angular/platform-browser';
 
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { StudentsService } from '../shared/services/students.service';
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
     private messagingService: MessagingService,
     private itemsService: ItemsService,
     private dialog: MatDialog,
+    private titleService: Title,
     public authenticationService: AuthenticationService,
   ) {}
 
@@ -43,6 +45,8 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
+
+    this.titleService.setTitle('beachshop | Profile');
   }
 
   public openMessageDialog(): void {

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { FileUpload } from '../shared/models/file-upload.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-profile',
@@ -27,13 +28,15 @@ export class EditProfileComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private angularFireDatabase: AngularFireDatabase,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private titleService: Title
   ) {}
 
   public ngOnInit(): void {
     this.firstName = this.authenticationService.firstName;
     this.lastName = this.authenticationService.lastName;
     this.aboutMe = this.authenticationService.description;
+    this.titleService.setTitle('beachshop | Edit Profile');
   }
 
   public submitHandler(): void {
